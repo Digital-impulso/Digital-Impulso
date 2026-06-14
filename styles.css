@@ -1092,3 +1092,38 @@ footer {
   #navbar.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   #navbar.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
+
+
+/* ===== Casos de éxito: acordeón expansible (estilo Devin) ===== */
+.cases-accordion { display: flex; flex-direction: column; gap: 16px; margin-top: 56px; }
+
+@media (min-width: 861px) {
+  .cases-accordion { flex-direction: row; height: 460px; gap: 14px; }
+  .cases-accordion .case-card {
+    flex: 1; height: 100%;
+    position: relative; overflow: hidden;
+    min-width: 0;
+    transition: flex 0.55s cubic-bezier(.4,0,.2,1), border-color 0.3s;
+  }
+  .cases-accordion .case-card:hover { transform: none; }
+  /* primera card expandida por defecto; al pasar el mouse, se expande la que tocás */
+  .cases-accordion:not(:hover) .case-card:first-child { flex: 2.8; }
+  .cases-accordion .case-card:hover { flex: 2.8; }
+
+  .cases-accordion .case-media { position: absolute; inset: 0; height: 100%; padding: 0; border-radius: 0; }
+  .cases-accordion .case-photo { width: 100%; height: 100%; object-fit: cover; }
+  .cases-accordion .case-graphic { max-width: 72%; max-height: 56%; margin-bottom: 60px; }
+  .cases-accordion .case-media-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%); }
+
+  .cases-accordion .case-body {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    width: 440px; max-width: 100%;
+    padding: 30px;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+  }
+  .cases-accordion:not(:hover) .case-card:first-child .case-body,
+  .cases-accordion .case-card:hover .case-body { opacity: 1; transform: translateY(0); }
+  .cases-accordion .case-body h3 { white-space: nowrap; }
+  .cases-accordion .case-body p { white-space: normal; }
+}
