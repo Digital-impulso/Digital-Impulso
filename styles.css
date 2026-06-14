@@ -987,3 +987,25 @@ footer {
   .app-showcase { grid-template-columns: 1fr; }
   .app-phone { order: -1; }
 }
+
+
+/* ===== Formatos alternativos para casos (variar la lectura) ===== */
+/* Pasos numerados (para 'La solución / La implementación') */
+.steps { list-style: none; margin-top: 28px; max-width: 880px; }
+.step { display: grid; grid-template-columns: auto 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--border); }
+.step:first-child { border-top: none; padding-top: 4px; }
+.step-num { font-size: 1.5rem; font-weight: 800; color: var(--c); letter-spacing: -0.02em; line-height: 1; min-width: 42px; }
+.step-body h3 { font-size: 1.12rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+.step-body p { color: #9CA3AF; font-size: 0.95rem; line-height: 1.7; max-width: 72ch; }
+
+/* Lista de beneficios con ícono check (para 'Por qué...') */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 44px; margin-top: 28px; }
+.why-item { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; }
+.why-ico { width: 34px; height: 34px; border-radius: 9px; background: rgba(125,211,252,0.1); border: 1px solid rgba(125,211,252,0.22); display: flex; align-items: center; justify-content: center; color: var(--c); flex-shrink: 0; }
+.why-ico svg { width: 17px; height: 17px; }
+.why-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+.why-item p { color: #9CA3AF; font-size: 0.9rem; line-height: 1.6; }
+
+@media (max-width: 680px) {
+  .why-grid { grid-template-columns: 1fr; }
+}
