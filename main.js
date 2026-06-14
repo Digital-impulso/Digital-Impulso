@@ -138,3 +138,19 @@ function enviarContacto(e) {
   document.addEventListener('click', (e) => { if (nav.classList.contains('nav-open') && !nav.contains(e.target)) close(); });
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 })();
+
+
+// ============ Acordeón de casos: mantener abierta la última activa ============
+(function casesAccordion() {
+  const acc = document.querySelector('.cases-accordion');
+  if (!acc) return;
+  const cards = Array.from(acc.querySelectorAll('.case-card'));
+  if (!cards.length) return;
+  cards[0].classList.add('active');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      cards.forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+})();

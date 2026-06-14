@@ -1105,10 +1105,9 @@ footer {
     min-width: 0;
     transition: flex 0.55s cubic-bezier(.4,0,.2,1), border-color 0.3s;
   }
-  .cases-accordion .case-card:hover { transform: none; }
-  /* primera card expandida por defecto; al pasar el mouse, se expande la que tocás */
-  .cases-accordion:not(:hover) .case-card:first-child { flex: 2.8; }
-  .cases-accordion .case-card:hover { flex: 2.8; }
+  .cases-accordion .case-card { transform: none; }
+  /* la card activa se mantiene expandida; JS mueve .active al hacer hover */
+  .cases-accordion .case-card.active { flex: 2.8; }
 
   .cases-accordion .case-media { position: absolute; inset: 0; height: 100%; padding: 0; border-radius: 0; }
   .cases-accordion .case-photo { width: 100%; height: 100%; object-fit: cover; }
@@ -1122,8 +1121,7 @@ footer {
     opacity: 0; transform: translateY(12px);
     transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
   }
-  .cases-accordion:not(:hover) .case-card:first-child .case-body,
-  .cases-accordion .case-card:hover .case-body { opacity: 1; transform: translateY(0); }
+  .cases-accordion .case-card.active .case-body { opacity: 1; transform: translateY(0); }
   .cases-accordion .case-body h3 { white-space: nowrap; }
   .cases-accordion .case-body p { white-space: normal; }
 }
