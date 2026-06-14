@@ -1,0 +1,5 @@
+# El sitio es estático: estos archivos no se suben a Vercel
+server.js
+docs/
+node_modules/
+.git/

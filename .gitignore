@@ -1,0 +1,13 @@
+# Dependencias
+node_modules/
+
+# Vercel
+.vercel/
+
+# Documentación interna con credenciales / notas privadas
+docs/
+
+# Logs y temporales
+*.log
+.DS_Store
+Thumbs.db
