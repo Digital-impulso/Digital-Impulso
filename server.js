@@ -26,6 +26,12 @@ const server = serve({
       return new Response(f);
     }
 
+    // cleanUrls: si no tiene extensión, probar agregando .html (igual que Vercel)
+    if (!pathname.includes(".")) {
+      const fh = file(ROOT + pathname.replace(/\/$/, "") + ".html");
+      if (await fh.exists()) return new Response(fh);
+    }
+
     return new Response("404 - No encontrado", {
       status: 404,
       headers: { "Content-Type": "text/plain; charset=utf-8" },

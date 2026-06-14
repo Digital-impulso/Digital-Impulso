@@ -807,3 +807,98 @@ footer {
   .about-metrics { gap: 24px; flex-wrap: wrap; }
   nav#navbar .btn-primary { font-size: 0.78rem; padding: 7px 12px; }
 }
+
+
+/* ============================================================
+   PÁGINAS DE CASO DE ÉXITO (subpáginas)
+   ============================================================ */
+.case-main { padding-top: 60px; position: relative; z-index: 1; }
+
+.breadcrumb {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px var(--pad-x) 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: #6B7280;
+}
+.breadcrumb a { color: #6B7280; text-decoration: none; transition: 0.2s; }
+.breadcrumb a:hover { color: var(--c); }
+.breadcrumb .sep { color: #4B5563; }
+.breadcrumb .current { color: #fff; font-weight: 600; }
+
+.case-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px var(--pad-x) 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+.case-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin: 16px 0 18px;
+}
+.case-hero-lead { color: #9CA3AF; font-size: 1.02rem; line-height: 1.75; }
+
+.case-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.case-tag-chip {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--c); background: rgba(125,211,252,0.08);
+  border: 1px solid rgba(125,211,252,0.2); padding: 4px 12px; border-radius: 100px;
+}
+
+.case-hero-media {
+  border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
+  aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.case-hero-media img.cover { width: 100%; height: 100%; object-fit: cover; }
+.case-hero-media img.contain { max-width: 78%; max-height: 82%; object-fit: contain; }
+
+.case-body { max-width: 1100px; margin: 0 auto; padding: clamp(48px, 7vw, 80px) var(--pad-x); }
+.case-block { margin-bottom: clamp(40px, 6vw, 64px); }
+.case-block:last-child { margin-bottom: 0; }
+.case-block h2 { font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+.case-block > p { color: #9CA3AF; font-size: 1rem; line-height: 1.8; max-width: 760px; }
+
+.result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-top: 28px; }
+.result-item { background: #0A0A0F; border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px; }
+.result-num {
+  font-size: clamp(1.7rem, 3vw, 2.1rem); font-weight: 900; letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #fff, #7DD3FC);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.result-label { color: #6B7280; font-size: 0.85rem; margin-top: 8px; line-height: 1.5; }
+
+.case-feature-list { list-style: none; margin-top: 18px; display: grid; gap: 12px; max-width: 760px; }
+.case-feature-list li { color: #9CA3AF; font-size: 0.95rem; line-height: 1.6; padding-left: 28px; position: relative; }
+.case-feature-list li::before { content: '✓'; position: absolute; left: 0; color: var(--c); font-weight: 800; }
+
+.case-quote { border-left: 3px solid var(--c); padding: 6px 0 6px 24px; margin-top: 28px; max-width: 760px; }
+.case-quote p { font-size: clamp(1.05rem, 2vw, 1.2rem); font-weight: 600; line-height: 1.6; color: #E5E7EB; font-style: italic; }
+.case-quote cite { display: block; margin-top: 12px; color: var(--c); font-size: 0.85rem; font-weight: 600; font-style: normal; }
+
+/* Sub-clientes (caso chatbot) */
+.subcases { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 28px; }
+.subcase { background: #0A0A0F; border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px; }
+.subcase h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.subcase .subcase-tag { color: var(--c); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.subcase p { color: #9CA3AF; font-size: 0.88rem; line-height: 1.65; margin: 10px 0 14px; }
+.subcase .subcase-result { color: #7DD3FC; font-size: 0.82rem; font-weight: 600; }
+
+.case-cta { text-align: center; padding: clamp(60px, 9vw, 100px) var(--pad-x); border-top: 1px solid var(--border); position: relative; z-index: 1; }
+.case-cta h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 14px; }
+.case-cta p { color: #6B7280; margin-bottom: 28px; }
+
+@media (max-width: 768px) {
+  .case-hero { grid-template-columns: 1fr; }
+  .case-hero-media { aspect-ratio: 16 / 10; }
+}
