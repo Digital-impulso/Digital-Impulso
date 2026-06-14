@@ -48,14 +48,14 @@ nav#navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
   border-bottom: 1px solid rgba(255,255,255,0.08);
   transition: background 0.3s;
 }
 
-nav#navbar.scrolled { background: rgba(0,0,0,0.88); }
+nav#navbar.scrolled { background: rgba(0,0,0,0.6); }
 
 .nav-logo {
   display: flex;
