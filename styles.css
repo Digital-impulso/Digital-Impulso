@@ -1053,3 +1053,7 @@ footer {
   .svc-row:nth-child(even) .svc-row-visual { order: 0; border-left: none; }
   .svc-row-visual { min-height: 120px; border-right: none; border-bottom: 1px solid var(--border); }
 }
+
+/* Logo de WhatsApp en el boton flotante */
+.wa-float { color: #fff; }
+.wa-float svg { width: 28px; height: 28px; }
