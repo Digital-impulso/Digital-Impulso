@@ -109,10 +109,10 @@ nav#navbar.scrolled { background: rgba(0,0,0,0.88); }
 
 .btn-primary {
   background: linear-gradient(135deg, #7DD3FC, #22D3EE);
-  color: #fff;
+  color: #06202e;
   text-decoration: none;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 8px 18px;
   border-radius: 7px;
   transition: 0.2s;
@@ -214,10 +214,10 @@ nav#navbar.scrolled { background: rgba(0,0,0,0.88); }
 
 .hero-btn-main {
   background: linear-gradient(135deg, #7DD3FC, #22D3EE);
-  color: #fff;
+  color: #06202e;
   text-decoration: none;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 14px 28px;
   border-radius: 9px;
   transition: 0.2s;
