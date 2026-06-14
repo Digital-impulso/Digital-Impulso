@@ -14,7 +14,7 @@ html { scroll-behavior: smooth; }
 }
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--txt);
   overflow-x: hidden;
@@ -1092,8 +1092,3 @@ footer {
   #navbar.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   #navbar.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
-
-/* Texto visible de contacto (numero + email) en el footer */
-.footer-contact-text { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
-.footer-contact-text a { color: #6B7280; font-size: 0.85rem; text-decoration: none; transition: 0.2s; width: fit-content; }
-.footer-contact-text a:hover { color: #fff; }
