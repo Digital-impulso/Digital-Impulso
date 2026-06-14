@@ -489,7 +489,7 @@ nav#navbar.scrolled { background: rgba(0,0,0,0.88); }
 .totems-note { color: #6B7280; font-size: 0.75rem; margin-top: 24px; text-align: center; font-style: italic; }
 
 /* ============ CASOS ============ */
-.cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+.cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 56px; }
 
 .case-card {
   background: #0A0A0F;
@@ -499,20 +499,32 @@ nav#navbar.scrolled { background: rgba(0,0,0,0.88); }
   transition: 0.3s;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
 }
 
 .case-card:hover { border-color: rgba(91,108,255,0.3); transform: translateY(-3px); }
 
 .case-media {
-  height: 180px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  padding: 24px;
 }
 
-.case-media img { width: 100%; height: 100%; object-fit: cover; }
+/* Logo de marca centrado sobre el gradiente */
+.case-logo { max-width: 70%; max-height: 70px; object-fit: contain; position: relative; z-index: 1; }
+/* Screenshot (ej. app): muestra la imagen completa */
+.case-shot { max-height: 100%; width: auto; object-fit: contain; position: relative; z-index: 1; border-radius: 8px; }
+/* Varios logos apilados (caso con múltiples clientes) */
+.case-logos { display: flex; flex-direction: column; gap: 18px; align-items: center; position: relative; z-index: 1; }
+.case-logos img { height: 22px; width: auto; object-fit: contain; opacity: 0.85; }
+
+.case-link { margin-top: 16px; color: #A5B4FC; font-size: 0.8rem; font-weight: 600; transition: 0.2s; }
+.case-card:hover .case-link { color: #fff; }
 
 .case-media-overlay {
   position: absolute;
@@ -707,7 +719,6 @@ footer {
 
   .stats-row { grid-template-columns: 1fr 1fr; }
   .totems-grid { grid-template-columns: 1fr 1fr; }
-  .cases-grid { grid-template-columns: 1fr; }
   .process-timeline { grid-template-columns: 1fr 1fr; }
   .about-inner { grid-template-columns: 1fr; }
 
