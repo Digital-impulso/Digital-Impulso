@@ -977,7 +977,7 @@ footer {
 .app-phone { display: flex; justify-content: center; }
 .app-phone img {
   width: 100%;
-  max-width: 300px;
+  max-width: 390px;
   height: auto;
   display: block;
   filter: drop-shadow(0 40px 55px rgba(0,0,0,0.55));
