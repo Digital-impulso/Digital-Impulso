@@ -807,9 +807,6 @@ footer {
 
 /* ============ RESPONSIVE - 768px (solo reacomodo estructural) ============ */
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-tel { display: none; }
-
   .services-header { flex-direction: column; align-items: flex-start; }
   .services-grid { grid-template-columns: 1fr 1fr; }
 
@@ -818,9 +815,15 @@ footer {
   .process-timeline { grid-template-columns: 1fr 1fr; }
   .about-inner { grid-template-columns: 1fr; }
 
-  .footer-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  /* Footer mobile: alineado a la izquierda, lista tappable (mas nativo) */
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; text-align: left; }
   .footer-tag { max-width: none; }
-  .footer-contact-item, .footer-socials { justify-content: center; }
+  .footer-socials { justify-content: flex-start; }
+  .footer-links { gap: 0; }
+  .footer-links a { padding: 13px 2px; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .footer-links a:last-child { border-bottom: none; }
+  .footer-contact-item { justify-content: flex-start; }
+  .footer-bottom { text-align: left; }
 }
 
 /* ============ RESPONSIVE - 480px (solo reacomodo estructural) ============ */
@@ -836,7 +839,6 @@ footer {
 
   .cta-form { flex-direction: column; }
   .about-metrics { gap: 24px; flex-wrap: wrap; }
-  nav#navbar .btn-primary { font-size: 0.78rem; padding: 7px 12px; }
 }
 
 
@@ -1057,3 +1059,36 @@ footer {
 /* Logo de WhatsApp en el boton flotante */
 .wa-float { color: #fff; }
 .wa-float svg { width: 28px; height: 28px; }
+
+
+/* ===== Menú móvil (hamburguesa) ===== */
+.nav-menu { display: contents; }
+.nav-toggle {
+  display: none; background: none; border: none; cursor: pointer;
+  width: 42px; height: 42px; padding: 0;
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+}
+.nav-toggle span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: transform .25s ease, opacity .2s ease; }
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  .nav-menu {
+    display: flex;
+    position: fixed; top: 60px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: rgba(0,0,0,0.97);
+    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 8px var(--pad-x) 22px;
+    transform: translateY(-14px); opacity: 0; pointer-events: none;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  #navbar.nav-open .nav-menu { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .nav-menu .nav-links { display: flex; flex-direction: column; gap: 0; width: 100%; }
+  .nav-menu .nav-links a { padding: 15px 6px; font-size: 1rem; border-radius: 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .nav-menu .nav-right { width: 100%; margin-top: 16px; }
+  .nav-menu .nav-right .btn-primary { display: block; text-align: center; padding: 13px; font-size: 0.95rem; }
+  #navbar.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #navbar.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+  #navbar.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}

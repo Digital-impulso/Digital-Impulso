@@ -121,3 +121,20 @@ function enviarContacto(e) {
   const msg = encodeURIComponent('Hola, quiero una consultoría gratis. Mi contacto: ' + valor);
   window.open('https://wa.me/5491171668769?text=' + msg, '_blank');
 }
+
+
+// ============ Menú móvil (hamburguesa) ============
+(function navToggle() {
+  const nav = document.getElementById('navbar');
+  const btn = nav && nav.querySelector('.nav-toggle');
+  if (!nav || !btn) return;
+  const close = () => { nav.classList.remove('nav-open'); btn.setAttribute('aria-expanded', 'false'); };
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = nav.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('.nav-menu a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('click', (e) => { if (nav.classList.contains('nav-open') && !nav.contains(e.target)) close(); });
+  window.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+})();
