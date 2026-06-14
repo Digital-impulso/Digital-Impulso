@@ -906,3 +906,20 @@ footer {
   .case-hero { grid-template-columns: 1fr; }
   .case-hero-media { aspect-ratio: 16 / 10; }
 }
+
+
+/* ===== Íconos SVG como media de caso (erp, portal) ===== */
+.case-media .case-svg { width: 72px; height: 72px; color: var(--c); position: relative; z-index: 1; }
+.case-hero-media .case-svg { width: 110px; height: 110px; color: var(--c); }
+
+/* ===== Encabezado del índice de casos ===== */
+.casos-index-head { margin-bottom: 8px; }
+.casos-index-head h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900; letter-spacing: -0.04em; line-height: 1.08;
+  margin: 14px 0 14px;
+}
+.casos-index-head .section-sub { max-width: 560px; }
+
+/* ===== Botón "ver todos" en la sección de casos de la landing ===== */
+.cases-cta { text-align: center; margin-top: 40px; }

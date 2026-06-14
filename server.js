@@ -26,10 +26,13 @@ const server = serve({
       return new Response(f);
     }
 
-    // cleanUrls: si no tiene extensión, probar agregando .html (igual que Vercel)
+    // cleanUrls: si no tiene extensión, probar .html y el índice de directorio (igual que Vercel)
     if (!pathname.includes(".")) {
-      const fh = file(ROOT + pathname.replace(/\/$/, "") + ".html");
+      const base = pathname.replace(/\/$/, "");
+      const fh = file(ROOT + base + ".html");
       if (await fh.exists()) return new Response(fh);
+      const fi = file(ROOT + base + "/index.html");
+      if (await fi.exists()) return new Response(fi);
     }
 
     return new Response("404 - No encontrado", {

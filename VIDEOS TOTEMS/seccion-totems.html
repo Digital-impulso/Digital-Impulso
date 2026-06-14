@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hacemos tótems — Digital Impulso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg-soft:#0f1422;
+    --card:#121829;
+    --line:rgba(77,155,255,.16);
+    --blue-bright:#4d9bff;
+    --cyan:#23d6e8;
+    --text:#eef2fb;
+    --muted:#8a96b3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Sora',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* ---------- SECCIÓN PRINCIPAL ---------- */
+  .totems{padding:96px 0 80px;position:relative;overflow:hidden}
+  .totems::before{
+    content:"";position:absolute;top:-120px;left:50%;transform:translateX(-50%);
+    width:760px;height:420px;
+    background:radial-gradient(ellipse at center, rgba(77,155,255,.18), transparent 70%);
+    filter:blur(20px);pointer-events:none;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+    color:var(--cyan);
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--cyan);border-radius:2px}
+  h2.title{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(2rem,5vw,3.4rem);
+    line-height:1.02;letter-spacing:-.01em;margin:18px 0 14px;
+    max-width:16ch;
+  }
+  h2.title .grad{
+    background:linear-gradient(100deg,var(--blue-bright),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{color:var(--muted);font-size:clamp(1rem,1.5vw,1.18rem);max-width:54ch}
+
+  .grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:18px 18px 22px;
+    display:flex;flex-direction:column;
+    transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(77,155,255,.4);
+    box-shadow:0 22px 50px -24px rgba(77,155,255,.55);
+  }
+  .tag{
+    align-self:flex-start;
+    font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+    color:var(--blue-bright);
+    background:rgba(77,155,255,.1);
+    border:1px solid rgba(77,155,255,.22);
+    padding:5px 11px;border-radius:999px;margin-bottom:14px;
+  }
+  .screen{
+    position:relative;border-radius:14px;overflow:hidden;
+    background:#000;aspect-ratio:478/850;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 12px 30px -16px rgba(0,0,0,.8);
+  }
+  .screen video{width:100%;height:100%;object-fit:cover;display:block}
+  .card h3{font-size:1.18rem;font-weight:600;margin:18px 0 8px}
+  .card p{color:var(--muted);font-size:.94rem}
+
+  /* ---------- SECCIÓN ABUELO JULIO ---------- */
+  .feature{
+    padding:80px 0 100px;
+    border-top:1px solid var(--line);
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(35,214,232,.10), transparent 55%),
+      var(--bg-soft);
+  }
+  .feature-inner{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:54px;align-items:center;
+  }
+  .feature .eyebrow{color:var(--blue-bright)}
+  .feature .eyebrow::before{background:var(--blue-bright)}
+  .feature h2{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.05;margin:16px 0 16px;
+  }
+  .feature p{color:var(--muted);font-size:1.08rem;max-width:46ch}
+  .feature ul{list-style:none;margin:26px 0 0;display:grid;gap:13px}
+  .feature li{display:flex;gap:12px;align-items:flex-start;font-size:.98rem}
+  .feature li::before{
+    content:"";flex:0 0 auto;width:9px;height:9px;margin-top:8px;border-radius:50%;
+    background:linear-gradient(120deg,var(--blue-bright),var(--cyan));
+    box-shadow:0 0 12px rgba(35,214,232,.7);
+  }
+  .feature-screen{
+    justify-self:center;width:100%;max-width:330px;
+    border-radius:18px;overflow:hidden;background:#000;aspect-ratio:478/850;
+    border:1px solid var(--line);
+    box-shadow:0 30px 70px -30px rgba(35,214,232,.5);
+  }
+  .feature-screen video{width:100%;height:100%;object-fit:cover;display:block}
+
+  @media(max-width:880px){
+    .grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+    .feature-inner{grid-template-columns:1fr;gap:36px;text-align:left}
+    .feature-screen{max-width:300px;order:-1}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============ HACEMOS TÓTEMS ============ -->
+  <section class="totems">
+    <div class="wrap">
+      <span class="eyebrow">Hacemos tótems interactivos</span>
+      <h2 class="title">Un tótem, <span class="grad">cualquier negocio.</span></h2>
+      <p class="lede">Diseñamos y fabricamos tótems de autogestión a medida. Misma tecnología, mil usos: cada pantalla se adapta a lo que tu negocio necesita vender, gestionar o mostrar.</p>
+
+      <div class="grid">
+
+        <article class="card">
+          <span class="tag">Club deportivo</span>
+          <div class="screen">
+            <video src="platense.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <h3>Club Atlético Platense</h3>
+          <p>Asociate, comprá tu entrada y llevate productos oficiales del club. Todo en una pantalla, sin filas ni cajero.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Gastronomía & retail</span>
+          <div class="screen">
+            <video src="abuelojulio-pedidos.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <h3>Abuelo Julio</h3>
+          <p>El cliente elige sus cortes en pantalla, arma el pedido y lo retira con un QR. Menos demora en el mostrador, más ventas.</p>
+        </article>
+
+        <article class="card">
+          <span class="tag">Logística</span>
+          <div class="screen">
+            <video src="viacargo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          </div>
+          <h3>Vía Cargo</h3>
+          <p>Despachá tus envíos en autogestión. Pensado para una red de más de 600 agencias en todo el país.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABUELO JULIO — GAMIFICACIÓN ============ -->
+  <section class="feature">
+    <div class="wrap feature-inner">
+      <div>
+        <span class="eyebrow">Caso Abuelo Julio</span>
+        <h2>No solo vende: enamora.</h2>
+        <p>Más allá de tomar pedidos, sumamos una experiencia de juego que mantiene al cliente frente a la pantalla.</p>
+        <ul>
+          <li>Trivia y ruleta de premios “Respondé y ganá”.</li>
+          <li>Más tiempo de interacción = más fidelización.</li>
+          <li>Premios y promos que potencian cada visita.</li>
+          <li>Totalmente personalizable con la marca del cliente.</li>
+        </ul>
+      </div>
+      <div class="feature-screen">
+        <video src="abuelojulio-ruleta.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
