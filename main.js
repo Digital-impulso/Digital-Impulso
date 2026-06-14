@@ -140,17 +140,22 @@ function enviarContacto(e) {
 })();
 
 
-// ============ Acordeón de casos: mantener abierta la última activa ============
+// ============ Acordeón de casos: hover en desktop, click en mobile ============
 (function casesAccordion() {
   const acc = document.querySelector('.cases-accordion');
   if (!acc) return;
   const cards = Array.from(acc.querySelectorAll('.case-card'));
   if (!cards.length) return;
-  cards[0].classList.add('active');
+  const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
+  const activate = (card) => { cards.forEach(c => c.classList.remove('active')); card.classList.add('active'); };
+  activate(cards[0]);
   cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      cards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
+    // Desktop: se abre al pasar el mouse
+    card.addEventListener('mouseenter', () => { if (!isMobile()) activate(card); });
+    // Mobile: primer tap abre (no navega), segundo tap navega
+    card.addEventListener('click', (e) => {
+      if (!isMobile()) return;
+      if (!card.classList.contains('active')) { e.preventDefault(); activate(card); }
     });
   });
 })();

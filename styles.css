@@ -1125,3 +1125,16 @@ footer {
   .cases-accordion .case-card.active .case-body { opacity: 1; transform: translateY(0); }
   .cases-accordion .case-body h3 { white-space: normal; }
 }
+
+
+/* ===== Casos: acordeón colapsable en mobile (click para abrir) ===== */
+@media (max-width: 860px) {
+  .cases-accordion .case-card { position: relative; overflow: hidden; cursor: pointer; }
+  .cases-accordion .case-card .case-body {
+    max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+  }
+  .cases-accordion .case-card.active .case-body {
+    max-height: 420px; opacity: 1; padding-top: 22px; padding-bottom: 22px;
+  }
+}
