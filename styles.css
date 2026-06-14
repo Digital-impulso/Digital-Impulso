@@ -68,6 +68,8 @@ nav#navbar.scrolled { background: rgba(0,0,0,0.88); }
   letter-spacing: -0.02em;
 }
 
+.nav-logo-img { height: 26px; width: auto; display: block; }
+
 .nav-logo-icon {
   width: 28px;
   height: 28px;
