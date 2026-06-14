@@ -1009,3 +1009,47 @@ footer {
 @media (max-width: 680px) {
   .why-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ===== Servicios: layout alternado (zig-zag) ===== */
+.svc-list { display: flex; flex-direction: column; gap: 16px; }
+.svc-row {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  background: #0A0A0F;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.svc-row:hover { border-color: rgba(125,211,252,0.3); transform: translateY(-2px); }
+.svc-row-visual {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 150px;
+  background: linear-gradient(135deg, rgba(125,211,252,0.08), rgba(34,211,238,0.03));
+  border-right: 1px solid var(--border);
+}
+.svc-row-num { position: absolute; top: 18px; left: 22px; font-size: 0.85rem; font-weight: 800; color: var(--c); letter-spacing: 0.06em; }
+.svc-row-ico {
+  width: 62px; height: 62px; border-radius: 15px;
+  background: rgba(125,211,252,0.1); border: 1px solid rgba(125,211,252,0.22);
+  display: flex; align-items: center; justify-content: center; color: var(--c);
+}
+.svc-row-ico svg { width: 28px; height: 28px; }
+.svc-row-text { padding: 28px 36px; display: flex; flex-direction: column; justify-content: center; }
+.svc-row-text h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
+.svc-row-text p { color: #6B7280; font-size: 0.92rem; line-height: 1.65; max-width: 62ch; }
+.svc-row-text .svc-pill { margin-top: 16px; align-self: flex-start; }
+
+/* Alternar lado: filas pares -> visual a la derecha */
+.svc-row:nth-child(even) .svc-row-visual { order: 2; border-right: none; border-left: 1px solid var(--border); }
+
+.svc-row-featured { border-color: rgba(125,211,252,0.25); }
+.svc-row-featured .svc-row-visual { background: linear-gradient(135deg, rgba(125,211,252,0.15), rgba(34,211,238,0.05)); }
+
+@media (max-width: 760px) {
+  .svc-row { grid-template-columns: 1fr; }
+  .svc-row:nth-child(even) .svc-row-visual { order: 0; border-left: none; }
+  .svc-row-visual { min-height: 120px; border-right: none; border-bottom: 1px solid var(--border); }
+}
