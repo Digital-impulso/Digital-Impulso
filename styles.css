@@ -292,6 +292,16 @@ nav#navbar.scrolled { background: rgba(0,0,0,0.6); }
 
 .client-logo:hover { opacity: 0.8; }
 
+/* Logos de color/oscuros -> se blanquean para unificar con el resto */
+.client-logo--mono {
+  filter: brightness(0) invert(1);
+  opacity: 0.45;
+}
+.client-logo--mono:hover { opacity: 0.85; }
+
+/* Logos que ocupan de mas -> se achican para equilibrar la fila */
+.client-logo--sm { height: 74px; }
+
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
