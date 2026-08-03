@@ -1042,13 +1042,18 @@ footer {
   background: linear-gradient(135deg, rgba(94,234,212,0.08), rgba(45,212,191,0.03));
   border-right: 1px solid var(--border);
 }
-.svc-row-num { position: absolute; top: 18px; left: 22px; font-size: 0.85rem; font-weight: 800; color: var(--c); letter-spacing: 0.06em; }
+.svc-row-num { position: absolute; top: 16px; left: 18px; z-index: 2; font-size: 0.85rem; font-weight: 800; color: #fff; letter-spacing: 0.06em; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
 .svc-row-ico {
   width: 62px; height: 62px; border-radius: 15px;
   background: rgba(94,234,212,0.1); border: 1px solid rgba(94,234,212,0.22);
   display: flex; align-items: center; justify-content: center; color: var(--c);
 }
 .svc-row-ico svg { width: 28px; height: 28px; }
+/* Imagen/gráfico en la columna visual del servicio */
+.svc-row-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.svc-row-img--contain { object-fit: contain; padding: 20px; }
+.svc-row-visual::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0) 42%); }
 .svc-row-text { padding: 28px 36px; display: flex; flex-direction: column; justify-content: center; }
 .svc-row-text h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.02em; }
 .svc-row-text p { color: #6B7280; font-size: 0.92rem; line-height: 1.65; max-width: 62ch; }
@@ -1148,3 +1153,104 @@ footer {
     max-height: 420px; opacity: 1; padding-top: 22px; padding-bottom: 22px;
   }
 }
+
+
+/* ============ PÁGINA PROYECTOS ============ */
+.proy-head { max-width: 1100px; margin: 0 auto; padding: 8px var(--pad-x) 0; }
+.proy-head h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 900; letter-spacing: -0.04em; line-height: 1.08;
+  margin: 12px 0 20px;
+}
+.proy-lead { color: #9CA3AF; font-size: 1rem; line-height: 1.75; max-width: 70ch; }
+
+.proy-stats { display: flex; flex-wrap: wrap; gap: clamp(24px, 5vw, 52px); margin-top: 40px; }
+.proy-stats div { display: flex; flex-direction: column; gap: 4px; }
+.proy-stats strong {
+  font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #fff, #5EEAD4);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.proy-stats span { color: #6B7280; font-size: 0.82rem; max-width: 20ch; line-height: 1.45; }
+
+.proy-block { max-width: 1100px; margin: 0 auto; padding: clamp(48px, 7vw, 72px) var(--pad-x) 0; }
+.proy-block-head { margin-bottom: 30px; }
+.proy-block-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.03em; margin: 6px 0 12px; }
+.proy-block-head p { color: #6B7280; font-size: 0.95rem; line-height: 1.7; max-width: 62ch; }
+.proy-block .cases-grid { margin-top: 0; }
+
+/* Placeholder cuando todavía no hay foto (isotipo cohete al 20%) */
+.case-media.proy-ph {
+  background: radial-gradient(circle at 50% 42%, rgba(94,234,212,0.06), transparent 60%), #0A0A0F;
+}
+.case-media.proy-ph::after {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: url(/assets/images/logo-isotipo.png) center / 72px auto no-repeat;
+  opacity: 0.2;
+}
+
+/* Chips de métricas/capacidades (sin la flecha de resultado de .case-result) */
+.proy-metrics {
+  margin-top: 16px; padding: 10px 14px;
+  background: rgba(94,234,212,0.06); border: 1px solid rgba(94,234,212,0.14);
+  border-radius: 8px; font-size: 0.8rem; color: #8EE7DA; font-weight: 600; line-height: 1.5;
+}
+
+/* Destacado: Profesionales in-company */
+.proy-incompany { max-width: 1100px; margin: clamp(44px, 6vw, 68px) auto 0; padding: 0 var(--pad-x); }
+.proy-incompany-inner {
+  position: relative; overflow: hidden; border-radius: 20px;
+  padding: clamp(32px, 5vw, 52px);
+  background: linear-gradient(135deg, rgba(94,234,212,0.10), rgba(45,212,191,0.02));
+  border: 1px solid rgba(94,234,212,0.35);
+}
+.proy-incompany-inner::after {
+  content: ''; position: absolute; right: -40px; top: -40px; width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(94,234,212,0.18), transparent 70%); pointer-events: none;
+}
+.proy-incompany h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; letter-spacing: -0.03em; margin: 10px 0 14px; position: relative; z-index: 1; }
+.proy-incompany p { color: #CBD5E1; font-size: 1.02rem; line-height: 1.75; max-width: 66ch; position: relative; z-index: 1; }
+
+
+/* ===== Proyectos: video en tarjeta (llena el marco) + lightbox ===== */
+.case-media.proy-vid, .case-media.proy-img { cursor: pointer; background: #000; }
+.proy-vid .proy-vid-el { width: 100%; height: 100%; object-fit: cover; display: block; }
+.proy-vid-badge {
+  position: absolute; right: 12px; bottom: 12px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em;
+  color: #052B26; background: rgba(94,234,212,0.92);
+  padding: 5px 10px; border-radius: 100px;
+  opacity: 0; transform: translateY(4px); transition: 0.25s;
+}
+.proy-vid:hover .proy-vid-badge,
+.proy-vid:focus-visible .proy-vid-badge,
+.proy-img:hover .proy-vid-badge,
+.proy-img:focus-visible .proy-vid-badge { opacity: 1; transform: translateY(0); }
+.proy-vid:focus-visible,
+.proy-img:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+
+.proy-lightbox {
+  position: fixed; inset: 0; z-index: 1000; display: none;
+  align-items: center; justify-content: center; padding: 24px;
+  background: rgba(0,0,0,0.86); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.proy-lightbox.open { display: flex; }
+.proy-lightbox video {
+  max-height: 88vh; max-width: min(92vw, 460px); width: auto; height: auto;
+  border-radius: 16px; background: #000;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);
+}
+.proy-lightbox img {
+  max-height: 88vh; max-width: min(94vw, 1400px); width: auto; height: auto;
+  border-radius: 14px; background: #000;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1);
+}
+.proy-lightbox-close {
+  position: absolute; top: 18px; right: 22px;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+  color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: 0.2s;
+}
+.proy-lightbox-close:hover { background: rgba(255,255,255,0.2); }

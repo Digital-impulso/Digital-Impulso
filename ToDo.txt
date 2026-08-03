@@ -1,0 +1,116 @@
+========================================================================
+ DIGITAL IMPULSO — PENDIENTES (web / brief-web-y-videos.md)
+ Última actualización: 2026-07-31 (2da pasada: imágenes)
+========================================================================
+
+HECHO
+------------------------------------------------------------------------
+[x] Página nueva /proyectos con las 15 tarjetas en 4 bloques (texto exacto
+    del brief), identidad negra/teal/Geist del sitio.
+[x] Destacado "Profesionales in-company" en caja aparte (degradado + borde cyan).
+[x] "Cómo trabajamos" (4 pasos) + cierre con botón de WhatsApp.
+[x] SEO: title, meta description, un solo <h1>, títulos de tarjeta en <h3>, Open Graph.
+[x] Home: stats de arriba actualizados (+50 · 8 industrias · +700 locales · 24/7).
+[x] Home: CTA de casos apunta a /proyectos.
+[x] Nav + footer con "Proyectos" en todas las páginas (/casos sigue accesible desde las tarjetas).
+[x] Marquee de la home: se quitó el logo "Mc" (sin confirmar / fuera de lista canónica).
+[x] Frames extraídos de video (assets/videos -> assets/images/cases/):
+    Vía Cargo (proy-viacargo.jpg), Abuelo Julio cortes (proy-abuelojulio.jpg),
+    Platense (proy-platense.jpg), Ruleta (proy-ruleta.jpg).
+[x] Esas 4 tarjetas AHORA SON VIDEO en /proyectos: llenan el marco (cover),
+    autoplay/loop/sin sonido, la foto como poster, y click -> lightbox con el
+    video completo en su relación de aspecto vertical (script inline en la página).
+[x] Gráficos ilustrativos diseñados y conectados (HTML->JPG, Chrome headless):
+    IA salón / mapa de calor (proy-ia-salon.jpg) y
+    Exactitud de entrega / vista de cámara con IA (proy-exactitud-entrega.jpg).
+
+
+[x] HOME · Sección Servicios: las 7 filas ahora tienen imagen en la columna
+    visual (antes solo ícono). Reusa mostaza-app, chatbot, kentucky-bi, ia-salon;
+    3 gráficos nuevos on-brand: svc-implementacion, svc-venta-digital, svc-incompany.
+    [ ] 07 In-company usa gráfico PROVISORIO -> reemplazar por FOTO REAL del equipo
+        cuando exista (archivo assets/images/cases/svc-incompany.jpg).
+[x] Fuentes HTML de todos los gráficos guardados en docs/_graficos/ (reproducibles).
+
+
+PENDIENTE — FOTOS A CONSEGUIR (detalle completo abajo)
+NOTA: 7 (IA salón) y 8 (Exactitud entrega) YA resueltas con gráfico ilustrativo;
+      reemplazar por foto/captura real cuando exista. Siguen faltando: 6, 12, 13, 14, 15.
+------------------------------------------------------------------------
+Specs comunes: 1600x1000 px mín., HORIZONTAL, JPG calidad 82, < 250 KB.
+Datos sensibles con BLUR gaussiano (no rectángulo negro). Nada de banco
+de imágenes ni foto de otro cliente. Interfaz de tótem lleva el pie
+"Desarrollado por digitalimpulso.com". Guardar en assets/images/cases/.
+
+[~] 7  · IA salón            -> proy-ia-salon.jpg   RESUELTO con gráfico ilustrativo.
+       (Opcional) reemplazar por versión final de diseño si se quiere.
+
+[~] 8  · Exactitud entrega   -> proy-exactitud-entrega.jpg  RESUELTO con gráfico ilustrativo.
+       Reemplazar por FOTO real: sector de retiro de un local de Mostaza con la
+       CÁMARA de IA visible + pedidos listos (PedidosYa/Rappi). Horizontal.
+       Sin caras identificables (o difuminadas). Tickets con blur.
+
+[ ] 6  · Hardware / NCR      -> proy-hardware.jpg   (hoy placeholder cohete)
+       FOTO del interior del tótem (impresora + lector). Hay material en folletos.
+
+[x] 12 · Facyca              -> proy-facyca.jpg     HECHO.
+       Captura del panel (bandeja de importados). Nombres de clientes y montos
+       difuminados con blur gaussiano. Original sin difuminar en docs/_raw-screenshots/.
+
+[--] 13 · ERP en 4 cadenas   -> QUITADO de /proyectos por decisión de Christian.
+       (Sigue existiendo /casos/erp y la tarjeta ERP en /casos/index. Definir si
+        también se sacan de ahí y del texto "bots, tableros, ERP y captación".)
+
+[ ] 14 · Portal cautivo Wi-Fi -> proy-portal.jpg   (hoy muestra ícono)
+       CAPTURA de la pantalla de login del Wi-Fi como la ve el cliente
+       (formulario que pide mail/teléfono) con la marca del cliente arriba.
+       Puede ser mockup de celular/tablet. Si la marca no está confirmada,
+       usar genérica o difuminar.
+
+[x] 15 · Control de gestión  -> proy-control-gestion.jpg   HECHO.
+       Collage 2x2 de las 4 pantallas de Facyca (bandeja, OT vigentes, detalle OT,
+       avance por sector). Nombres/montos difuminados. Click -> lightbox amplía.
+       (Se puede reemplazar por foto de oficina real si se prefiere.)
+       Originales sin difuminar en docs/_raw-screenshots/.
+
+
+FOTOS DEL BRIEF (1.3) — estado
+------------------------------------------------------------------------
+[x] 2 Vía Cargo, 3 Abuelo Julio, 4 Platense, 5 Ruleta -> frames de video (HECHO)
+[ ] 6 Hardware/NCR -> foto real interior del tótem (impresora/lector). Falta.
+NOTA: los frames son de material real propio; cuando haya foto "de local"
+      mejor (repartidor usando, tótem instalado), se puede reemplazar.
+
+
+PENDIENTE — LOGOS DE CLIENTES QUE FALTAN (lista canónica 1.4)
+------------------------------------------------------------------------
+No hay archivo en assets/images/clients/ para:
+[ ] Vía Cargo
+[ ] Club Atlético Platense
+[ ] Facyca
+[ ] La Palita
+[ ] PiNext
+[ ] Somma
+[ ] Alfajores Galán
+[ ] Gamondes y Asociados
+
+
+PENDIENTE — DEFINICIONES (dependen de Christian)
+------------------------------------------------------------------------
+[ ] Logo "Mc": ¿es McDonald's? Se quitó del marquee hasta confirmar. Si se
+    confirma y se puede publicar, volver a agregarlo.
+[ ] Droguerías del Sud: hoy queda como logo de cliente (está en lista canónica)
+    pero SIN tarjeta ni métricas. Confirmar si entra como cliente cerrado.
+[ ] Open Graph: el brief pide OG con foto de Mostaza 1200x630. Hoy se usa
+    /og-image.jpg del sitio. Reemplazar si quieren una específica de Mostaza.
+
+
+REGLAS DEL BRIEF A NO OLVIDAR
+------------------------------------------------------------------------
+- NUNCA decir que Mercado Pago funciona offline.
+- SIN métricas numéricas en Facyca, Chisap, Droguerías del Sud ni en la
+  implementación de Vía Cargo (van como capacidad).
+- No reescribir el texto de las tarjetas.
+- Revisado por el que no lo hizo antes de dar por publicado.
+
+FASE 2 — VIDEOS (no bloquea la web). Detalle en docs/manual-produccion-contenido.md
