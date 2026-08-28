@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- SEO -->
+  <title>Agendá tu demo | Digital Impulso</title>
+  <meta name="description" content="Contanos sobre tu operación y coordinamos una demo de 30 minutos a medida: tótems de autogestión, IA y automatización para tu negocio. Sin compromiso.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://digital-impulso.vercel.app/agendar">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Agendá tu demo | Digital Impulso">
+  <meta property="og:description" content="Contanos sobre tu operación y elegí día y horario. 30 minutos por videollamada, sin compromiso.">
+  <meta property="og:image" content="https://digital-impulso.vercel.app/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://digital-impulso.vercel.app/agendar">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/agendar.css">
+</head>
+<body>
+  <div id="spotlight"></div>
+
+  <nav id="navbar">
+    <a href="/" class="nav-logo">
+      <img class="nav-logo-img" src="/assets/images/logo-isotipo.png" alt="Digital Impulso">
+      Digital Impulso
+    </a>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-menu">
+    <div class="nav-links">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#totems">Tótems</a>
+      <a href="/proyectos">Proyectos</a>
+      <a href="/#nosotros">Nosotros</a>
+      <a href="/agendar">Agendar demo</a>
+      <a href="/#contacto">Contacto</a>
+    </div>
+    <div class="nav-right">
+      <a href="/#contacto" class="btn-primary">Consultoría gratis →</a>
+    </div>
+    </div>
+  </nav>
+
+  <main class="ag-main">
+    <div class="ag-top">
+      <p class="ag-pill" id="ag-pill">Agendá tu demo</p>
+      <h1 class="ag-h1" id="ag-h1">Contanos sobre tu operación</h1>
+      <p class="ag-lead" id="ag-lead">Tres pasos cortos: tus datos, tu operación y el horario. Con eso preparamos una demo a medida. Toma menos de 2 minutos.</p>
+    </div>
+
+    <div id="ag-body" class="ag-body" aria-live="polite">
+      <div class="ag-loading">Cargando…</div>
+    </div>
+
+    <p class="ag-alt">¿Preferís escribirnos directo? <a href="https://wa.me/5491171668769?text=Hola%2C%20quiero%20coordinar%20una%20demo" target="_blank" rel="noopener">WhatsApp →</a></p>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="nav-logo">
+          <img class="nav-logo-img" src="/assets/images/logo-isotipo.png" alt="Digital Impulso">
+          Digital Impulso
+        </a>
+        <p class="footer-tag">Automatizamos, digitalizamos y escalamos tu negocio con tecnología, IA y automatización.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="/#servicios">Servicios</a>
+        <a href="/#totems">Tótems</a>
+        <a href="/proyectos">Proyectos</a>
+        <a href="/#nosotros">Nosotros</a>
+        <a href="/agendar">Agendar demo</a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+      <div class="footer-col footer-contact">
+        <p class="footer-col-title">Contacto</p>
+        <div class="footer-socials">
+          <a class="social-icon" href="https://wa.me/5491171668769" target="_blank" rel="noopener" aria-label="WhatsApp +54 9 11 7166-8769" title="+54 9 11 7166-8769"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          <a class="social-icon" href="mailto:info@digitalimpulso.com" aria-label="Email info@digitalimpulso.com" title="info@digitalimpulso.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+          <a class="social-icon" href="https://www.linkedin.com/company/digitalimpulso/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a class="social-icon" href="https://www.instagram.com/digitalimpulso.ar" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Digital Impulso. Todos los derechos reservados. · <a href="/privacidad" style="color:inherit">Política de privacidad</a></div>
+  </footer>
+
+  <a href="https://wa.me/5491171668769" class="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+  <script src="/main.js"></script>
+  <script>
+  (function agenda() {
+    const body = document.getElementById('ag-body');
+    const h1 = document.getElementById('ag-h1');
+    const leadTxt = document.getElementById('ag-lead');
+    const pill = document.getElementById('ag-pill');
+    const WA = 'https://wa.me/5491171668769?text=' + encodeURIComponent('Hola, quise agendar una demo desde la web y no pude. ¿Coordinamos por acá?');
+
+    // Zona horaria del visitante: mostramos todo en SU hora, aclarando cuál es.
+    const tzVisitante = (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'America/Argentina/Buenos_Aires';
+    const fmt = (opts) => new Intl.DateTimeFormat('es-AR', { timeZone: tzVisitante, ...opts });
+    const fHora = fmt({ hour: '2-digit', minute: '2-digit', hour12: false });
+    const fDiaCorto = fmt({ weekday: 'short' });
+    const fDiaNum = fmt({ day: 'numeric' });
+    const fMes = fmt({ month: 'short' });
+    const fLargo = fmt({ weekday: 'long', day: 'numeric', month: 'long' });
+    const fCorto = fmt({ weekday: 'short', day: 'numeric', month: 'short' });
+    const claveDia = (d) => fmt({ year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+    const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    // ---------- Estado ----------
+    let datos = null;                 // respuesta de /api/disponibilidad
+    let dias = [];                    // [{clave, fecha:Date, turnos:[Date]}]
+    let diaSel = null, turnoSel = null;
+    let lead = { respuestas: {} };
+    let abierto = 0;                  // bloque abierto (0..2)
+    const hecho = [false, false, false];
+    let errores = ['', '', ''];       // mensaje de error por bloque
+
+    const BLOQUES = [
+      { titulo: 'Tus datos', vacio: 'Nombre, email y WhatsApp' },
+      { titulo: 'Tu operación', vacio: 'Qué querés automatizar y cómo trabajan hoy' },
+      { titulo: 'Día y horario', vacio: '30 minutos por Google Meet' },
+    ];
+
+    function errorFatal(msg) {
+      body.innerHTML = '<div class="ag-error"><p>' + esc(msg) + '</p><a class="ag-btn" href="' + WA + '" target="_blank" rel="noopener">Coordinar por WhatsApp →</a></div>';
+    }
+
+    function agrupar(d) {
+      const mapa = new Map();
+      d.dias.forEach((dia) => dia.turnos.forEach((t) => {
+        const fecha = new Date(t.inicio), k = claveDia(fecha);
+        if (!mapa.has(k)) mapa.set(k, { clave: k, fecha, turnos: [] });
+        mapa.get(k).turnos.push(fecha);
+      }));
+      return [...mapa.values()].sort((a, b) => a.fecha - b.fecha);
+    }
+
+    async function cargar() {
+      try {
+        const r = await fetch('/api/disponibilidad', { cache: 'no-store' });
+        datos = await r.json();
+        if (!r.ok || !datos.ok) throw new Error(datos.error || 'Error');
+      } catch (e) {
+        return errorFatal('No pudimos cargar la agenda en este momento.');
+      }
+      dias = agrupar(datos);
+      if (!dias.length) return errorFatal('No quedan horarios libres en las próximas semanas.');
+      diaSel = dias[0];
+      render();
+    }
+
+    // ---------- Resúmenes de bloques completados ----------
+    function resumen(i) {
+      if (i === 0) return [lead.nombre, lead.email, lead.whatsapp].filter(Boolean).join(' · ');
+      if (i === 1) {
+        const r = lead.respuestas || {};
+        const areas = Array.isArray(r.areas) ? r.areas.slice(0, 2).join(', ') + (r.areas.length > 2 ? ' +' + (r.areas.length - 2) : '') : '';
+        return [areas, r.locales && r.locales + ' local' + (r.locales === '1' ? '' : 'es'), r.urgencia].filter(Boolean).join(' · ') || 'Sin respuestas';
+      }
+      if (i === 2 && turnoSel) return cap(fCorto.format(turnoSel)) + ' · ' + fHora.format(turnoSel) + ' hs';
+      return '';
+    }
+
+    // ---------- Render del acordeón ----------
+    function render() {
+      const html = BLOQUES.map((b, i) => {
+        const estado = i === abierto ? 'open' : hecho[i] ? 'done' : 'locked';
+        const bloqueado = estado === 'locked' && !hecho[i] && !(i > 0 && hecho[i - 1]);
+        const sub = hecho[i] && i !== abierto ? resumen(i) : b.vacio;
+        return '<section class="ag-blk ' + estado + '" data-i="' + i + '">' +
+          '<button type="button" class="ag-blk-head" data-abrir="' + i + '"' + (bloqueado || i === abierto ? ' disabled' : '') + '>' +
+            '<span class="ag-blk-num">' + (hecho[i] && i !== abierto ? '✓' : i + 1) + '</span>' +
+            '<span class="ag-blk-title"><b>' + esc(b.titulo) + '</b><small>' + esc(sub) + '</small></span>' +
+            (hecho[i] && i !== abierto ? '<span class="ag-blk-edit">Editar</span>' : '') +
+          '</button>' +
+          (i === abierto ? '<div class="ag-blk-body">' + cuerpo(i) + '</div>' : '') +
+        '</section>';
+      }).join('');
+      body.innerHTML = (datos.simulado ? '<p class="ag-simulado">Modo simulado: no se crean reuniones reales.</p>' : '') + html;
+      enganchar();
+    }
+
+    const err = (i) => (errores[i] ? '<p class="ag-msg-error">' + esc(errores[i]) + '</p>' : '');
+
+    function cuerpo(i) {
+      if (i === 0) return (
+        '<form id="ag-f0" class="ag-form" novalidate>' + err(0) +
+          '<div class="ag-row">' +
+            '<div class="ag-q"><label class="ag-label" for="f-nombre">Nombre y apellido</label><input class="ag-input" id="f-nombre" name="nombre" maxlength="80" value="' + esc(lead.nombre || '') + '" autocomplete="name"></div>' +
+            '<div class="ag-q"><label class="ag-label" for="f-email">Email</label><input class="ag-input" id="f-email" name="email" type="email" maxlength="120" value="' + esc(lead.email || '') + '" autocomplete="email"></div>' +
+          '</div>' +
+          '<div class="ag-row">' +
+            '<div class="ag-q"><label class="ag-label" for="f-whatsapp">Teléfono (WhatsApp)</label><input class="ag-input" id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" maxlength="30" value="' + esc(lead.whatsapp || '') + '" autocomplete="tel"></div>' +
+            '<div class="ag-q"><label class="ag-label" for="f-web">Sitio web de tu empresa<small>Opcional</small></label><input class="ag-input" id="f-web" name="sitioWeb" type="text" inputmode="url" maxlength="120" value="' + esc(lead.sitioWeb || '') + '" autocomplete="url"></div>' +
+          '</div>' +
+          '<div class="ag-hp" aria-hidden="true"><label>Web<input name="web" tabindex="-1" autocomplete="off"></label></div>' +
+          '<div class="ag-actions"><span></span><button type="submit" class="ag-btn">Continuar <span aria-hidden="true">→</span></button></div>' +
+        '</form>');
+
+      if (i === 1) {
+        const preguntas = Object.entries(datos.preguntas || {}).map(([clave, p]) => {
+          const tipo = p.multiple ? 'checkbox' : 'radio';
+          const sel = lead.respuestas[clave];
+          const chips = p.opciones.map((o) => {
+            const marcado = p.multiple ? (Array.isArray(sel) && sel.includes(o)) : sel === o;
+            return '<label class="ag-chip"><input type="' + tipo + '" name="' + clave + '" value="' + esc(o) + '"' + (marcado ? ' checked' : '') + '><span>' + esc(o) + '</span></label>';
+          }).join('');
+          return '<div class="ag-q"><p class="ag-label">' + esc(p.titulo) + (p.multiple ? '<small>Podés marcar varias</small>' : '') + '</p><div class="ag-chips">' + chips + '</div></div>';
+        }).join('');
+        return (
+          '<form id="ag-f1" class="ag-form" novalidate>' + err(1) + preguntas +
+            (datos.comentario ? '<div class="ag-q"><label class="ag-label" for="f-comentario">' + esc(datos.comentario.titulo) + '<small>Opcional</small></label><textarea class="ag-input" id="f-comentario" name="comentario" rows="3" maxlength="800" placeholder="' + esc(datos.comentario.placeholder || '') + '">' + esc(lead.comentario || '') + '</textarea></div>' : '') +
+            '<div class="ag-actions"><button type="button" class="ag-btn-ghost" data-abrir="0">← Atrás</button><button type="submit" class="ag-btn">Continuar <span aria-hidden="true">→</span></button></div>' +
+          '</form>');
+      }
+
+      const chips = dias.map((d) =>
+        '<button type="button" class="ag-dia' + (d === diaSel ? ' sel' : '') + '" data-k="' + d.clave + '">' +
+          '<span>' + esc(cap(fDiaCorto.format(d.fecha)).replace('.', '')) + '</span><b>' + fDiaNum.format(d.fecha) + '</b><span>' + esc(fMes.format(d.fecha).replace('.', '')) + '</span>' +
+        '</button>').join('');
+      const turnos = diaSel.turnos.map((t) =>
+        '<button type="button" class="ag-turno' + (turnoSel && t.getTime() === turnoSel.getTime() ? ' sel' : '') + '" data-t="' + t.toISOString() + '">' + fHora.format(t) + '</button>').join('');
+      return (
+        '<form id="ag-f2" class="ag-form" novalidate>' + err(2) +
+          '<div class="ag-q"><p class="ag-label">Día</p><div class="ag-dias">' + chips + '</div></div>' +
+          '<div class="ag-q"><p class="ag-label">' + esc(cap(fLargo.format(diaSel.fecha))) + '<small>' + datos.duracionMin + ' min</small></p><div class="ag-turnos">' + turnos + '</div><p class="ag-tz">Horarios en tu zona horaria (' + esc(tzVisitante.replace(/_/g, ' ')) + ').</p></div>' +
+          '<div class="ag-actions"><button type="button" class="ag-btn-ghost" data-abrir="1">← Atrás</button><button type="submit" class="ag-btn" id="ag-confirmar">Confirmar demo <span aria-hidden="true">→</span></button></div>' +
+          '<p class="ag-tz">Al confirmar aceptás nuestra <a href="/privacidad" target="_blank" rel="noopener" style="color:var(--c);text-decoration:none">política de privacidad</a>. Usamos tus datos solo para coordinar la demo.</p>' +
+        '</form>');
+    }
+
+    // ---------- Interacción ----------
+    function abrir(i) {
+      guardarAbierto();
+      abierto = i;
+      render();
+      const blk = body.querySelector('.ag-blk.open');
+      if (blk) {
+        const top = blk.getBoundingClientRect().top + window.scrollY - 84;
+        if (Math.abs(window.scrollY - top) > 40) window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+
+    /** Guarda lo tipeado en el bloque abierto sin validar (para no perderlo al navegar). */
+    function guardarAbierto() {
+      const f0 = document.getElementById('ag-f0');
+      if (f0) { lead.nombre = f0.nombre.value.trim(); lead.email = f0.email.value.trim(); lead.whatsapp = f0.whatsapp.value.trim(); lead.sitioWeb = f0.sitioWeb.value.trim(); lead.web = f0.web.value; }
+      const f1 = document.getElementById('ag-f1');
+      if (f1) {
+        const fd = new FormData(f1);
+        lead.respuestas = {};
+        Object.entries(datos.preguntas || {}).forEach(([clave, p]) => { const v = fd.getAll(clave); if (v.length) lead.respuestas[clave] = p.multiple ? v : v[0]; });
+        lead.comentario = (fd.get('comentario') || '').trim();
+      }
+    }
+
+    function enganchar() {
+      body.querySelectorAll('[data-abrir]').forEach((b) => b.addEventListener('click', () => abrir(Number(b.dataset.abrir))));
+
+      const f0 = document.getElementById('ag-f0');
+      if (f0) f0.addEventListener('submit', (e) => {
+        e.preventDefault(); guardarAbierto();
+        if (!lead.nombre || lead.nombre.length < 2) errores[0] = 'Contanos tu nombre.';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(lead.email || '')) errores[0] = 'El email no parece válido.';
+        else if (lead.whatsapp.replace(/\D/g, '').length < 6) errores[0] = 'Dejanos un WhatsApp para poder contactarte.';
+        else errores[0] = '';
+        if (errores[0]) return render();
+        hecho[0] = true; abrir(hecho[1] ? (hecho[2] ? 2 : 1) : 1);
+      });
+
+      const f1 = document.getElementById('ag-f1');
+      if (f1) f1.addEventListener('submit', (e) => {
+        e.preventDefault(); guardarAbierto();
+        errores[1] = ''; hecho[1] = true; abrir(2);
+      });
+
+      body.querySelectorAll('.ag-dia').forEach((b) => b.addEventListener('click', () => {
+        diaSel = dias.find((d) => d.clave === b.dataset.k); turnoSel = null; render();
+      }));
+      body.querySelectorAll('.ag-turno').forEach((b) => b.addEventListener('click', () => {
+        turnoSel = new Date(b.dataset.t);
+        body.querySelectorAll('.ag-turno').forEach((x) => x.classList.toggle('sel', x === b));
+      }));
+
+      const f2 = document.getElementById('ag-f2');
+      if (f2) f2.addEventListener('submit', enviar);
+    }
+
+    async function enviar(e) {
+      e.preventDefault();
+      if (!turnoSel) { errores[2] = 'Elegí un horario para la demo.'; return render(); }
+      errores[2] = '';
+      const btn = document.getElementById('ag-confirmar');
+      btn.disabled = true; btn.textContent = 'Agendando…';
+      let r, j;
+      try {
+        r = await fetch('/api/agendar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...lead, inicio: turnoSel.toISOString() }),
+        });
+        j = await r.json();
+      } catch {
+        errores[2] = 'No pudimos conectar con el servidor. Probá de nuevo o escribinos por WhatsApp.'; return render();
+      }
+      if (r.status === 409) {
+        // El turno se ocupó mientras elegías: refrescamos la agenda y pedimos otro.
+        turnoSel = null;
+        try {
+          const rr = await fetch('/api/disponibilidad', { cache: 'no-store' });
+          const dd = await rr.json();
+          if (dd.ok) { datos = dd; dias = agrupar(datos); diaSel = dias.find((d) => d.clave === diaSel.clave) || dias[0]; }
+        } catch {}
+        errores[2] = j.error || 'Ese horario ya no está disponible. Elegí otro.'; return render();
+      }
+      if (!r.ok || !j.ok) { errores[2] = j.error || 'Algo falló. Probá de nuevo.'; return render(); }
+      renderOk(j);
+    }
+
+    // ---------- Confirmación ----------
+    function renderOk(j) {
+      const ini = new Date(j.inicio), fin = new Date(j.fin);
+      pill.textContent = 'Demo agendada';
+      h1.textContent = '¡Listo, ' + lead.nombre.split(' ')[0] + '!';
+      leadTxt.textContent = j.emailEnviado
+        ? 'Te mandamos la confirmación con el link de Google Meet.'
+        : 'Tu demo quedó reservada. Guardá el link de Google Meet.';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const aviso = j.emailEnviado
+        ? 'Confirmación enviada a <b>' + esc(lead.email) + '</b> desde info@digitalimpulso.com. Si no la ves, revisá la carpeta de spam.'
+        : (j.simulado ? '<em>Modo simulado: no se envió ningún mail.</em>' : 'No pudimos enviarte el mail de confirmación; guardá el link de abajo o agregá el evento a tu calendario.');
+      body.innerHTML =
+        '<div class="ag-ok">' +
+          '<div class="ag-ok-ico">✓</div>' +
+          '<p class="ag-ok-cuando">' + esc(cap(fLargo.format(ini))) + ' · ' + fHora.format(ini) + ' hs</p>' +
+          '<p>' + aviso + '</p>' +
+          (j.meet ? '<a class="ag-btn" href="' + esc(j.meet) + '" target="_blank" rel="noopener">Link de Google Meet →</a>' : '') +
+          '<div class="ag-ok-links"><a href="' + generarIcs(ini, fin, j.meet) + '" download="demo-digital-impulso.ics">Agregar a mi calendario (.ics)</a><a href="/">Volver al inicio</a></div>' +
+        '</div>';
+    }
+
+    function generarIcs(ini, fin, meet) {
+      const st = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+      const txt = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Digital Impulso//Agenda//ES', 'BEGIN:VEVENT',
+        'UID:' + st(ini) + '@digitalimpulso.com', 'DTSTAMP:' + st(new Date()), 'DTSTART:' + st(ini), 'DTEND:' + st(fin),
+        'SUMMARY:Demo Digital Impulso', 'DESCRIPTION:' + (meet ? 'Google Meet: ' + meet : ''), meet ? 'URL:' + meet : '',
+        'END:VEVENT', 'END:VCALENDAR',
+      ].filter(Boolean).join('\r\n');
+      return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(txt);
+    }
+
+    cargar();
+  })();
+  </script>
+</body>
+</html>
