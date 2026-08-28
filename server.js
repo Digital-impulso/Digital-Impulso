@@ -12,6 +12,24 @@ const server = serve({
     const url = new URL(req.url);
     let pathname = decodeURIComponent(url.pathname);
 
+    // /api/* -> funciones serverless de ./api (mismo contrato que Vercel: export GET/POST(Request))
+    if (pathname.startsWith("/api/")) {
+      const nombre = pathname.slice(5).replace(/\/.*$/, "");
+      if (!/^[a-z0-9-]+$/.test(nombre)) return new Response("404", { status: 404 });
+      try {
+        const mod = await import(`./api/${nombre}.js`);
+        const handler = mod[req.method] || mod.default;
+        if (!handler) return new Response("405 Method Not Allowed", { status: 405 });
+        return await handler(req);
+      } catch (e) {
+        if (e?.code === "ERR_MODULE_NOT_FOUND" || /Cannot find module/.test(String(e?.message))) {
+          return new Response("404 - API no encontrada", { status: 404 });
+        }
+        console.error(e);
+        return new Response("500 - Error en la API", { status: 500 });
+      }
+    }
+
     // Ruta raíz -> index.html
     if (pathname === "/" || pathname === "") pathname = "/index.html";
 
