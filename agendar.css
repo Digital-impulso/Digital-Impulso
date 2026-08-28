@@ -61,6 +61,10 @@ textarea.ag-input { resize: vertical; min-height: 96px; line-height: 1.55; }
 .ag-btn-ghost { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: #9CA3AF; font-family: inherit; font-size: 0.88rem; font-weight: 500; cursor: pointer; padding: 8px 0; }
 .ag-btn-ghost:hover { color: var(--c); }
 .ag-msg-error { color: #FCA5A5; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); border-radius: 12px; padding: 11px 14px; font-size: 0.86rem; }
+/* Error debajo del campo puntual que falta */
+.ag-field-error { color: #FCA5A5; font-size: 0.82rem; font-weight: 600; margin-top: 6px; line-height: 1.4; }
+.ag-input.is-error { border-color: rgba(248,113,113,0.7); background: rgba(248,113,113,0.05); }
+.ag-input.is-error:focus { border-color: rgba(248,113,113,0.85); box-shadow: 0 0 0 3px rgba(248,113,113,0.16); }
 .ag-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* Bloque 3: calendario */

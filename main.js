@@ -110,19 +110,6 @@ document.querySelectorAll('.svc-card').forEach(card => {
   });
 });
 
-// ============ Envío del formulario de contacto a WhatsApp ============
-function enviarContacto(e) {
-  e.preventDefault();
-  const valor = document.getElementById('contacto-input').value.trim();
-  if (!valor) {
-    alert('Por favor ingresá tu WhatsApp o email');
-    return;
-  }
-  const msg = encodeURIComponent('Hola, quiero una consultoría gratis. Mi contacto: ' + valor);
-  window.open('https://wa.me/5491171668769?text=' + msg, '_blank');
-}
-
-
 // ============ Menú móvil (hamburguesa) ============
 (function navToggle() {
   const nav = document.getElementById('navbar');

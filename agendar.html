@@ -46,11 +46,10 @@
       <a href="/#totems">Tótems</a>
       <a href="/proyectos">Proyectos</a>
       <a href="/#nosotros">Nosotros</a>
-      <a href="/agendar">Agendar demo</a>
       <a href="/#contacto">Contacto</a>
     </div>
     <div class="nav-right">
-      <a href="/#contacto" class="btn-primary">Consultoría gratis →</a>
+      <a href="/agendar" class="btn-primary">Agendar demo →</a>
     </div>
     </div>
   </nav>
@@ -131,6 +130,7 @@
     let abierto = 0;                  // bloque abierto (0..2)
     const hecho = [false, false, false];
     let errores = ['', '', ''];       // mensaje de error por bloque
+    let errCampos = {};               // errores por campo del bloque 0 (nombre/email/whatsapp)
 
     const BLOQUES = [
       { titulo: 'Tus datos', vacio: 'Nombre, email y WhatsApp' },
@@ -198,16 +198,18 @@
     }
 
     const err = (i) => (errores[i] ? '<p class="ag-msg-error">' + esc(errores[i]) + '</p>' : '');
+    const errC = (k) => (errCampos[k] ? '<p class="ag-field-error">' + esc(errCampos[k]) + '</p>' : '');
+    const cls = (k) => (errCampos[k] ? ' is-error' : '');
 
     function cuerpo(i) {
       if (i === 0) return (
-        '<form id="ag-f0" class="ag-form" novalidate>' + err(0) +
+        '<form id="ag-f0" class="ag-form" novalidate>' +
           '<div class="ag-row">' +
-            '<div class="ag-q"><label class="ag-label" for="f-nombre">Nombre y apellido</label><input class="ag-input" id="f-nombre" name="nombre" maxlength="80" value="' + esc(lead.nombre || '') + '" autocomplete="name"></div>' +
-            '<div class="ag-q"><label class="ag-label" for="f-email">Email</label><input class="ag-input" id="f-email" name="email" type="email" maxlength="120" value="' + esc(lead.email || '') + '" autocomplete="email"></div>' +
+            '<div class="ag-q"><label class="ag-label" for="f-nombre">Nombre y apellido</label><input class="ag-input' + cls('nombre') + '" id="f-nombre" name="nombre" maxlength="80" value="' + esc(lead.nombre || '') + '" autocomplete="name">' + errC('nombre') + '</div>' +
+            '<div class="ag-q"><label class="ag-label" for="f-email">Email</label><input class="ag-input' + cls('email') + '" id="f-email" name="email" type="email" maxlength="120" value="' + esc(lead.email || '') + '" autocomplete="email">' + errC('email') + '</div>' +
           '</div>' +
           '<div class="ag-row">' +
-            '<div class="ag-q"><label class="ag-label" for="f-whatsapp">Teléfono (WhatsApp)</label><input class="ag-input" id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" maxlength="30" value="' + esc(lead.whatsapp || '') + '" autocomplete="tel"></div>' +
+            '<div class="ag-q"><label class="ag-label" for="f-whatsapp">Teléfono (WhatsApp)</label><input class="ag-input' + cls('whatsapp') + '" id="f-whatsapp" name="whatsapp" type="tel" inputmode="tel" maxlength="30" value="' + esc(lead.whatsapp || '') + '" autocomplete="tel">' + errC('whatsapp') + '</div>' +
             '<div class="ag-q"><label class="ag-label" for="f-web">Sitio web de tu empresa<small>Opcional</small></label><input class="ag-input" id="f-web" name="sitioWeb" type="text" inputmode="url" maxlength="120" value="' + esc(lead.sitioWeb || '') + '" autocomplete="url"></div>' +
           '</div>' +
           '<div class="ag-hp" aria-hidden="true"><label>Web<input name="web" tabindex="-1" autocomplete="off"></label></div>' +
@@ -238,9 +240,9 @@
       const turnos = diaSel.turnos.map((t) =>
         '<button type="button" class="ag-turno' + (turnoSel && t.getTime() === turnoSel.getTime() ? ' sel' : '') + '" data-t="' + t.toISOString() + '">' + fHora.format(t) + '</button>').join('');
       return (
-        '<form id="ag-f2" class="ag-form" novalidate>' + err(2) +
+        '<form id="ag-f2" class="ag-form" novalidate>' +
           '<div class="ag-q"><p class="ag-label">Día</p><div class="ag-dias">' + chips + '</div></div>' +
-          '<div class="ag-q"><p class="ag-label">' + esc(cap(fLargo.format(diaSel.fecha))) + '<small>' + datos.duracionMin + ' min</small></p><div class="ag-turnos">' + turnos + '</div><p class="ag-tz">Horarios en tu zona horaria (' + esc(tzVisitante.replace(/_/g, ' ')) + ').</p></div>' +
+          '<div class="ag-q"><p class="ag-label">' + esc(cap(fLargo.format(diaSel.fecha))) + '<small>' + datos.duracionMin + ' min</small></p><div class="ag-turnos">' + turnos + '</div>' + err(2) + '<p class="ag-tz">Horarios en tu zona horaria (' + esc(tzVisitante.replace(/_/g, ' ')) + ').</p></div>' +
           '<div class="ag-actions"><button type="button" class="ag-btn-ghost" data-abrir="1">← Atrás</button><button type="submit" class="ag-btn" id="ag-confirmar">Confirmar demo <span aria-hidden="true">→</span></button></div>' +
           '<p class="ag-tz">Al confirmar aceptás nuestra <a href="/privacidad" target="_blank" rel="noopener" style="color:var(--c);text-decoration:none">política de privacidad</a>. Usamos tus datos solo para coordinar la demo.</p>' +
         '</form>');
@@ -249,6 +251,7 @@
     // ---------- Interacción ----------
     function abrir(i) {
       guardarAbierto();
+      errCampos = {};
       abierto = i;
       render();
       const blk = body.querySelector('.ag-blk.open');
@@ -277,11 +280,11 @@
       const f0 = document.getElementById('ag-f0');
       if (f0) f0.addEventListener('submit', (e) => {
         e.preventDefault(); guardarAbierto();
-        if (!lead.nombre || lead.nombre.length < 2) errores[0] = 'Contanos tu nombre.';
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(lead.email || '')) errores[0] = 'El email no parece válido.';
-        else if (lead.whatsapp.replace(/\D/g, '').length < 6) errores[0] = 'Dejanos un WhatsApp para poder contactarte.';
-        else errores[0] = '';
-        if (errores[0]) return render();
+        errCampos = {};
+        if (!lead.nombre || lead.nombre.length < 2) errCampos.nombre = 'Contanos tu nombre.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(lead.email || '')) errCampos.email = 'El email no parece válido.';
+        if (lead.whatsapp.replace(/\D/g, '').length < 6) errCampos.whatsapp = 'Dejanos un WhatsApp para poder contactarte.';
+        if (Object.keys(errCampos).length) return render();
         hecho[0] = true; abrir(hecho[1] ? (hecho[2] ? 2 : 1) : 1);
       });
 
