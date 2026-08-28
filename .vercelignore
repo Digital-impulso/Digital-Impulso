@@ -4,3 +4,7 @@ docs/
 node_modules/
 .git/
 ToDo.txt
+.env
+.env.example
+scripts/
+AGENDAR.md
