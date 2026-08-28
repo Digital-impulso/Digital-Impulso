@@ -14,3 +14,6 @@ Thumbs.db
 
 # Variables de entorno locales (credenciales de Google)
 .env
+
+.vercel
+.env*
