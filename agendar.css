@@ -4,8 +4,8 @@
 
 .ag-pill { display: inline-flex; align-items: center; margin: 0 auto 22px; padding: 6px 14px; border-radius: 999px; font-size: 0.78rem; font-weight: 500; color: #D1D5DB; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); }
 .ag-top { text-align: center; }
-.ag-h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.04; margin: 0 0 18px; background: linear-gradient(180deg, #FFFFFF 20%, #9CA3AF 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.ag-lead { color: #9CA3AF; font-size: 1rem; line-height: 1.65; max-width: 48ch; margin: 0 auto 40px; }
+.ag-h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.04; margin: 0 0 18px; background: linear-gradient(180deg, #FFFFFF 20%, #9AA1B0 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.ag-lead { color: #9AA1B0; font-size: 1rem; line-height: 1.65; max-width: 48ch; margin: 0 auto 40px; }
 
 .ag-body { display: flex; flex-direction: column; gap: 14px; }
 .ag-loading, .ag-error { text-align: center; color: #9AA1B0; padding: 40px 10px; font-size: 0.95rem; }
@@ -20,13 +20,13 @@
 .ag-blk-head { display: flex; align-items: center; gap: 14px; width: 100%; padding: 18px 20px; background: none; border: none; color: #fff; font-family: inherit; text-align: left; cursor: pointer; }
 .ag-blk-head:disabled { cursor: default; }
 .ag-blk.done .ag-blk-head:hover { background: rgba(255,255,255,0.03); }
-.ag-blk-num { width: 30px; height: 30px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 0.82rem; font-weight: 700; color: #9CA3AF; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
+.ag-blk-num { width: 30px; height: 30px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 0.82rem; font-weight: 700; color: #9AA1B0; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
 .ag-blk.open .ag-blk-num { color: #052B26; background: linear-gradient(180deg, #6EF0DC, #2DD4BF); border-color: transparent; }
 .ag-blk.done .ag-blk-num { color: var(--c); background: rgba(94,234,212,0.12); border-color: rgba(94,234,212,0.35); }
 .ag-blk-title { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .ag-blk-title b { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
 .ag-blk-title small { color: #9AA1B0; font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ag-blk.done .ag-blk-title small { color: #9CA3AF; }
+.ag-blk.done .ag-blk-title small { color: #9AA1B0; }
 .ag-blk-edit { color: #9AA1B0; font-size: 0.8rem; font-weight: 500; flex: none; }
 .ag-blk.done .ag-blk-head:hover .ag-blk-edit { color: var(--c); }
 .ag-blk-body { padding: 4px 20px 22px; border-top: 1px solid rgba(255,255,255,0.06); }
@@ -58,7 +58,7 @@ textarea.ag-input { resize: vertical; min-height: 96px; line-height: 1.55; }
 .ag-btn:active { transform: scale(0.99); }
 .ag-btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
 .ag-btn-wide { width: 100%; }
-.ag-btn-ghost { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: #9CA3AF; font-family: inherit; font-size: 0.88rem; font-weight: 500; cursor: pointer; padding: 8px 0; }
+.ag-btn-ghost { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: #9AA1B0; font-family: inherit; font-size: 0.88rem; font-weight: 500; cursor: pointer; padding: 8px 0; }
 .ag-btn-ghost:hover { color: var(--c); }
 .ag-msg-error { color: #FCA5A5; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.3); border-radius: 12px; padding: 11px 14px; font-size: 0.86rem; }
 /* Error debajo del campo puntual que falta */
@@ -69,7 +69,7 @@ textarea.ag-input { resize: vertical; min-height: 96px; line-height: 1.55; }
 
 /* Bloque 3: calendario */
 .ag-dias { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.15) transparent; }
-.ag-dia { flex: none; width: 68px; padding: 10px 6px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035); color: #9CA3AF; font-family: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: 0.15s; }
+.ag-dia { flex: none; width: 68px; padding: 10px 6px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035); color: #9AA1B0; font-family: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; transition: 0.15s; }
 .ag-dia span { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .ag-dia b { font-size: 1.25rem; color: #fff; font-weight: 700; letter-spacing: -0.02em; }
 .ag-dia:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
@@ -85,10 +85,10 @@ textarea.ag-input { resize: vertical; min-height: 96px; line-height: 1.55; }
 .ag-ok { text-align: center; padding: 8px 0; }
 .ag-ok-ico { width: 60px; height: 60px; margin: 0 auto 22px; border-radius: 50%; display: grid; place-items: center; font-size: 1.7rem; font-weight: 900; color: #052B26; background: linear-gradient(180deg, #6EF0DC, #2DD4BF); box-shadow: 0 0 48px rgba(94,234,212,0.35); }
 .ag-ok-cuando { font-size: 1.15rem; font-weight: 600; color: var(--c); margin-bottom: 10px; }
-.ag-ok p { color: #9CA3AF; font-size: 0.95rem; line-height: 1.6; margin-bottom: 22px; }
+.ag-ok p { color: #9AA1B0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 22px; }
 .ag-ok p b { color: #fff; }
 .ag-ok-links { display: flex; justify-content: center; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
-.ag-ok-links a { color: #9CA3AF; font-size: 0.88rem; text-decoration: none; }
+.ag-ok-links a { color: #9AA1B0; font-size: 0.88rem; text-decoration: none; }
 .ag-ok-links a:hover { color: var(--c); }
 
 .ag-alt { margin-top: 40px; text-align: center; color: #9AA1B0; font-size: 0.88rem; }
