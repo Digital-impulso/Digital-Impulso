@@ -30,12 +30,33 @@
   <meta name="twitter:image" content="https://digitalimpulso.com/og-image.jpg">
   <meta property="og:type" content="website">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Fuente autoalojada (variable, un solo woff2) -->
+  <link rel="preload" href="/assets/fonts/geist-var.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Datos estructurados -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Digital Impulso",
+    "url": "https://digitalimpulso.com",
+    "logo": "https://digitalimpulso.com/assets/images/logo-isotipo.webp",
+    "description": "Automatizamos, digitalizamos y escalamos negocios con tecnología, IA y automatización: tótems de autogestión, chatbots IA, apps a medida y control de gestión.",
+    "sameAs": [
+      "https://www.linkedin.com/company/digitalimpulso/",
+      "https://www.instagram.com/digitalimpulso.ar"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "telephone": "+54-9-11-7166-8769",
+      "areaServed": "AR",
+      "availableLanguage": "es"
+    }
+  }
+  </script>
 </head>
 <body>
   <div id="spotlight"></div>
@@ -43,7 +64,7 @@
   <!-- ============ NAVBAR ============ -->
   <nav id="navbar">
     <a href="#inicio" class="nav-logo">
-      <img class="nav-logo-img" src="/assets/images/logo-isotipo.png" alt="Digital Impulso">
+      <img class="nav-logo-img" src="/assets/images/logo-isotipo.webp" alt="" width="171" height="160">
       Digital Impulso
     </a>
     <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -67,8 +88,8 @@
     <div class="hero-inner">
       <span class="hero-badge"><span class="hero-badge-dot"></span> Demo gratis · 30 min · sin compromiso</span>
       <h1 class="hero-title">
-        Automatizamos y escalamos<br>
-        tu negocio con <span class="text-gradient" id="typewriter"></span>
+        <span class="hero-title-sizer" aria-hidden="true">Automatizamos y escalamos<br>tu negocio con Inteligencia Artificial</span>
+        <span class="hero-title-live">Automatizamos y escalamos<br>tu negocio con <span class="text-gradient" id="typewriter"></span></span>
       </h1>
       <p class="hero-sub">
         Tecnología aplicada a problemas reales: IA, tótems de autogestión, apps a medida
@@ -78,49 +99,46 @@
         <a href="/agendar" class="hero-btn-main">Agendar demo →</a>
         <a href="#servicios" class="hero-btn-ghost">Ver servicios</a>
       </div>
-      <div class="hero-mini-stats">
-        <div><strong>+50</strong><span>proyectos entregados</span></div>
-        <div><strong>90 días</strong><span>para ver resultados</span></div>
-        <div><strong>24/7</strong><span>automatización activa</span></div>
-      </div>
     </div>
   </header>
+
+  <main id="contenido">
 
   <!-- ============ MARQUEE CLIENTES ============ -->
   <div class="marquee-wrap">
     <p class="marquee-label">Confían en nosotros</p>
     <div class="marquee-track">
-      <img src="assets/images/clients/Nuke-blanco.png" alt="Ñuke" class="client-logo">
-      <img src="assets/images/clients/selquet-blanco-1.png" alt="Selquet" class="client-logo">
-      <img src="assets/images/clients/Tecnofarm-blanco.png" alt="Tecnofarm" class="client-logo">
-      <img src="assets/images/clients/Trianorte-blanco-1.png" alt="Trianorte" class="client-logo">
-      <img src="assets/images/clients/Tromen-blanco.png" alt="Tromen" class="client-logo">
-      <img src="assets/images/clients/11-a-fondo-blanco-1.png" alt="11 a fondo" class="client-logo">
-      <img src="assets/images/clients/Dandy-blanco.png" alt="Dandy" class="client-logo">
-      <img src="assets/images/clients/Kentucky-blanco-1.png" alt="Kentucky" class="client-logo">
-      <img src="assets/images/clients/Las-violetas-blanco.png" alt="Las Violetas" class="client-logo">
-      <img src="assets/images/clients/Mostaza-blanco-1.png" alt="Mostaza" class="client-logo">
-      <img src="assets/images/clients/abuelo-julio.png" alt="Abuelo Julio" class="client-logo client-logo--mono client-logo--sm">
-      <img src="assets/images/clients/braford.png" alt="Braford" class="client-logo client-logo--mono">
-      <img src="assets/images/clients/droguerias del sud.png" alt="Droguería Del Sud" class="client-logo client-logo--mono client-logo--sm">
-      <img src="assets/images/clients/galan logo.svg" alt="Galán" class="client-logo client-logo--sm">
-      <img src="assets/images/clients/chisap-Photoroom.png" alt="Chisap" class="client-logo client-logo--sm">
+      <img src="assets/images/clients/Nuke-blanco.webp" alt="Ñuke" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/selquet-blanco-1.webp" alt="Selquet" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Tecnofarm-blanco.webp" alt="Tecnofarm" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Trianorte-blanco-1.webp" alt="Trianorte" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Tromen-blanco.webp" alt="Tromen" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/11-a-fondo-blanco-1.webp" alt="11 a fondo" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Dandy-blanco.webp" alt="Dandy" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Kentucky-blanco-1.webp" alt="Kentucky" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Las-violetas-blanco.webp" alt="Las Violetas" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Mostaza-blanco-1.webp" alt="Mostaza" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/abuelo-julio.webp" alt="Abuelo Julio" loading="lazy" decoding="async" class="client-logo client-logo--mono client-logo--sm">
+      <img src="assets/images/clients/braford.webp" alt="Braford" loading="lazy" decoding="async" class="client-logo client-logo--mono">
+      <img src="assets/images/clients/droguerias del sud.webp" alt="Droguería Del Sud" loading="lazy" decoding="async" class="client-logo client-logo--mono client-logo--sm">
+      <img src="assets/images/clients/galan logo.svg" alt="Galán" loading="lazy" decoding="async" class="client-logo client-logo--sm">
+      <img src="assets/images/clients/chisap-Photoroom.webp" alt="Chisap" loading="lazy" decoding="async" class="client-logo client-logo--sm">
       <!-- Duplicado para loop continuo -->
-      <img src="assets/images/clients/Nuke-blanco.png" alt="Ñuke" class="client-logo">
-      <img src="assets/images/clients/selquet-blanco-1.png" alt="Selquet" class="client-logo">
-      <img src="assets/images/clients/Tecnofarm-blanco.png" alt="Tecnofarm" class="client-logo">
-      <img src="assets/images/clients/Trianorte-blanco-1.png" alt="Trianorte" class="client-logo">
-      <img src="assets/images/clients/Tromen-blanco.png" alt="Tromen" class="client-logo">
-      <img src="assets/images/clients/11-a-fondo-blanco-1.png" alt="11 a fondo" class="client-logo">
-      <img src="assets/images/clients/Dandy-blanco.png" alt="Dandy" class="client-logo">
-      <img src="assets/images/clients/Kentucky-blanco-1.png" alt="Kentucky" class="client-logo">
-      <img src="assets/images/clients/Las-violetas-blanco.png" alt="Las Violetas" class="client-logo">
-      <img src="assets/images/clients/Mostaza-blanco-1.png" alt="Mostaza" class="client-logo">
-      <img src="assets/images/clients/abuelo-julio.png" alt="Abuelo Julio" class="client-logo client-logo--mono client-logo--sm">
-      <img src="assets/images/clients/braford.png" alt="Braford" class="client-logo client-logo--mono">
-      <img src="assets/images/clients/droguerias del sud.png" alt="Droguería Del Sud" class="client-logo client-logo--mono client-logo--sm">
-      <img src="assets/images/clients/galan logo.svg" alt="Galán" class="client-logo client-logo--sm">
-      <img src="assets/images/clients/chisap-Photoroom.png" alt="Chisap" class="client-logo client-logo--sm">
+      <img src="assets/images/clients/Nuke-blanco.webp" alt="Ñuke" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/selquet-blanco-1.webp" alt="Selquet" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Tecnofarm-blanco.webp" alt="Tecnofarm" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Trianorte-blanco-1.webp" alt="Trianorte" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Tromen-blanco.webp" alt="Tromen" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/11-a-fondo-blanco-1.webp" alt="11 a fondo" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Dandy-blanco.webp" alt="Dandy" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Kentucky-blanco-1.webp" alt="Kentucky" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Las-violetas-blanco.webp" alt="Las Violetas" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/Mostaza-blanco-1.webp" alt="Mostaza" loading="lazy" decoding="async" class="client-logo">
+      <img src="assets/images/clients/abuelo-julio.webp" alt="Abuelo Julio" loading="lazy" decoding="async" class="client-logo client-logo--mono client-logo--sm">
+      <img src="assets/images/clients/braford.webp" alt="Braford" loading="lazy" decoding="async" class="client-logo client-logo--mono">
+      <img src="assets/images/clients/droguerias del sud.webp" alt="Droguería Del Sud" loading="lazy" decoding="async" class="client-logo client-logo--mono client-logo--sm">
+      <img src="assets/images/clients/galan logo.svg" alt="Galán" loading="lazy" decoding="async" class="client-logo client-logo--sm">
+      <img src="assets/images/clients/chisap-Photoroom.webp" alt="Chisap" loading="lazy" decoding="async" class="client-logo client-logo--sm">
     </div>
   </div>
 
@@ -159,7 +177,7 @@
         <article class="svc-row fade-in">
           <div class="svc-row-visual">
             <span class="svc-row-num">01</span>
-            <img class="svc-row-img" src="/assets/images/cases/svc-implementacion.jpg" alt="Sistemas integrados: ERP, CRM, POS, finanzas y operaciones en un solo ecosistema" loading="lazy">
+            <img class="svc-row-img" src="/assets/images/cases/svc-implementacion.webp" width="900" height="600" alt="Sistemas integrados: ERP, CRM, POS, finanzas y operaciones en un solo ecosistema" loading="lazy">
           </div>
           <div class="svc-row-text">
             <h3>Implementación Tecnológica</h3>
@@ -171,7 +189,7 @@
         <article class="svc-row fade-in">
           <div class="svc-row-visual">
             <span class="svc-row-num">02</span>
-            <img class="svc-row-img svc-row-img--contain" src="/assets/images/cases/mostaza-app.png" alt="Aplicación móvil a medida" loading="lazy">
+            <img class="svc-row-img svc-row-img--contain" src="/assets/images/cases/mostaza-app.webp" width="477" height="1000" alt="Aplicación móvil a medida" loading="lazy">
           </div>
           <div class="svc-row-text">
             <h3>Desarrollo de Aplicaciones</h3>
@@ -183,7 +201,7 @@
         <article class="svc-row fade-in">
           <div class="svc-row-visual">
             <span class="svc-row-num">03</span>
-            <img class="svc-row-img svc-row-img--contain" src="/assets/images/cases/chatbot.png" alt="Automatización con bots y agentes de IA" loading="lazy">
+            <img class="svc-row-img svc-row-img--contain" src="/assets/images/cases/chatbot.webp" width="1000" height="1000" alt="Automatización con bots y agentes de IA" loading="lazy">
           </div>
           <div class="svc-row-text">
             <h3>Automatización de Procesos</h3>
@@ -195,7 +213,7 @@
         <article class="svc-row fade-in">
           <div class="svc-row-visual">
             <span class="svc-row-num">04</span>
-            <img class="svc-row-img" src="/assets/images/cases/svc-venta-digital.jpg" alt="Crecimiento de ventas online" loading="lazy">
+            <img class="svc-row-img" src="/assets/images/cases/svc-venta-digital.webp" width="900" height="600" alt="Crecimiento de ventas online" loading="lazy">
           </div>
           <div class="svc-row-text">
             <h3>Crecimiento en Venta Digital</h3>
@@ -207,7 +225,7 @@
         <article class="svc-row fade-in">
           <div class="svc-row-visual">
             <span class="svc-row-num">05</span>
-            <img class="svc-row-img svc-row-img--contain" src="/assets/images/cases/kentucky-bi.png" alt="Tableros de control de gestión (BI)" loading="lazy">
+            <img class="svc-row-img svc-row-img--contain" src="/assets/images/cases/kentucky-bi.webp" width="834" height="837" alt="Tableros de control de gestión (BI)" loading="lazy">
           </div>
           <div class="svc-row-text">
             <h3>Control de Gestión</h3>
@@ -219,7 +237,7 @@
         <article class="svc-row fade-in">
           <div class="svc-row-visual">
             <span class="svc-row-num">06</span>
-            <img class="svc-row-img" src="/assets/images/cases/proy-ia-salon.jpg" alt="Cámaras con IA: mapa de calor del local" loading="lazy">
+            <img class="svc-row-img" src="/assets/images/cases/proy-ia-salon.webp" width="1600" height="1000" alt="Cámaras con IA: mapa de calor del local" loading="lazy">
           </div>
           <div class="svc-row-text">
             <h3>IA: Cámaras Inteligentes</h3>
@@ -231,7 +249,7 @@
         <article class="svc-row svc-row-featured fade-in">
           <div class="svc-row-visual">
             <span class="svc-row-num">07</span>
-            <img class="svc-row-img" src="/assets/images/cases/svc-incompany.jpg" alt="Equipo técnico trabajando in-company" loading="lazy">
+            <img class="svc-row-img" src="/assets/images/cases/svc-incompany.webp" width="900" height="600" alt="Equipo técnico trabajando in-company" loading="lazy">
           </div>
           <div class="svc-row-text">
             <h3>Profesionales Digitales In-Company ⭐</h3>
@@ -255,7 +273,7 @@
 
         <article class="totem-card fade-in">
           <div class="totem-screen">
-            <video src="assets/videos/platense.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <video class="lazy-video" poster="/assets/videos/platense-poster.webp" width="478" height="850" muted loop playsinline preload="none" data-src="assets/videos/platense.mp4" aria-label="Demo del tótem de Club Atlético Platense"></video>
           </div>
           <div class="totem-body">
             <span class="totem-tag">Club deportivo</span>
@@ -266,7 +284,7 @@
 
         <article class="totem-card fade-in">
           <div class="totem-screen">
-            <video src="assets/videos/abuelojulio-pedidos.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <video class="lazy-video" poster="/assets/videos/abuelojulio-pedidos-poster.webp" width="478" height="850" muted loop playsinline preload="none" data-src="assets/videos/abuelojulio-pedidos.mp4" aria-label="Demo del tótem de pedidos de Abuelo Julio"></video>
           </div>
           <div class="totem-body">
             <span class="totem-tag">Gastronomía & retail</span>
@@ -277,7 +295,7 @@
 
         <article class="totem-card fade-in">
           <div class="totem-screen">
-            <video src="assets/videos/viacargo.mp4" autoplay muted loop playsinline preload="metadata"></video>
+            <video class="lazy-video" poster="/assets/videos/viacargo-poster.webp" width="478" height="850" muted loop playsinline preload="none" data-src="assets/videos/viacargo.mp4" aria-label="Demo del tótem de autogestión de Vía Cargo"></video>
           </div>
           <div class="totem-body">
             <span class="totem-tag">Logística</span>
@@ -302,7 +320,7 @@
           </ul>
         </div>
         <div class="totem-feature-screen">
-          <video src="assets/videos/abuelojulio-ruleta.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <video class="lazy-video" poster="/assets/videos/abuelojulio-ruleta-poster.webp" width="478" height="850" muted loop playsinline preload="none" data-src="assets/videos/abuelojulio-ruleta.mp4" aria-label="Demo de la ruleta de premios de Abuelo Julio"></video>
         </div>
       </div>
     </div>
@@ -318,7 +336,7 @@
         <!-- Mostaza · Tótems -->
         <a class="case-card fade-in" href="/casos/mostaza-totems">
           <div class="case-media">
-            <img class="case-photo" src="assets/images/cases/mostaza-totem.jpg" alt="Tótems de autogestión Mostaza" loading="lazy">
+            <img class="case-photo" src="assets/images/cases/mostaza-totem.webp" width="485" height="1000" alt="Tótems de autogestión Mostaza" loading="lazy">
             <div class="case-media-overlay"></div>
           </div>
           <div class="case-body">
@@ -333,7 +351,7 @@
         <!-- Mostaza · App -->
         <a class="case-card fade-in" href="/casos/mostaza-app">
           <div class="case-media" style="background:linear-gradient(135deg,#2A0E10,#46161A)">
-            <img class="case-graphic" src="assets/images/cases/mostaza-app.png" alt="App móvil de Mostaza" loading="lazy">
+            <img class="case-graphic" src="assets/images/cases/mostaza-app.webp" width="477" height="1000" alt="App móvil de Mostaza" loading="lazy">
             <div class="case-media-overlay"></div>
           </div>
           <div class="case-body">
@@ -348,7 +366,7 @@
         <!-- Kentucky · Business Intelligence -->
         <a class="case-card fade-in" href="/casos/kentucky">
           <div class="case-media" style="background:linear-gradient(135deg,#08222B,#0C3A44)">
-            <img class="case-graphic" src="assets/images/cases/kentucky-bi.png" alt="Ventajas de Business Intelligence con Power BI" loading="lazy">
+            <img class="case-graphic" src="assets/images/cases/kentucky-bi.webp" width="834" height="837" alt="Ventajas de Business Intelligence con Power BI" loading="lazy">
             <div class="case-media-overlay"></div>
           </div>
           <div class="case-body">
@@ -363,7 +381,7 @@
         <!-- Chatbots WhatsApp IA -->
         <a class="case-card fade-in" href="/casos/chatbot">
           <div class="case-media" style="background:linear-gradient(135deg,#0A1A30,#102A4C)">
-            <img class="case-graphic" src="assets/images/cases/chatbot.png" alt="Chatbot de WhatsApp con IA" loading="lazy">
+            <img class="case-graphic" src="assets/images/cases/chatbot.webp" width="1000" height="1000" alt="Chatbot de WhatsApp con IA" loading="lazy">
             <div class="case-media-overlay"></div>
           </div>
           <div class="case-body">
@@ -428,11 +446,6 @@
           experiencia real implementando soluciones que mueven la aguja del negocio.
           No vendemos humo: medimos cada proyecto por su impacto.
         </p>
-        <div class="about-metrics">
-          <div><strong>+50</strong><span>proyectos</span></div>
-          <div><strong>8</strong><span>industrias</span></div>
-          <div><strong>100%</strong><span>foco en ROI</span></div>
-        </div>
       </div>
       <div class="about-card fade-in">
         <p class="about-quote">“La tecnología solo sirve si genera resultados medibles. Esa es nuestra única métrica.”</p>
@@ -451,6 +464,7 @@
     </div>
     <p class="cta-alt">¿Preferís escribirnos directo? <a href="https://wa.me/5491171668769" target="_blank" rel="noopener">WhatsApp →</a></p>
   </section>
+  </main>
 
   <!-- ============ FOOTER ============ -->
   <footer>
@@ -459,7 +473,7 @@
       <!-- Marca -->
       <div class="footer-col">
         <a href="#inicio" class="nav-logo">
-          <img class="nav-logo-img" src="/assets/images/logo-isotipo.png" alt="Digital Impulso">
+          <img class="nav-logo-img" src="/assets/images/logo-isotipo.webp" alt="" width="171" height="160">
           Digital Impulso
         </a>
         <p class="footer-tag">Automatizamos, digitalizamos y escalamos tu negocio con tecnología, IA y automatización.</p>
@@ -472,7 +486,6 @@
         <a href="/proyectos">Proyectos</a>
         <a href="#nosotros">Nosotros</a>
         <a href="/agendar">Agendar demo</a>
-        <a href="#contacto">Contacto</a>
       </nav>
 
       <!-- Contacto -->
@@ -493,6 +506,6 @@
   <!-- Botón flotante de WhatsApp -->
   <a href="https://wa.me/5491171668769" class="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
-  <script src="main.js"></script>
+  <script src="main.js" defer></script>
 </body>
 </html>

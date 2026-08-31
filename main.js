@@ -1,10 +1,20 @@
-// ============ Spotlight sigue el cursor ============
-document.addEventListener('mousemove', e => {
+// ============ Spotlight sigue el cursor (sólo mouse, con rAF) ============
+if (window.matchMedia('(pointer: fine)').matches) {
   const sp = document.getElementById('spotlight');
-  if (!sp) return;
-  sp.style.setProperty('--mx', e.clientX + 'px');
-  sp.style.setProperty('--my', e.clientY + 'px');
-});
+  if (sp) {
+    let ticking = false, mx = 0, my = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        sp.style.setProperty('--mx', mx + 'px');
+        sp.style.setProperty('--my', my + 'px');
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+}
 
 // ============ Navbar se oscurece al hacer scroll ============
 window.addEventListener('scroll', () => {
@@ -97,19 +107,6 @@ window.addEventListener('scroll', () => {
   nums.forEach(n => observer.observe(n));
 })();
 
-// ============ Glow que sigue el mouse dentro de cada card de servicio ============
-document.querySelectorAll('.svc-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
-    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
-    card.style.background = "radial-gradient(circle at " + x + "% " + y + "%, rgba(91,108,255,0.08), transparent 60%), #0A0A0F";
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.background = '';
-  });
-});
-
 // ============ Menú móvil (hamburguesa) ============
 (function navToggle() {
   const nav = document.getElementById('navbar');
@@ -127,6 +124,30 @@ document.querySelectorAll('.svc-card').forEach(card => {
 })();
 
 
+// ============ Videos de tótems: cargar y reproducir al entrar en viewport ============
+(function lazyVideos() {
+  const vids = document.querySelectorAll('video.lazy-video');
+  if (!vids.length) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const load = (v) => {
+    if (v.dataset.loaded) return;
+    v.dataset.loaded = '1';
+    const src = v.getAttribute('data-src');
+    if (src) v.src = src;
+    // Sólo reproduce en loop si el usuario no pidió reducir movimiento
+    if (!reduce) { v.autoplay = true; v.play().catch(() => {}); }
+  };
+
+  if (!('IntersectionObserver' in window)) { vids.forEach(load); return; }
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { load(e.target); obs.unobserve(e.target); }
+    });
+  }, { rootMargin: '200px 0px' });
+  vids.forEach(v => io.observe(v));
+})();
+
 // ============ Acordeón de casos: hover en desktop, click en mobile ============
 (function casesAccordion() {
   const acc = document.querySelector('.cases-accordion');
@@ -137,12 +158,8 @@ document.querySelectorAll('.svc-card').forEach(card => {
   const activate = (card) => { cards.forEach(c => c.classList.remove('active')); card.classList.add('active'); };
   activate(cards[0]);
   cards.forEach(card => {
-    // Desktop: se abre al pasar el mouse
+    // Desktop: se abre al pasar el mouse. En mobile es una grilla de 2 columnas
+    // con todas las cards visibles, así que el click navega directo.
     card.addEventListener('mouseenter', () => { if (!isMobile()) activate(card); });
-    // Mobile: primer tap abre (no navega), segundo tap navega
-    card.addEventListener('click', (e) => {
-      if (!isMobile()) return;
-      if (!card.classList.contains('active')) { e.preventDefault(); activate(card); }
-    });
   });
 })();
