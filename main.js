@@ -27,36 +27,6 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// ============ Typewriter en el hero ============
-(function typewriter() {
-  const el = document.getElementById('typewriter');
-  if (!el) return;
-  const words = ['Inteligencia Artificial', 'Automatización', 'Tótems de autogestión', 'Apps a medida'];
-  let wordIndex = 0, charIndex = 0, deleting = false;
-
-  function tick() {
-    const current = words[wordIndex];
-    if (deleting) {
-      charIndex--;
-    } else {
-      charIndex++;
-    }
-    el.textContent = current.substring(0, charIndex);
-
-    let delay = deleting ? 45 : 90;
-    if (!deleting && charIndex === current.length) {
-      delay = 1800;            // pausa al completar la palabra
-      deleting = true;
-    } else if (deleting && charIndex === 0) {
-      deleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
-      delay = 400;
-    }
-    setTimeout(tick, delay);
-  }
-  tick();
-})();
-
 // ============ Fade-in al hacer scroll (IntersectionObserver) ============
 (function fadeInOnScroll() {
   const items = document.querySelectorAll('.fade-in');
