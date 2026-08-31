@@ -2,6 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/casos", "destination": "/proyectos", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/fonts/(.*)",
