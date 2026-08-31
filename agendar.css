@@ -8,14 +8,14 @@
 .ag-lead { color: #9CA3AF; font-size: 1rem; line-height: 1.65; max-width: 48ch; margin: 0 auto 40px; }
 
 .ag-body { display: flex; flex-direction: column; gap: 14px; }
-.ag-loading, .ag-error { text-align: center; color: #8A93A3; padding: 40px 10px; font-size: 0.95rem; }
+.ag-loading, .ag-error { text-align: center; color: #9AA1B0; padding: 40px 10px; font-size: 0.95rem; }
 .ag-error p { margin-bottom: 20px; }
 .ag-error .ag-btn { display: inline-flex; width: auto; }
 .ag-simulado { font-size: 0.78rem; color: #FBBF24; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: 10px; padding: 8px 12px; text-align: center; margin-bottom: 4px; }
 
 /* ---- Acordeón ---- */
 .ag-blk { border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; background: rgba(255,255,255,0.025); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); overflow: hidden; transition: border-color 0.2s, background 0.2s; }
-.ag-blk.open { border-color: rgba(94,234,212,0.45); background: #0A0A0F; box-shadow: 0 0 0 1px rgba(94,234,212,0.08), 0 20px 60px -30px rgba(94,234,212,0.35); }
+.ag-blk.open { border-color: rgba(94,234,212,0.45); background: #20232B; box-shadow: 0 0 0 1px rgba(94,234,212,0.08), 0 20px 60px -30px rgba(94,234,212,0.35); }
 .ag-blk.locked { opacity: 0.45; }
 .ag-blk-head { display: flex; align-items: center; gap: 14px; width: 100%; padding: 18px 20px; background: none; border: none; color: #fff; font-family: inherit; text-align: left; cursor: pointer; }
 .ag-blk-head:disabled { cursor: default; }
@@ -25,9 +25,9 @@
 .ag-blk.done .ag-blk-num { color: var(--c); background: rgba(94,234,212,0.12); border-color: rgba(94,234,212,0.35); }
 .ag-blk-title { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .ag-blk-title b { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
-.ag-blk-title small { color: #8A93A3; font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ag-blk-title small { color: #9AA1B0; font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ag-blk.done .ag-blk-title small { color: #9CA3AF; }
-.ag-blk-edit { color: #8A93A3; font-size: 0.8rem; font-weight: 500; flex: none; }
+.ag-blk-edit { color: #9AA1B0; font-size: 0.8rem; font-weight: 500; flex: none; }
 .ag-blk.done .ag-blk-head:hover .ag-blk-edit { color: var(--c); }
 .ag-blk-body { padding: 4px 20px 22px; border-top: 1px solid rgba(255,255,255,0.06); }
 .ag-blk-body > .ag-form { padding-top: 18px; }
@@ -35,7 +35,7 @@
 .ag-form { display: flex; flex-direction: column; gap: 22px; }
 .ag-q { display: flex; flex-direction: column; gap: 10px; }
 .ag-q > .ag-label { font-size: 0.88rem; font-weight: 600; color: #F3F4F6; letter-spacing: -0.005em; }
-.ag-q .ag-label small { font-weight: 400; color: #8A93A3; margin-left: 6px; }
+.ag-q .ag-label small { font-weight: 400; color: #9AA1B0; margin-left: 6px; }
 .ag-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
 .ag-input { width: 100%; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 13px 15px; color: #fff; font-size: 0.95rem; font-family: inherit; outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
@@ -79,7 +79,7 @@ textarea.ag-input { resize: vertical; min-height: 96px; line-height: 1.55; }
 .ag-turno { padding: 11px 6px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035); color: #fff; font-family: inherit; font-size: 0.92rem; font-weight: 600; cursor: pointer; transition: 0.15s; font-variant-numeric: tabular-nums; }
 .ag-turno:hover { border-color: rgba(94,234,212,0.5); background: rgba(94,234,212,0.06); }
 .ag-turno.sel { background: linear-gradient(180deg, #6EF0DC, #2DD4BF); color: #052B26; border-color: transparent; }
-.ag-tz { color: #8A93A3; font-size: 0.78rem; line-height: 1.5; }
+.ag-tz { color: #9AA1B0; font-size: 0.78rem; line-height: 1.5; }
 
 /* Confirmación */
 .ag-ok { text-align: center; padding: 8px 0; }
@@ -91,7 +91,7 @@ textarea.ag-input { resize: vertical; min-height: 96px; line-height: 1.55; }
 .ag-ok-links a { color: #9CA3AF; font-size: 0.88rem; text-decoration: none; }
 .ag-ok-links a:hover { color: var(--c); }
 
-.ag-alt { margin-top: 40px; text-align: center; color: #8A93A3; font-size: 0.88rem; }
+.ag-alt { margin-top: 40px; text-align: center; color: #9AA1B0; font-size: 0.88rem; }
 .ag-alt a { color: var(--c); text-decoration: none; font-weight: 600; }
 .ag-alt a:hover { text-decoration: underline; }
 
