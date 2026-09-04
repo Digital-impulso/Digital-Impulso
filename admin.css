@@ -136,18 +136,25 @@ table.adm-table { width: 100%; border-collapse: collapse; font-size: 13px; min-w
   border-radius: 16px; padding: 24px; margin-bottom: 40px;
 }
 /* La ficha de prospecto tiene bastante más campos + sus mensajes: en vez de apilar todo
-   verticalmente (mucho scroll), van lado a lado — datos a la izquierda, mensajes a la derecha. */
-#adm-modal-prospecto .adm-modal { max-width: 1180px; width: 94vw; }
+   verticalmente (mucho scroll), van lado a lado en 3 columnas — datos, mensajes existentes
+   y el formulario de mensaje nuevo — con el modal bien ancho para que entre todo. */
+#adm-modal-prospecto .adm-modal { max-width: 1560px; width: 96vw; }
 /* "Nuevo prospecto" (sin mensajes todavía, una sola columna): no hace falta tanto ancho. */
 #adm-modal-prospecto:has(.adm-mp-col-mensajes.adm-hidden) .adm-modal { max-width: 860px; }
-.adm-mp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; align-items: start; }
+.adm-mp-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 0 32px; align-items: start; }
 /* "Nuevo prospecto" todavía no tiene mensajes que mostrar (columna oculta): una sola columna. */
 .adm-mp-layout:has(> .adm-mp-col-mensajes.adm-hidden) { grid-template-columns: 1fr; }
 .adm-mp-col-mensajes {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px;
   border-left: 1px solid var(--border); padding-left: 32px;
   max-height: 76vh; overflow-y: auto;
 }
 .adm-mp-col-mensajes h2 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.adm-mp-col-nuevo { border-left: 1px solid var(--border); padding-left: 28px; }
+@media (max-width: 1180px) {
+  .adm-mp-col-mensajes { grid-template-columns: 1fr; }
+  .adm-mp-col-nuevo { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; }
+}
 @media (max-width: 860px) {
   .adm-mp-layout { grid-template-columns: 1fr; }
   .adm-mp-col-mensajes { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; max-height: none; overflow-y: visible; }
