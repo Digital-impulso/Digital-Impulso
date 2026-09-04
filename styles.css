@@ -517,8 +517,7 @@ nav#navbar.scrolled { background: rgba(24,26,33,0.82); border-bottom-color: rgba
 .svc-feat-main h3 { margin-bottom: 8px; }
 .svc-featured .svc-pill { margin-top: 0; white-space: nowrap; }
 
-/* ============ TÓTEMS (teaser) ============ */
-.totems-section { background: rgba(255,255,255,0.01); }
+/* ============ TÓTEMS (página /totems y bloques reel+texto) ============ */
 .totem-feature {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
