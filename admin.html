@@ -60,6 +60,9 @@
           <button class="adm-nav-item is-activa" data-vista="prospectos">
             <span class="adm-nav-ico">▤</span> Prospectos
           </button>
+          <button class="adm-nav-item" data-vista="borradores">
+            <span class="adm-nav-ico">✎</span> Borradores
+          </button>
           <button class="adm-nav-item" data-vista="buscar-ia">
             <span class="adm-nav-ico">✦</span> Buscar con IA
           </button>
@@ -117,6 +120,27 @@
             </table>
             <div class="adm-empty adm-hidden" id="adm-empty">Todavía no hay prospectos cargados.</div>
           </div>
+        </section>
+
+        <!-- Vista: Borradores -->
+        <section class="adm-view adm-hidden" id="adm-view-borradores">
+          <div class="adm-view-head">
+            <div>
+              <h1>Borradores</h1>
+              <p class="adm-sub">Todos los mensajes preparados, de todas las empresas, en un solo lugar.</p>
+            </div>
+          </div>
+
+          <div class="adm-toolbar">
+            <select id="adm-bo-filtro">
+              <option value="pendiente">Sin enviar</option>
+              <option value="enviado">Ya enviados</option>
+              <option value="todos">Todos</option>
+            </select>
+          </div>
+
+          <div id="adm-bo-lista"></div>
+          <div class="adm-empty adm-hidden" id="adm-bo-empty">No hay mensajes para este filtro.</div>
         </section>
 
         <!-- Vista: Integraciones -->

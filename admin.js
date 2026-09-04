@@ -85,7 +85,7 @@
   }
 
   // ---------- Navegación del panel lateral ----------
-  const CARGA_POR_VISTA = { usuarios: cargarUsuarios, integraciones: cargarIntegraciones };
+  const CARGA_POR_VISTA = { usuarios: cargarUsuarios, integraciones: cargarIntegraciones, borradores: cargarBorradores };
 
   $$('.adm-nav-item').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -236,86 +236,127 @@
       return;
     }
     for (const m of mensajes) {
-      const item = document.createElement('div');
-      item.className = 'adm-msg-item';
-      const badge = m.enviado
-        ? `<span class="adm-pill adm-pill-si">Enviado</span> <span class="adm-fecha">${fmtFecha(m.fecha_envio)}</span>`
-        : '<span class="adm-pill adm-pill-no">Sin enviar</span>';
-      item.innerHTML = `
-        <div class="adm-msg-head">
-          <div>${badge} <span class="adm-muted" style="margin-left:8px">${escapeHtml(m.canal)}</span></div>
-        </div>
-        <div class="adm-field"><label>Asunto</label><input class="adm-i-asunto" value="${escapeAttr(m.asunto)}"></div>
-        <div class="adm-field"><label>Contenido</label><textarea class="adm-i-contenido">${escapeHtml(m.contenido)}</textarea></div>
-        <p class="adm-error adm-i-error"></p>
-        <div class="adm-actions">
-          <button class="adm-btn adm-btn-ghost adm-i-guardar">Guardar</button>
-          <button class="adm-btn adm-btn-ghost adm-i-toggle">${m.enviado ? 'Desmarcar enviado' : 'Marcar enviado (a mano)'}</button>
-          ${m.canal === 'email' ? `<button class="adm-btn adm-i-enviar">${m.enviado ? 'Reenviar por email' : 'Enviar por email ahora'}</button>` : ''}
-          ${m.canal === 'linkedin' || m.canal === 'instagram' ? `<button class="adm-btn adm-i-abrir">Abrir y copiar →</button>` : ''}
-          <span class="adm-spacer"></span>
-          <button class="adm-btn adm-btn-danger adm-i-borrar">Eliminar</button>
-        </div>
-      `;
-      const errorEl = item.querySelector('.adm-i-error');
-
-      item.querySelector('.adm-i-guardar').addEventListener('click', async () => {
-        errorEl.textContent = '';
-        try {
-          await api('/api/admin/mensajes', { method: 'PUT', body: {
-            id: m.id,
-            asunto: item.querySelector('.adm-i-asunto').value,
-            contenido: item.querySelector('.adm-i-contenido').value,
-          } });
-          await cargarMensajes(prospectoActualId);
-          await cargarProspectos();
-        } catch (err) { errorEl.textContent = err.message; }
-      });
-
-      item.querySelector('.adm-i-toggle').addEventListener('click', async () => {
-        errorEl.textContent = '';
-        try {
-          await api('/api/admin/mensajes', { method: 'PUT', body: { id: m.id, enviado: !m.enviado } });
-          await cargarMensajes(prospectoActualId);
-          await cargarProspectos();
-        } catch (err) { errorEl.textContent = err.message; }
-      });
-
-      const btnEnviar = item.querySelector('.adm-i-enviar');
-      if (btnEnviar) {
-        btnEnviar.addEventListener('click', async () => {
-          errorEl.textContent = '';
-          if (m.enviado && !confirm('Este mensaje ya figura como enviado. ¿Reenviar de todas formas?')) return;
-          btnEnviar.disabled = true;
-          try {
-            await api('/api/admin/enviar', { method: 'POST', body: { mensajeId: m.id, forzarReenvio: !!m.enviado } });
-            await cargarMensajes(prospectoActualId);
-            await cargarProspectos();
-          } catch (err) {
-            errorEl.textContent = err.message;
-          } finally {
-            btnEnviar.disabled = false;
-          }
-        });
-      }
-
-      const btnAbrir = item.querySelector('.adm-i-abrir');
-      if (btnAbrir) {
-        btnAbrir.addEventListener('click', () => abrirDrawerEnvio(m, MP.linkedin.value));
-      }
-
-      item.querySelector('.adm-i-borrar').addEventListener('click', async () => {
-        if (!confirm('¿Eliminar este mensaje?')) return;
-        try {
-          await api(`/api/admin/mensajes?id=${m.id}`, { method: 'DELETE' });
-          await cargarMensajes(prospectoActualId);
-          await cargarProspectos();
-        } catch (err) { errorEl.textContent = err.message; }
-      });
-
-      cont.appendChild(item);
+      cont.appendChild(crearItemMensaje(m, {
+        mostrarEmpresa: false,
+        linkedin: MP.linkedin.value,
+        onCambio: async () => { await cargarMensajes(prospectoActualId); await cargarProspectos(); },
+      }));
     }
   }
+
+  /**
+   * Un mensaje con sus acciones (guardar, marcar enviado, enviar por email, abrir y copiar,
+   * eliminar). Lo usan tanto la ficha de un prospecto (renderMensajes) como la vista Borradores
+   * (renderBorradores, que además muestra a qué empresa pertenece cada uno).
+   * ctx: { mostrarEmpresa, empresa?, prospectoId?, linkedin, onCambio }
+   */
+  function crearItemMensaje(m, ctx) {
+    const item = document.createElement('div');
+    item.className = 'adm-msg-item';
+    const badge = m.enviado
+      ? `<span class="adm-pill adm-pill-si">Enviado</span> <span class="adm-fecha">${fmtFecha(m.fecha_envio)}</span>`
+      : '<span class="adm-pill adm-pill-no">Sin enviar</span>';
+    const encabezado = ctx.mostrarEmpresa ? `<b>${escapeHtml(ctx.empresa)}</b> · ` : '';
+    item.innerHTML = `
+      <div class="adm-msg-head">
+        <div>${encabezado}${badge} <span class="adm-muted" style="margin-left:8px">${escapeHtml(m.canal)}</span></div>
+        ${ctx.mostrarEmpresa ? '<button class="adm-btn adm-btn-ghost adm-i-ver">Ver ficha →</button>' : ''}
+      </div>
+      <div class="adm-field"><label>Asunto</label><input class="adm-i-asunto" value="${escapeAttr(m.asunto)}"></div>
+      <div class="adm-field"><label>Contenido</label><textarea class="adm-i-contenido">${escapeHtml(m.contenido)}</textarea></div>
+      <p class="adm-error adm-i-error"></p>
+      <div class="adm-actions">
+        <button class="adm-btn adm-btn-ghost adm-i-guardar">Guardar</button>
+        <button class="adm-btn adm-btn-ghost adm-i-toggle">${m.enviado ? 'Desmarcar enviado' : 'Marcar enviado (a mano)'}</button>
+        ${m.canal === 'email' ? `<button class="adm-btn adm-i-enviar">${m.enviado ? 'Reenviar por email' : 'Enviar por email ahora'}</button>` : ''}
+        ${m.canal === 'linkedin' || m.canal === 'instagram' ? '<button class="adm-btn adm-i-abrir">Abrir y copiar →</button>' : ''}
+        <span class="adm-spacer"></span>
+        <button class="adm-btn adm-btn-danger adm-i-borrar">Eliminar</button>
+      </div>
+    `;
+    const errorEl = item.querySelector('.adm-i-error');
+
+    item.querySelector('.adm-i-guardar').addEventListener('click', async () => {
+      errorEl.textContent = '';
+      try {
+        await api('/api/admin/mensajes', { method: 'PUT', body: {
+          id: m.id,
+          asunto: item.querySelector('.adm-i-asunto').value,
+          contenido: item.querySelector('.adm-i-contenido').value,
+        } });
+        await ctx.onCambio();
+      } catch (err) { errorEl.textContent = err.message; }
+    });
+
+    item.querySelector('.adm-i-toggle').addEventListener('click', async () => {
+      errorEl.textContent = '';
+      try {
+        await api('/api/admin/mensajes', { method: 'PUT', body: { id: m.id, enviado: !m.enviado } });
+        await ctx.onCambio();
+      } catch (err) { errorEl.textContent = err.message; }
+    });
+
+    const btnEnviar = item.querySelector('.adm-i-enviar');
+    if (btnEnviar) {
+      btnEnviar.addEventListener('click', async () => {
+        errorEl.textContent = '';
+        if (m.enviado && !confirm('Este mensaje ya figura como enviado. ¿Reenviar de todas formas?')) return;
+        btnEnviar.disabled = true;
+        try {
+          await api('/api/admin/enviar', { method: 'POST', body: { mensajeId: m.id, forzarReenvio: !!m.enviado } });
+          await ctx.onCambio();
+        } catch (err) {
+          errorEl.textContent = err.message;
+        } finally {
+          btnEnviar.disabled = false;
+        }
+      });
+    }
+
+    const btnAbrir = item.querySelector('.adm-i-abrir');
+    if (btnAbrir) {
+      btnAbrir.addEventListener('click', () => abrirDrawerEnvio(m, ctx.linkedin));
+    }
+
+    const btnVer = item.querySelector('.adm-i-ver');
+    if (btnVer) {
+      btnVer.addEventListener('click', () => abrirProspecto(ctx.prospectoId));
+    }
+
+    item.querySelector('.adm-i-borrar').addEventListener('click', async () => {
+      if (!confirm('¿Eliminar este mensaje?')) return;
+      try {
+        await api(`/api/admin/mensajes?id=${m.id}`, { method: 'DELETE' });
+        await ctx.onCambio();
+      } catch (err) { errorEl.textContent = err.message; }
+    });
+
+    return item;
+  }
+
+  // ---------- Borradores (todos los mensajes de todas las empresas, en un solo lugar) ----------
+  async function cargarBorradores() {
+    const estado = $('#adm-bo-filtro').value || 'pendiente';
+    const data = await api(`/api/admin/mensajes?estado=${estado}`);
+    renderBorradores(data.mensajes);
+  }
+
+  function renderBorradores(mensajes) {
+    const cont = $('#adm-bo-lista');
+    cont.innerHTML = '';
+    $('#adm-bo-empty').classList.toggle('adm-hidden', mensajes.length > 0);
+    for (const m of mensajes) {
+      cont.appendChild(crearItemMensaje(m, {
+        mostrarEmpresa: true,
+        empresa: m.prospecto_empresa,
+        prospectoId: m.prospecto_id,
+        linkedin: m.prospecto_linkedin,
+        onCambio: async () => { await cargarBorradores(); await cargarProspectos(); },
+      }));
+    }
+  }
+
+  $('#adm-bo-filtro').addEventListener('change', cargarBorradores);
 
   // ---------- Drawer: enviar por LinkedIn/Instagram (copiar + abrir el perfil) ----------
   // No se puede embeber LinkedIn/Instagram dentro de esta página (ellos mismos lo bloquean,
