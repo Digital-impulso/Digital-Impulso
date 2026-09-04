@@ -1230,28 +1230,63 @@ footer {
 
 .tp-include { grid-template-columns: 1fr 1fr; max-width: 760px; }
 
-/* Galería de reels (/totems/videos) */
-.tv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 32px); }
-.tv-card { display: flex; flex-direction: column; }
+/* Galería de reels (/totems/videos): filas alternadas en desktop, carrusel en mobile */
+.tv-list { display: flex; flex-direction: column; gap: clamp(56px, 8vw, 100px); }
+.tv-card {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) 1fr;
+  gap: clamp(36px, 6vw, 80px);
+  align-items: center;
+}
+.tv-card:nth-child(even) { grid-template-columns: 1fr minmax(0, 380px); }
+.tv-card:nth-child(even) .tv-screen { order: 2; }
 .tv-screen {
+  width: 100%;
   border-radius: 18px; overflow: hidden; background: #000;
   aspect-ratio: 9 / 16;
   border: 1px solid var(--border);
   box-shadow: 0 30px 70px -30px rgba(94,234,212,0.4);
 }
 .tv-screen video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.tv-body { padding: 18px 6px 0; }
-.tv-body h2 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; margin: 10px 0 8px; }
-.tv-body p { color: #9AA1B0; font-size: 0.9rem; line-height: 1.65; }
+.tv-body h2 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 700; letter-spacing: -0.01em; margin: 12px 0 12px; }
+.tv-body p { color: #9AA1B0; font-size: 1rem; line-height: 1.7; max-width: 46ch; }
+.tv-dots { display: none; }
 
 @media (max-width: 768px) {
   .totem-feature--flip { grid-template-columns: 1fr; }
   .tp-captures { grid-template-columns: 1fr; }
   .tp-benefits { grid-template-columns: 1fr; }
   .tp-include { grid-template-columns: 1fr; }
-  .tv-grid { grid-template-columns: 1fr; }
-  .tv-screen { max-width: 340px; margin: 0 auto; width: 100%; }
-  .tv-body { text-align: center; }
+
+  /* Carrusel: se pasa video + texto de a una card, deslizando */
+  .tv-list {
+    flex-direction: row;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+  .tv-list::-webkit-scrollbar { display: none; }
+  .tv-card,
+  .tv-card:nth-child(even) {
+    display: flex; flex-direction: column;
+    flex: 0 0 100%; min-width: 0;
+    scroll-snap-align: center;
+  }
+  .tv-card:nth-child(even) .tv-screen { order: 0; }
+  .tv-screen { max-width: 300px; margin: 0 auto; }
+  .tv-body { text-align: center; padding: 16px 10px 0; }
+  .tv-body p { margin: 0 auto; }
+  .tv-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+  .tv-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: none; padding: 0; cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .tv-dot.active { background: var(--c); transform: scale(1.25); }
 }
 
 /* Chips de métricas/capacidades (sin la flecha de resultado de .case-result) */

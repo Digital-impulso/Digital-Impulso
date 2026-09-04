@@ -118,6 +118,48 @@ window.addEventListener('scroll', () => {
   vids.forEach(v => io.observe(v));
 })();
 
+// ============ Carrusel de reels (/totems/videos): puntos indicadores en mobile ============
+(function reelsCarousel() {
+  const track = document.querySelector('.tv-list');
+  const dotsWrap = document.querySelector('.tv-dots');
+  if (!track || !dotsWrap) return;
+  const cards = Array.from(track.querySelectorAll('.tv-card'));
+  if (cards.length < 2) return;
+
+  const dots = cards.map((card, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tv-dot';
+    b.setAttribute('aria-label', 'Ver video ' + (i + 1) + ' de ' + cards.length);
+    b.addEventListener('click', () => {
+      const left = card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+      track.scrollTo({ left, behavior: 'smooth' });
+    });
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  const setActive = (i) => dots.forEach((d, j) => d.classList.toggle('active', j === i));
+  setActive(0);
+
+  let raf = null;
+  track.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const r = c.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      setActive(best);
+      raf = null;
+    });
+  }, { passive: true });
+})();
+
 // ============ Acordeón de casos: hover en desktop, click en mobile ============
 (function casesAccordion() {
   const acc = document.querySelector('.cases-accordion');
