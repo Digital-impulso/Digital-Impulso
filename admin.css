@@ -137,7 +137,10 @@ table.adm-table { width: 100%; border-collapse: collapse; font-size: 13px; min-w
 }
 /* La ficha de prospecto tiene bastante más campos (+ sus mensajes abajo): más ancha para que
    los campos de dos columnas y el contenido del mensaje no queden apretados. */
-#adm-modal-prospecto .adm-modal { max-width: 880px; }
+#adm-modal-prospecto .adm-modal { max-width: 1180px; width: 92vw; }
+#adm-modal-prospecto .adm-grid2 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 760px) { #adm-modal-prospecto .adm-grid2 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { #adm-modal-prospecto .adm-grid2 { grid-template-columns: 1fr; } }
 .adm-modal h2 { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
 .adm-modal .adm-sub { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
 .adm-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
