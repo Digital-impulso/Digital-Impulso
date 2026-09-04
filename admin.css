@@ -135,9 +135,23 @@ table.adm-table { width: 100%; border-collapse: collapse; font-size: 13px; min-w
   width: 100%; max-width: 620px; background: var(--bg2); border: 1px solid var(--border);
   border-radius: 16px; padding: 24px; margin-bottom: 40px;
 }
-/* La ficha de prospecto tiene bastante más campos (+ sus mensajes abajo): más ancha para que
-   los campos de dos columnas y el contenido del mensaje no queden apretados. */
-#adm-modal-prospecto .adm-modal { max-width: 860px; width: 92vw; }
+/* La ficha de prospecto tiene bastante más campos + sus mensajes: en vez de apilar todo
+   verticalmente (mucho scroll), van lado a lado — datos a la izquierda, mensajes a la derecha. */
+#adm-modal-prospecto .adm-modal { max-width: 1180px; width: 94vw; }
+/* "Nuevo prospecto" (sin mensajes todavía, una sola columna): no hace falta tanto ancho. */
+#adm-modal-prospecto:has(.adm-mp-col-mensajes.adm-hidden) .adm-modal { max-width: 860px; }
+.adm-mp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; align-items: start; }
+/* "Nuevo prospecto" todavía no tiene mensajes que mostrar (columna oculta): una sola columna. */
+.adm-mp-layout:has(> .adm-mp-col-mensajes.adm-hidden) { grid-template-columns: 1fr; }
+.adm-mp-col-mensajes {
+  border-left: 1px solid var(--border); padding-left: 32px;
+  max-height: 76vh; overflow-y: auto;
+}
+.adm-mp-col-mensajes h2 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+@media (max-width: 860px) {
+  .adm-mp-layout { grid-template-columns: 1fr; }
+  .adm-mp-col-mensajes { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 20px; max-height: none; overflow-y: visible; }
+}
 .adm-modal h2 { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
 .adm-modal .adm-sub { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
 .adm-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }

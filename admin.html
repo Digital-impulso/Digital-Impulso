@@ -327,46 +327,49 @@
       </div>
 
       <input type="hidden" id="adm-mp-id">
-      <div class="adm-grid2">
-        <div class="adm-field"><label>Empresa *</label><input id="adm-mp-empresa" required></div>
-        <div class="adm-field"><label>Categoría</label><input id="adm-mp-categoria" placeholder="C, D…"></div>
-        <div class="adm-field"><label>Web</label><input id="adm-mp-web" placeholder="empresa.com.ar"></div>
-        <div class="adm-field"><label>Email</label><input id="adm-mp-email" type="email"></div>
-        <div class="adm-field"><label>Teléfono</label><input id="adm-mp-telefono"></div>
-        <div class="adm-field"><label>LinkedIn / Instagram</label><input id="adm-mp-linkedin" placeholder="linkedin.com/company/… o @usuario de Instagram"></div>
-        <div class="adm-field"><label>Decisor — nombre</label><input id="adm-mp-decisor-nombre"></div>
-        <div class="adm-field"><label>Decisor — cargo</label><input id="adm-mp-decisor-cargo"></div>
-        <div class="adm-field"><label>Canal recomendado</label>
-          <select id="adm-mp-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="otro">Otro</option></select>
-        </div>
-      </div>
-      <div class="adm-field"><label>Oportunidad / notas</label><textarea id="adm-mp-notas" placeholder="Qué necesidad detectamos, qué le proponemos…"></textarea></div>
-
-      <p class="adm-error" id="adm-mp-error"></p>
-      <div class="adm-actions">
-        <button class="adm-btn" id="adm-mp-guardar">Guardar</button>
-        <button class="adm-btn adm-btn-ghost" data-cerrar="adm-modal-prospecto">Cancelar</button>
-        <span class="adm-spacer"></span>
-        <button class="adm-btn adm-btn-danger adm-hidden" id="adm-mp-eliminar">Eliminar prospecto</button>
-      </div>
-
-      <div id="adm-mp-mensajes-wrap" class="adm-hidden">
-        <hr class="adm-sep">
-        <h2>Mensajes</h2>
-        <p class="adm-sub">Borradores y registro de lo que ya se mandó.</p>
-        <div id="adm-mp-mensajes"></div>
-
-        <div class="adm-msg-item" style="margin-top:16px">
-          <p class="adm-sub" style="margin-bottom:10px">Nuevo mensaje</p>
+      <div class="adm-mp-layout">
+        <div class="adm-mp-col-datos">
           <div class="adm-grid2">
-            <div class="adm-field"><label>Canal</label>
-              <select id="adm-nm-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="otro">Otro</option></select>
+            <div class="adm-field"><label>Empresa *</label><input id="adm-mp-empresa" required></div>
+            <div class="adm-field"><label>Categoría</label><input id="adm-mp-categoria" placeholder="C, D…"></div>
+            <div class="adm-field"><label>Web</label><input id="adm-mp-web" placeholder="empresa.com.ar"></div>
+            <div class="adm-field"><label>Email</label><input id="adm-mp-email" type="email"></div>
+            <div class="adm-field"><label>Teléfono</label><input id="adm-mp-telefono"></div>
+            <div class="adm-field"><label>LinkedIn / Instagram</label><input id="adm-mp-linkedin" placeholder="linkedin.com/company/… o @usuario de Instagram"></div>
+            <div class="adm-field"><label>Decisor — nombre</label><input id="adm-mp-decisor-nombre"></div>
+            <div class="adm-field"><label>Decisor — cargo</label><input id="adm-mp-decisor-cargo"></div>
+            <div class="adm-field"><label>Canal recomendado</label>
+              <select id="adm-mp-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="otro">Otro</option></select>
             </div>
-            <div class="adm-field"><label>Asunto</label><input id="adm-nm-asunto" placeholder="(para email)"></div>
           </div>
-          <div class="adm-field"><label>Contenido</label><textarea id="adm-nm-contenido" placeholder="Mensaje personalizado para esta empresa…"></textarea></div>
-          <button class="adm-btn" id="adm-nm-crear">Agregar mensaje</button>
-          <p class="adm-error" id="adm-nm-error"></p>
+          <div class="adm-field"><label>Oportunidad / notas</label><textarea id="adm-mp-notas" placeholder="Qué necesidad detectamos, qué le proponemos…"></textarea></div>
+
+          <p class="adm-error" id="adm-mp-error"></p>
+          <div class="adm-actions">
+            <button class="adm-btn" id="adm-mp-guardar">Guardar</button>
+            <button class="adm-btn adm-btn-ghost" data-cerrar="adm-modal-prospecto">Cancelar</button>
+            <span class="adm-spacer"></span>
+            <button class="adm-btn adm-btn-danger adm-hidden" id="adm-mp-eliminar">Eliminar prospecto</button>
+          </div>
+        </div>
+
+        <div id="adm-mp-mensajes-wrap" class="adm-mp-col-mensajes adm-hidden">
+          <h2>Mensajes</h2>
+          <p class="adm-sub">Borradores y registro de lo que ya se mandó.</p>
+          <div id="adm-mp-mensajes"></div>
+
+          <div class="adm-msg-item" style="margin-top:16px">
+            <p class="adm-sub" style="margin-bottom:10px">Nuevo mensaje</p>
+            <div class="adm-grid2">
+              <div class="adm-field"><label>Canal</label>
+                <select id="adm-nm-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="otro">Otro</option></select>
+              </div>
+              <div class="adm-field"><label>Asunto</label><input id="adm-nm-asunto" placeholder="(para email)"></div>
+            </div>
+            <div class="adm-field"><label>Contenido</label><textarea id="adm-nm-contenido" placeholder="Mensaje personalizado para esta empresa…"></textarea></div>
+            <button class="adm-btn" id="adm-nm-crear">Agregar mensaje</button>
+            <p class="adm-error" id="adm-nm-error"></p>
+          </div>
         </div>
       </div>
     </div>
