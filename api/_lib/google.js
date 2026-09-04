@@ -10,8 +10,8 @@ let cache = { token: null, vence: 0 };
 async function accessToken() {
   if (cache.token && Date.now() < cache.vence - 30_000) return cache.token;
   const body = new URLSearchParams({
-    client_id: process.env.GOOGLE_CLIENT_ID || '',
-    client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
+    client_id: process.env.GOOGLE_OAUTH_CLIENT || '',
+    client_secret: process.env.GOOGLE_OAUTH_SECRET || '',
     refresh_token: process.env.GOOGLE_REFRESH_TOKEN || '',
     grant_type: 'refresh_token',
   });

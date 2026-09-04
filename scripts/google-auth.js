@@ -2,7 +2,7 @@
 //
 //   bun scripts/google-auth.js
 //
-// Requiere GOOGLE_CLIENT_ID y GOOGLE_CLIENT_SECRET en .env (Bun lo carga solo).
+// Requiere GOOGLE_OAUTH_CLIENT y GOOGLE_OAUTH_SECRET en .env (Bun lo carga solo).
 // En Google Cloud, el cliente OAuth tiene que ser de tipo "Aplicación web" y tener
 // http://localhost:3999/callback como URI de redirección autorizada.
 // Ver AGENDAR.md para el paso a paso.
@@ -14,10 +14,10 @@ const SCOPES = [
   'https://www.googleapis.com/auth/calendar.readonly',
 ];
 
-const id = process.env.GOOGLE_CLIENT_ID;
-const secret = process.env.GOOGLE_CLIENT_SECRET;
+const id = process.env.GOOGLE_OAUTH_CLIENT;
+const secret = process.env.GOOGLE_OAUTH_SECRET;
 if (!id || !secret) {
-  console.error('Faltan GOOGLE_CLIENT_ID y/o GOOGLE_CLIENT_SECRET en .env');
+  console.error('Faltan GOOGLE_OAUTH_CLIENT y/o GOOGLE_OAUTH_SECRET en .env');
   process.exit(1);
 }
 

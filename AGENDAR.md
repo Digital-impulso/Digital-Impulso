@@ -53,13 +53,13 @@ Las carpetas/archivos que empiezan con `_` dentro de `api/` no se publican como 
    de Google cuyo calendario recibirá las demos (con eso alcanza; no hace falta publicar la app).
 3. *Credenciales* → **ID de cliente OAuth** → tipo **Aplicación web** → URI de redirección
    autorizada: `http://localhost:3999/callback`. Copiar client ID y secret.
-4. En el repo: `cp .env.example .env` y completar `GOOGLE_CLIENT_ID` y `GOOGLE_CLIENT_SECRET`.
+4. En el repo: `cp .env.example .env` y completar `GOOGLE_OAUTH_CLIENT` y `GOOGLE_OAUTH_SECRET`.
 5. `bun scripts/google-auth.js` → se abre el navegador → iniciar sesión con la cuenta del
    calendario → aceptar. La consola imprime `GOOGLE_REFRESH_TOKEN=...`; pegarlo en `.env`
    y **sacar** `AGENDA_MODO=simulada`.
 6. Probar local: `bun run dev` → http://localhost:3000/agendar. Agendar un turno de prueba y
    verificar que aparece en el calendario con Meet y que llega el mail.
-7. **Vercel** → Settings → Environment Variables: cargar `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`,
+7. **Vercel** → Settings → Environment Variables: cargar `GOOGLE_OAUTH_CLIENT`, `GOOGLE_OAUTH_SECRET`,
    `GOOGLE_REFRESH_TOKEN` (y `GOOGLE_CALENDAR_ID` si no es `primary`). Deploy.
 
 Si el calendario es de **otra persona del equipo**, esa persona corre el paso 5 con su cuenta.
