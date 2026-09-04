@@ -138,3 +138,19 @@ export async function avisarEquipo({ lead, inicio, meet, eventoId }) {
     html,
   });
 }
+
+// ---------- Mensajes de prospección (panel /admin) ----------
+// Mismo remitente y transporte que el resto del sitio: la casilla propia del dominio
+// (con SPF/DKIM/DMARC ya alineados para digitalimpulso.com), nunca un servicio de bulk mail.
+export async function enviarProspeccion({ paraEmail, paraNombre, asunto, contenido }) {
+  const html = `
+<div style="font-family:Geist,Inter,-apple-system,Segoe UI,Roboto,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111827;white-space:pre-wrap;line-height:1.6;font-size:15px">${esc(contenido)}</div>`;
+  await transporte().sendMail({
+    from: REMITENTE(),
+    to: paraNombre ? `${paraNombre} <${paraEmail}>` : paraEmail,
+    replyTo: REMITENTE(),
+    subject: asunto,
+    text: contenido,
+    html,
+  });
+}

@@ -13,9 +13,10 @@ const server = serve({
     let pathname = decodeURIComponent(url.pathname);
 
     // /api/* -> funciones serverless de ./api (mismo contrato que Vercel: export GET/POST(Request))
+    // Soporta un nivel de subcarpeta (ej. /api/admin/login -> ./api/admin/login.js).
     if (pathname.startsWith("/api/")) {
-      const nombre = pathname.slice(5).replace(/\/.*$/, "");
-      if (!/^[a-z0-9-]+$/.test(nombre)) return new Response("404", { status: 404 });
+      const nombre = pathname.slice(5).replace(/\/$/, "");
+      if (!/^[a-z0-9-]+(\/[a-z0-9-]+)?$/.test(nombre)) return new Response("404", { status: 404 });
       try {
         const mod = await import(`./api/${nombre}.js`);
         const handler = mod[req.method] || mod.default;

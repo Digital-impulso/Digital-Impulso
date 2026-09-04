@@ -17,3 +17,6 @@ Thumbs.db
 
 .vercel
 .env*
+
+# Base de datos local (Turso/libSQL) del panel /admin
+data/

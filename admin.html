@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <title>Panel · Digital Impulso</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+
+  <!-- Login -->
+  <div id="adm-login" class="adm-hidden">
+    <form class="adm-card" id="adm-login-form" autocomplete="off">
+      <h1>Panel de prospección</h1>
+      <p class="adm-sub">Digital Impulso · acceso interno</p>
+      <div class="adm-field">
+        <label for="adm-usuario">Usuario</label>
+        <input type="text" id="adm-usuario" name="usuario" autocomplete="username" required>
+      </div>
+      <div class="adm-field">
+        <label for="adm-clave">Contraseña</label>
+        <input type="password" id="adm-clave" name="clave" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="adm-btn adm-btn-block">Entrar</button>
+      <p class="adm-error" id="adm-login-error"></p>
+    </form>
+  </div>
+
+  <!-- Alta del primer usuario (solo aparece si todavía no hay ninguno) -->
+  <div id="adm-setup" class="adm-hidden">
+    <form class="adm-card" id="adm-setup-form" autocomplete="off">
+      <h1>Crear el primer usuario</h1>
+      <p class="adm-sub">Todavía no hay nadie cargado. Elegí tu usuario y contraseña para entrar al panel.</p>
+      <div class="adm-field">
+        <label for="adm-setup-usuario">Usuario</label>
+        <input type="text" id="adm-setup-usuario" autocomplete="username" required>
+      </div>
+      <div class="adm-field">
+        <label for="adm-setup-clave">Contraseña (mín. 8 caracteres)</label>
+        <input type="password" id="adm-setup-clave" autocomplete="new-password" minlength="8" required>
+      </div>
+      <button type="submit" class="adm-btn adm-btn-block">Crear usuario y entrar</button>
+      <p class="adm-error" id="adm-setup-error"></p>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div id="adm-app" class="adm-hidden">
+    <div class="adm-topbar">
+      <div>
+        <h1>Prospección C · D</h1>
+        <p class="adm-sub">Clientes, mensajes y a quién ya le escribimos.</p>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="adm-btn adm-btn-ghost" id="adm-btn-config">Configuración</button>
+        <button class="adm-btn adm-btn-ghost" id="adm-logout">Salir</button>
+      </div>
+    </div>
+
+    <div class="adm-toolbar">
+      <input type="search" id="adm-buscar" placeholder="Buscar empresa o decisor…">
+      <select id="adm-filtro-canal">
+        <option value="">Todos los canales</option>
+        <option value="email">Email</option>
+        <option value="linkedin">LinkedIn</option>
+        <option value="otro">Otro</option>
+      </select>
+      <select id="adm-filtro-estado">
+        <option value="">Enviado y sin enviar</option>
+        <option value="pendiente">Sin ningún envío</option>
+        <option value="enviado">Con al menos un envío</option>
+      </select>
+      <div class="adm-spacer"></div>
+      <button class="adm-btn adm-btn-ghost" id="adm-btn-importar">Importar varios</button>
+      <button class="adm-btn" id="adm-btn-nuevo">+ Nuevo prospecto</button>
+    </div>
+
+    <div class="adm-table-wrap">
+      <table class="adm-table">
+        <thead>
+          <tr>
+            <th>Empresa</th><th>Categoría</th><th>Canal</th><th>Decisor</th>
+            <th>Contacto</th><th>Mensajes</th><th>Último envío</th>
+          </tr>
+        </thead>
+        <tbody id="adm-tbody"></tbody>
+      </table>
+      <div class="adm-empty adm-hidden" id="adm-empty">Todavía no hay prospectos cargados.</div>
+    </div>
+  </div>
+
+  <!-- Modal: prospecto -->
+  <div class="adm-overlay adm-hidden" id="adm-modal-prospecto">
+    <div class="adm-modal">
+      <div class="adm-modal-head">
+        <div><h2 id="adm-mp-titulo">Nuevo prospecto</h2><p class="adm-sub">Datos de la empresa.</p></div>
+        <button class="adm-close" data-cerrar="adm-modal-prospecto">×</button>
+      </div>
+
+      <input type="hidden" id="adm-mp-id">
+      <div class="adm-grid2">
+        <div class="adm-field"><label>Empresa *</label><input id="adm-mp-empresa" required></div>
+        <div class="adm-field"><label>Categoría</label><input id="adm-mp-categoria" placeholder="C, D…"></div>
+        <div class="adm-field"><label>Web</label><input id="adm-mp-web" placeholder="empresa.com.ar"></div>
+        <div class="adm-field"><label>Email</label><input id="adm-mp-email" type="email"></div>
+        <div class="adm-field"><label>Teléfono</label><input id="adm-mp-telefono"></div>
+        <div class="adm-field"><label>LinkedIn</label><input id="adm-mp-linkedin" placeholder="linkedin.com/company/…"></div>
+        <div class="adm-field"><label>Decisor — nombre</label><input id="adm-mp-decisor-nombre"></div>
+        <div class="adm-field"><label>Decisor — cargo</label><input id="adm-mp-decisor-cargo"></div>
+        <div class="adm-field"><label>Canal recomendado</label>
+          <select id="adm-mp-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="otro">Otro</option></select>
+        </div>
+      </div>
+      <div class="adm-field"><label>Oportunidad / notas</label><textarea id="adm-mp-notas" placeholder="Qué necesidad detectamos, qué le proponemos…"></textarea></div>
+
+      <p class="adm-error" id="adm-mp-error"></p>
+      <div class="adm-actions">
+        <button class="adm-btn" id="adm-mp-guardar">Guardar</button>
+        <button class="adm-btn adm-btn-ghost" data-cerrar="adm-modal-prospecto">Cancelar</button>
+        <span class="adm-spacer"></span>
+        <button class="adm-btn adm-btn-danger adm-hidden" id="adm-mp-eliminar">Eliminar prospecto</button>
+      </div>
+
+      <div id="adm-mp-mensajes-wrap" class="adm-hidden">
+        <hr class="adm-sep">
+        <h2>Mensajes</h2>
+        <p class="adm-sub">Borradores y registro de lo que ya se mandó.</p>
+        <div id="adm-mp-mensajes"></div>
+
+        <div class="adm-msg-item" style="margin-top:16px">
+          <p class="adm-sub" style="margin-bottom:10px">Nuevo mensaje</p>
+          <div class="adm-grid2">
+            <div class="adm-field"><label>Canal</label>
+              <select id="adm-nm-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="otro">Otro</option></select>
+            </div>
+            <div class="adm-field"><label>Asunto</label><input id="adm-nm-asunto" placeholder="(para email)"></div>
+          </div>
+          <div class="adm-field"><label>Contenido</label><textarea id="adm-nm-contenido" placeholder="Mensaje personalizado para esta empresa…"></textarea></div>
+          <button class="adm-btn" id="adm-nm-crear">Agregar mensaje</button>
+          <p class="adm-error" id="adm-nm-error"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: importar varios -->
+  <div class="adm-overlay adm-hidden" id="adm-modal-importar">
+    <div class="adm-modal">
+      <div class="adm-modal-head">
+        <div><h2>Importar varios prospectos</h2><p class="adm-sub">Pegá filas separadas por tabulación (como copiar de una planilla) o por "|".</p></div>
+        <button class="adm-close" data-cerrar="adm-modal-importar">×</button>
+      </div>
+      <p class="adm-sub" style="margin-bottom:10px">
+        Orden de columnas: <b>Empresa, Categoría, Web, Email, Teléfono, LinkedIn, Decisor (nombre), Decisor (cargo), Canal, Notas</b>.
+        Podés dejar columnas vacías; sólo Empresa es obligatoria.
+      </p>
+      <div class="adm-field">
+        <textarea id="adm-imp-texto" style="min-height:220px;font-family:monospace;font-size:12px" placeholder="Playland Park&#9;C&#9;playland.com.ar&#9;recepcion@playland.com.ar&#9;(011) 4788-6767&#9;linkedin.com/company/playland&#9;Florencia Esteves Kurhelec&#9;Gerente General&#9;email&#9;Tótems, gestión de tickets…"></textarea>
+      </div>
+      <p class="adm-error" id="adm-imp-error"></p>
+      <p class="adm-ok" id="adm-imp-ok"></p>
+      <div class="adm-actions">
+        <button class="adm-btn" id="adm-imp-confirmar">Importar</button>
+        <button class="adm-btn adm-btn-ghost" data-cerrar="adm-modal-importar">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: configuración / usuarios -->
+  <div class="adm-overlay adm-hidden" id="adm-modal-config">
+    <div class="adm-modal">
+      <div class="adm-modal-head">
+        <div><h2>Configuración</h2><p class="adm-sub">Usuarios que pueden entrar al panel.</p></div>
+        <button class="adm-close" data-cerrar="adm-modal-config">×</button>
+      </div>
+
+      <div id="adm-usuarios-lista"></div>
+
+      <hr class="adm-sep">
+      <p class="adm-sub" style="margin-bottom:10px">Agregar usuario</p>
+      <div class="adm-grid2">
+        <div class="adm-field"><label>Usuario</label><input id="adm-nu-usuario"></div>
+        <div class="adm-field"><label>Contraseña (mín. 8)</label><input id="adm-nu-clave" type="password"></div>
+      </div>
+      <button class="adm-btn" id="adm-nu-crear">Crear usuario</button>
+      <p class="adm-error" id="adm-nu-error"></p>
+    </div>
+  </div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

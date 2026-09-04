@@ -1,0 +1,110 @@
+/* Panel /admin — prospección. Reusa tokens de styles.css (fuente, colores, reset). */
+
+body { min-height: 100vh; }
+
+.adm-hidden { display: none !important; }
+
+/* ---------- Login ---------- */
+#adm-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.adm-card {
+  width: 100%;
+  max-width: 360px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px;
+}
+.adm-card h1 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.adm-card p.adm-sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+.adm-field { margin-bottom: 14px; }
+.adm-field label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.adm-field input, .adm-field select, .adm-field textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--txt);
+  font-family: inherit;
+  font-size: 14px;
+}
+.adm-field textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+.adm-field input:focus, .adm-field select:focus, .adm-field textarea:focus { border-color: var(--c2); }
+
+.adm-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: var(--c2); color: #0B1215; font-weight: 700; font-size: 13px;
+  border: none; border-radius: 8px; padding: 10px 16px; cursor: pointer;
+}
+.adm-btn:hover { background: var(--c); }
+.adm-btn:disabled { opacity: .5; cursor: not-allowed; }
+.adm-btn-ghost { background: transparent; color: var(--txt); border: 1px solid var(--border); }
+.adm-btn-ghost:hover { background: var(--bg2); border-color: var(--c2); }
+.adm-btn-danger { background: transparent; color: #FCA5A5; border: 1px solid rgba(252,165,165,.35); }
+.adm-btn-danger:hover { background: rgba(252,165,165,.08); }
+.adm-btn-block { width: 100%; }
+
+.adm-error { color: #FCA5A5; font-size: 13px; margin-top: 10px; min-height: 16px; }
+.adm-ok { color: #86EFAC; font-size: 13px; margin-top: 10px; min-height: 16px; }
+
+/* ---------- App ---------- */
+#adm-app { max-width: 1200px; margin: 0 auto; padding: 24px var(--pad-x) 80px; }
+
+.adm-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
+.adm-topbar h1 { font-size: 18px; font-weight: 800; }
+.adm-topbar .adm-sub { color: var(--muted); font-size: 13px; }
+
+.adm-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+.adm-toolbar input[type="search"] {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 9px 12px; color: var(--txt); font-size: 13px; min-width: 220px; font-family: inherit;
+}
+.adm-toolbar select { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px; color: var(--txt); font-size: 13px; font-family: inherit; }
+.adm-spacer { flex: 1; }
+
+.adm-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+table.adm-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 880px; }
+.adm-table th, .adm-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.adm-table th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; background: var(--bg2); }
+.adm-table tbody tr { cursor: pointer; }
+.adm-table tbody tr:hover { background: rgba(255,255,255,.03); }
+.adm-table tbody tr:last-child td { border-bottom: none; }
+
+.adm-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.adm-pill-si { background: rgba(134,239,172,.12); color: #86EFAC; }
+.adm-pill-no { background: rgba(255,255,255,.08); color: var(--muted); }
+.adm-muted { color: var(--muted); }
+.adm-empty { text-align: center; padding: 40px; color: var(--muted); font-size: 14px; }
+
+/* ---------- Modal ---------- */
+.adm-overlay {
+  position: fixed; inset: 0; background: rgba(8,9,12,.72);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 40px 16px; overflow-y: auto; z-index: 50;
+}
+.adm-modal {
+  width: 100%; max-width: 620px; background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px; margin-bottom: 40px;
+}
+.adm-modal h2 { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+.adm-modal .adm-sub { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+.adm-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.adm-close { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; line-height: 1; padding: 4px; }
+.adm-close:hover { color: var(--txt); }
+
+.adm-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; }
+@media (max-width: 520px) { .adm-grid2 { grid-template-columns: 1fr; } }
+
+.adm-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+
+.adm-msg-item { border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-top: 12px; }
+.adm-msg-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.adm-msg-head .adm-fecha { color: var(--muted); font-size: 12px; }
+
+hr.adm-sep { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
