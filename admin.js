@@ -248,33 +248,60 @@
    * Un mensaje con sus acciones (guardar, marcar enviado, enviar por email, abrir y copiar,
    * eliminar). Lo usan tanto la ficha de un prospecto (renderMensajes) como la vista Borradores
    * (renderBorradores, que además muestra a qué empresa pertenece cada uno).
-   * ctx: { mostrarEmpresa, empresa?, prospectoId?, linkedin, onCambio }
+   * ctx: { mostrarEmpresa, empresa?, prospectoId?, linkedin, onCambio, colapsable? }
    */
   function crearItemMensaje(m, ctx) {
     const item = document.createElement('div');
-    item.className = 'adm-msg-item';
+    item.className = 'adm-msg-item' + (ctx.colapsable ? ' adm-msg-item--colapsable' : '');
     const badge = m.enviado
       ? `<span class="adm-pill adm-pill-si">Enviado</span> <span class="adm-fecha">${fmtFecha(m.fecha_envio)}</span>`
       : '<span class="adm-pill adm-pill-no">Sin enviar</span>';
     const encabezado = ctx.mostrarEmpresa ? `<b>${escapeHtml(ctx.empresa)}</b> · ` : '';
+    const asuntoPreview = ctx.colapsable
+      ? `<span class="adm-muted adm-msg-preview">${escapeHtml(m.asunto || '(sin asunto)')}</span>`
+      : '';
     item.innerHTML = `
       <div class="adm-msg-head">
-        <div>${encabezado}${badge} <span class="adm-muted" style="margin-left:8px">${escapeHtml(m.canal)}</span></div>
+        <button type="button" class="adm-msg-toggle">
+          ${ctx.colapsable ? '<span class="adm-msg-chevron">▸</span>' : ''}
+          <span>${encabezado}${badge} <span class="adm-muted" style="margin-left:8px">${escapeHtml(m.canal)}</span></span>
+          ${asuntoPreview}
+        </button>
         ${ctx.mostrarEmpresa ? '<button class="adm-btn adm-btn-ghost adm-i-ver">Ver ficha →</button>' : ''}
       </div>
-      <div class="adm-field"><label>Asunto</label><input class="adm-i-asunto" value="${escapeAttr(m.asunto)}"></div>
-      <div class="adm-field"><label>Contenido</label><textarea class="adm-i-contenido">${escapeHtml(m.contenido)}</textarea></div>
-      <p class="adm-error adm-i-error"></p>
-      <div class="adm-actions">
-        <button class="adm-btn adm-btn-ghost adm-i-guardar">Guardar</button>
-        <button class="adm-btn adm-btn-ghost adm-i-toggle">${m.enviado ? 'Desmarcar enviado' : 'Marcar enviado (a mano)'}</button>
-        ${m.canal === 'email' ? `<button class="adm-btn adm-i-enviar">${m.enviado ? 'Reenviar por email' : 'Enviar por email ahora'}</button>` : ''}
-        ${m.canal === 'linkedin' || m.canal === 'instagram' ? '<button class="adm-btn adm-i-abrir">Abrir y copiar →</button>' : ''}
-        <span class="adm-spacer"></span>
-        <button class="adm-btn adm-btn-danger adm-i-borrar">Eliminar</button>
+      <div class="adm-msg-body${ctx.colapsable ? ' adm-hidden' : ''}">
+        <div class="adm-field"><label>Asunto</label><input class="adm-i-asunto" value="${escapeAttr(m.asunto)}"></div>
+        <div class="adm-field"><label>Contenido</label><textarea class="adm-i-contenido">${escapeHtml(m.contenido)}</textarea></div>
+        <p class="adm-error adm-i-error"></p>
+        <div class="adm-actions">
+          <button class="adm-btn adm-btn-ghost adm-i-guardar">Guardar</button>
+          <button class="adm-btn adm-btn-ghost adm-i-toggle">${m.enviado ? 'Desmarcar enviado' : 'Marcar enviado (a mano)'}</button>
+          ${m.canal === 'email' ? `<button class="adm-btn adm-i-enviar">${m.enviado ? 'Reenviar por email' : 'Enviar por email ahora'}</button>` : ''}
+          ${m.canal === 'linkedin' || m.canal === 'instagram' ? '<button class="adm-btn adm-i-abrir">Abrir y copiar →</button>' : ''}
+          <span class="adm-spacer"></span>
+          <button class="adm-btn adm-btn-danger adm-i-borrar">Eliminar</button>
+        </div>
       </div>
     `;
     const errorEl = item.querySelector('.adm-i-error');
+    const contenidoEl = item.querySelector('.adm-i-contenido');
+    const autoAltura = () => { contenidoEl.style.height = 'auto'; contenidoEl.style.height = contenidoEl.scrollHeight + 'px'; };
+    contenidoEl.addEventListener('input', autoAltura);
+
+    if (ctx.colapsable) {
+      const cuerpo = item.querySelector('.adm-msg-body');
+      const chevron = item.querySelector('.adm-msg-chevron');
+      item.querySelector('.adm-msg-toggle').addEventListener('click', () => {
+        const abrir = cuerpo.classList.contains('adm-hidden');
+        cuerpo.classList.toggle('adm-hidden', !abrir);
+        chevron.textContent = abrir ? '▾' : '▸';
+        if (abrir) autoAltura();
+      });
+    } else {
+      // Recién insertado en el DOM por quien llama a crearItemMensaje: hay que esperar
+      // al próximo frame para que el textarea tenga layout y scrollHeight sea real.
+      requestAnimationFrame(autoAltura);
+    }
 
     item.querySelector('.adm-i-guardar').addEventListener('click', async () => {
       errorEl.textContent = '';
@@ -351,6 +378,7 @@
         empresa: m.prospecto_empresa,
         prospectoId: m.prospecto_id,
         linkedin: m.prospecto_linkedin,
+        colapsable: true,
         onCambio: async () => { await cargarBorradores(); await cargarProspectos(); },
       }));
     }
