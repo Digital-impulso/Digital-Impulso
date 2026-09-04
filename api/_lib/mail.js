@@ -2,6 +2,7 @@
 // El prospecto nunca ve la cuenta de Google que guarda el calendario: sólo este remitente.
 import nodemailer from 'nodemailer';
 import { AGENDA } from './config.js';
+import { obtenerConfig } from './configAdmin.js';
 
 const env = (k, def = '') => (process.env[k] && process.env[k].trim()) || def;
 
@@ -139,16 +140,59 @@ export async function avisarEquipo({ lead, inicio, meet, eventoId }) {
   });
 }
 
-// ---------- Mensajes de prospección (panel /admin) ----------
-// Mismo remitente y transporte que el resto del sitio: la casilla propia del dominio
-// (con SPF/DKIM/DMARC ya alineados para digitalimpulso.com), nunca un servicio de bulk mail.
+// ---------- Mensajes de prospección (panel /admin · Integraciones) ----------
+// Casilla configurable desde Integraciones (guardada en Turso); si no se configuró nada
+// ahí, cae a la misma casilla de /agendar (SMTP_HOST/USER/PASS). Nunca un servicio de
+// bulk mail de terceros: siempre una casilla propia y autenticada del dominio.
+async function configSmtpProspeccion() {
+  const c = await obtenerConfig(['smtp_host', 'smtp_port', 'smtp_user', 'smtp_pass', 'smtp_from']);
+  const host = c.smtp_host || env('SMTP_HOST');
+  const port = Number(c.smtp_port || env('SMTP_PORT', 587));
+  const user = c.smtp_user || env('SMTP_USER');
+  const pass = c.smtp_pass || env('SMTP_PASS');
+  const from = c.smtp_from || env('SMTP_FROM') || (user ? `Digital Impulso <${user}>` : '');
+  return { host, port, user, pass, from };
+}
+
+let cacheProspeccion = null; // { firma, transporter }
+async function transporteProspeccion() {
+  const c = await configSmtpProspeccion();
+  const firma = JSON.stringify(c);
+  if (!cacheProspeccion || cacheProspeccion.firma !== firma) {
+    cacheProspeccion = {
+      firma,
+      transporter: nodemailer.createTransport({
+        host: c.host,
+        port: c.port,
+        secure: c.port === 465,
+        auth: { user: c.user, pass: c.pass },
+      }),
+    };
+  }
+  return { transporter: cacheProspeccion.transporter, from: c.from };
+}
+
+export async function mailProspeccionConfigurado() {
+  const c = await configSmtpProspeccion();
+  return Boolean(c.host && c.user && c.pass);
+}
+
+/** Comprueba conexión y credenciales de la casilla de prospección (no manda nada). */
+export async function verificarSmtpProspeccion() {
+  if (!(await mailProspeccionConfigurado())) throw new Error('Falta host, usuario o contraseña de SMTP.');
+  const { transporter } = await transporteProspeccion();
+  await transporter.verify();
+  return true;
+}
+
 export async function enviarProspeccion({ paraEmail, paraNombre, asunto, contenido }) {
+  const { transporter, from } = await transporteProspeccion();
   const html = `
 <div style="font-family:Geist,Inter,-apple-system,Segoe UI,Roboto,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111827;white-space:pre-wrap;line-height:1.6;font-size:15px">${esc(contenido)}</div>`;
-  await transporte().sendMail({
-    from: REMITENTE(),
+  await transporter.sendMail({
+    from,
     to: paraNombre ? `${paraNombre} <${paraEmail}>` : paraEmail,
-    replyTo: REMITENTE(),
+    replyTo: from,
     subject: asunto,
     text: contenido,
     html,

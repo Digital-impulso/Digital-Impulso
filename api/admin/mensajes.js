@@ -9,7 +9,7 @@ import { json, error } from '../_lib/http.js';
 import { sesionValida } from '../_lib/session.js';
 
 const limpiar = (v, max = 300) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
-const CANALES = new Set(['email', 'linkedin', 'otro']);
+const CANALES = new Set(['email', 'linkedin', 'instagram', 'otro']);
 
 export async function GET(request) {
   if (!(await sesionValida(request))) return error('No autorizado.', 401);

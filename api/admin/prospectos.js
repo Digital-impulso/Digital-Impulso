@@ -12,7 +12,7 @@ const CAMPOS = {
   linkedin: 300, decisorNombre: 120, decisorCargo: 120, canal: 20, notas: 4000,
 };
 const A_COLUMNA = { decisorNombre: 'decisor_nombre', decisorCargo: 'decisor_cargo' };
-const CANALES = new Set(['email', 'linkedin', 'otro']);
+const CANALES = new Set(['email', 'linkedin', 'instagram', 'otro']);
 
 function normalizar(it) {
   const out = {};

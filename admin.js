@@ -84,6 +84,18 @@
     }
   }
 
+  // ---------- Navegación del panel lateral ----------
+  const CARGA_POR_VISTA = { usuarios: cargarUsuarios, integraciones: cargarIntegraciones };
+
+  $$('.adm-nav-item').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const vista = btn.dataset.vista;
+      $$('.adm-nav-item').forEach((b) => b.classList.toggle('is-activa', b === btn));
+      $$('.adm-view').forEach((v) => v.classList.toggle('adm-hidden', v.id !== `adm-view-${vista}`));
+      if (CARGA_POR_VISTA[vista]) await CARGA_POR_VISTA[vista]();
+    });
+  });
+
   // ---------- Tabla ----------
   async function cargarProspectos() {
     const data = await api('/api/admin/prospectos');
@@ -240,6 +252,7 @@
           <button class="adm-btn adm-btn-ghost adm-i-guardar">Guardar</button>
           <button class="adm-btn adm-btn-ghost adm-i-toggle">${m.enviado ? 'Desmarcar enviado' : 'Marcar enviado (a mano)'}</button>
           ${m.canal === 'email' ? `<button class="adm-btn adm-i-enviar">${m.enviado ? 'Reenviar por email' : 'Enviar por email ahora'}</button>` : ''}
+          ${m.canal === 'linkedin' || m.canal === 'instagram' ? `<button class="adm-btn adm-i-abrir">Abrir y copiar →</button>` : ''}
           <span class="adm-spacer"></span>
           <button class="adm-btn adm-btn-danger adm-i-borrar">Eliminar</button>
         </div>
@@ -286,6 +299,11 @@
         });
       }
 
+      const btnAbrir = item.querySelector('.adm-i-abrir');
+      if (btnAbrir) {
+        btnAbrir.addEventListener('click', () => abrirDrawerEnvio(m, MP.linkedin.value));
+      }
+
       item.querySelector('.adm-i-borrar').addEventListener('click', async () => {
         if (!confirm('¿Eliminar este mensaje?')) return;
         try {
@@ -298,6 +316,98 @@
       cont.appendChild(item);
     }
   }
+
+  // ---------- Drawer: enviar por LinkedIn/Instagram (copiar + abrir el perfil) ----------
+  // No se puede embeber LinkedIn/Instagram dentro de esta página (ellos mismos lo bloquean,
+  // vía X-Frame-Options/CSP, para evitar clickjacking — ni un <iframe> ni ningún truco de
+  // frontend lo evita). Lo más parecido a "verlos juntos" sin eso es abrir una ventana aparte
+  // ya ubicada al lado de esta, en vez de una pestaña más — ver abrirVentanaAlLado más abajo.
+  let drawerMensajeId = null;
+
+  function urlRedSocial(valor, canal) {
+    const v = (valor || '').trim();
+    if (!v) return '';
+    if (/^https?:\/\//i.test(v)) return v;
+    if (/linkedin\.com/i.test(v)) return `https://${v.replace(/^\/+/, '')}`;
+    if (/instagram\.com/i.test(v)) return `https://${v.replace(/^\/+/, '')}`;
+    const usuario = v.replace(/^@/, '');
+    // ig.me/m/<usuario> es un link que el propio Instagram provee para ir directo al chat con
+    // esa persona (el mismo que usan en las bios como "Enviame un mensaje"), no una ficha.
+    return canal === 'instagram' ? `https://ig.me/m/${usuario}` : `https://www.linkedin.com/in/${usuario}`;
+  }
+
+  /**
+   * Abre la red social en una ventana aparte (no una pestaña más), ya ubicada al lado de esta.
+   * Si el navegador soporta la Window Management API (Chrome/Edge) y hay un segundo monitor,
+   * la manda ahí entera; si no, la deja en la mitad derecha de la pantalla actual. Ninguna de
+   * las dos formas embebe nada — son ventanas del sistema operativo, no iframes.
+   */
+  async function abrirVentanaAlLado(url) {
+    let left = Math.round(window.screen.availWidth / 2);
+    let top = window.screen.availTop || 0;
+    let width = Math.round(window.screen.availWidth / 2);
+    let height = window.screen.availHeight;
+
+    if (window.getScreenDetails) {
+      try {
+        const detalles = await window.getScreenDetails();
+        const otra = detalles.screens.find((s) => s !== detalles.currentScreen);
+        if (otra) { left = otra.availLeft; top = otra.availTop; width = otra.availWidth; height = otra.availHeight; }
+      } catch { /* sin permiso o sin segundo monitor: se usa la mitad de la pantalla actual */ }
+    }
+
+    window.open(url, 'adm_red_social', `noopener,left=${left},top=${top},width=${width},height=${height}`);
+  }
+
+  function abrirDrawerEnvio(mensaje, valorContacto) {
+    drawerMensajeId = mensaje.id;
+    const redNombre = mensaje.canal === 'instagram' ? 'Instagram' : 'LinkedIn';
+    $('#adm-dr-titulo').textContent = `Enviar por ${redNombre}`;
+    $('#adm-dr-sub').textContent = mensaje.enviado ? 'Ya está marcado como enviado.' : 'Todavía sin enviar.';
+    $('#adm-dr-mensaje').value = mensaje.contenido;
+    $('#adm-dr-ok').textContent = '';
+    $('#adm-dr-marcar').textContent = mensaje.enviado ? 'Ya está marcado como enviado' : 'Ya lo mandé — marcar como enviado';
+    $('#adm-dr-marcar').disabled = mensaje.enviado;
+
+    const url = urlRedSocial(valorContacto, mensaje.canal);
+    const btnAbrir = $('#adm-dr-abrir');
+    btnAbrir.disabled = !url;
+    btnAbrir.dataset.url = url;
+    $('#adm-dr-sin-url').textContent = url ? '' : `No hay LinkedIn/Instagram cargado para este prospecto — completalo en la ficha para poder abrirlo directo.`;
+
+    $('#adm-drawer-overlay').classList.remove('adm-hidden');
+  }
+
+  $('#adm-dr-cerrar').addEventListener('click', () => $('#adm-drawer-overlay').classList.add('adm-hidden'));
+  $('#adm-drawer-overlay').addEventListener('click', (e) => { if (e.target.id === 'adm-drawer-overlay') $('#adm-drawer-overlay').classList.add('adm-hidden'); });
+
+  $('#adm-dr-copiar').addEventListener('click', async () => {
+    const okEl = $('#adm-dr-ok');
+    try {
+      await navigator.clipboard.writeText($('#adm-dr-mensaje').value);
+      okEl.textContent = '¡Copiado!';
+    } catch {
+      $('#adm-dr-mensaje').select();
+      okEl.textContent = 'No se pudo copiar solo — seleccioná el texto (Ctrl/Cmd+C).';
+    }
+  });
+
+  $('#adm-dr-abrir').addEventListener('click', () => {
+    const url = $('#adm-dr-abrir').dataset.url;
+    if (url) abrirVentanaAlLado(url);
+  });
+
+  $('#adm-dr-marcar').addEventListener('click', async () => {
+    if (!drawerMensajeId) return;
+    try {
+      await api('/api/admin/mensajes', { method: 'PUT', body: { id: drawerMensajeId, enviado: true } });
+      $('#adm-drawer-overlay').classList.add('adm-hidden');
+      await cargarMensajes(prospectoActualId);
+      await cargarProspectos();
+    } catch (err) {
+      $('#adm-dr-ok').textContent = err.message;
+    }
+  });
 
   $('#adm-nm-crear').addEventListener('click', async () => {
     const errorEl = $('#adm-nm-error');
@@ -352,14 +462,7 @@
     }
   });
 
-  // ---------- Configuración / usuarios ----------
-  $('#adm-btn-config').addEventListener('click', async () => {
-    $('#adm-nu-error').textContent = '';
-    $('#adm-nu-usuario').value = ''; $('#adm-nu-clave').value = '';
-    abrirModal('adm-modal-config');
-    await cargarUsuarios();
-  });
-
+  // ---------- Usuarios (vista del panel lateral) ----------
   async function cargarUsuarios() {
     const lista = $('#adm-usuarios-lista');
     lista.innerHTML = '<p class="adm-muted" style="font-size:13px">Cargando…</p>';
@@ -431,6 +534,219 @@
       errorEl.textContent = err.message;
     }
   });
+
+  // ---------- Integraciones (email de prospección + reglas de envío + IA) ----------
+  async function cargarIntegraciones() {
+    ['adm-int-smtp-error', 'adm-int-smtp-ok', 'adm-int-reglas-error', 'adm-int-reglas-ok', 'adm-int-ia-error', 'adm-int-ia-ok']
+      .forEach((id) => { $('#' + id).textContent = ''; });
+    try {
+      const data = await api('/api/admin/integraciones');
+      $('#adm-int-host').value = data.smtp.host || '';
+      $('#adm-int-port').value = data.smtp.port || '';
+      $('#adm-int-user').value = data.smtp.user || '';
+      $('#adm-int-from').value = data.smtp.from || '';
+      $('#adm-int-pass').value = '';
+      $('#adm-int-pass').placeholder = data.smtp.passConfigurada ? '••••••••  (ya configurada; dejar vacío para no cambiarla)' : 'Sin configurar';
+      $('#adm-int-pass-hint').textContent = data.smtp.passConfigurada
+        ? 'Ya hay una contraseña guardada. Escribí una nueva solo si querés reemplazarla.'
+        : 'Sin host/usuario/contraseña acá, se usa la misma casilla que /agendar (si está configurada por variables de entorno).';
+      $('#adm-int-espera').value = data.reglas.esperaSeg || '';
+      $('#adm-int-tope').value = data.reglas.topeDiario || '';
+
+      $('#adm-int-ia-key').value = '';
+      $('#adm-int-ia-key').placeholder = data.ia.apiKeyConfigurada ? '••••••••••••  (ya configurada; dejar vacío para no cambiarla)' : 'sk-ant-...';
+      $('#adm-int-ia-modelo').value = data.ia.modelo || 'claude-opus-5';
+      $('#adm-int-ia-auto').checked = Boolean(data.ia.autoEnviar);
+    } catch (err) {
+      $('#adm-int-smtp-error').textContent = err.message;
+    }
+  }
+
+  $('#adm-int-ia-guardar').addEventListener('click', async () => {
+    const errorEl = $('#adm-int-ia-error'); const okEl = $('#adm-int-ia-ok');
+    errorEl.textContent = ''; okEl.textContent = '';
+    try {
+      await api('/api/admin/integraciones', { method: 'PUT', body: {
+        ia: { apiKey: $('#adm-int-ia-key').value, modelo: $('#adm-int-ia-modelo').value, autoEnviar: $('#adm-int-ia-auto').checked },
+      } });
+      okEl.textContent = 'Guardado.';
+      await cargarIntegraciones();
+    } catch (err) {
+      errorEl.textContent = err.message;
+    }
+  });
+
+  $('#adm-int-ia-probar').addEventListener('click', async () => {
+    const errorEl = $('#adm-int-ia-error'); const okEl = $('#adm-int-ia-ok');
+    errorEl.textContent = ''; okEl.textContent = '';
+    const btn = $('#adm-int-ia-probar');
+    btn.disabled = true;
+    try {
+      await api('/api/admin/integraciones', { method: 'POST', body: { objetivo: 'ia' } });
+      okEl.textContent = 'Conexión OK.';
+    } catch (err) {
+      errorEl.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  $('#adm-int-guardar').addEventListener('click', async () => {
+    const errorEl = $('#adm-int-smtp-error'); const okEl = $('#adm-int-smtp-ok');
+    errorEl.textContent = ''; okEl.textContent = '';
+    try {
+      await api('/api/admin/integraciones', { method: 'PUT', body: {
+        smtp: { host: $('#adm-int-host').value, port: $('#adm-int-port').value, user: $('#adm-int-user').value, pass: $('#adm-int-pass').value, from: $('#adm-int-from').value },
+      } });
+      okEl.textContent = 'Guardado.';
+      await cargarIntegraciones();
+    } catch (err) {
+      errorEl.textContent = err.message;
+    }
+  });
+
+  $('#adm-int-probar').addEventListener('click', async () => {
+    const errorEl = $('#adm-int-smtp-error'); const okEl = $('#adm-int-smtp-ok');
+    errorEl.textContent = ''; okEl.textContent = '';
+    const btn = $('#adm-int-probar');
+    btn.disabled = true;
+    try {
+      await api('/api/admin/integraciones', { method: 'POST' });
+      okEl.textContent = 'Conexión OK.';
+    } catch (err) {
+      errorEl.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  $('#adm-int-reglas-guardar').addEventListener('click', async () => {
+    const errorEl = $('#adm-int-reglas-error'); const okEl = $('#adm-int-reglas-ok');
+    errorEl.textContent = ''; okEl.textContent = '';
+    try {
+      await api('/api/admin/integraciones', { method: 'PUT', body: {
+        reglas: { esperaSeg: $('#adm-int-espera').value, topeDiario: $('#adm-int-tope').value },
+      } });
+      okEl.textContent = 'Guardado.';
+      await cargarIntegraciones();
+    } catch (err) {
+      errorEl.textContent = err.message;
+    }
+  });
+
+  // ---------- Buscar con IA ----------
+  $('#adm-ia-buscar-btn').addEventListener('click', async () => {
+    const errorEl = $('#adm-ia-error');
+    const resultadoEl = $('#adm-ia-resultado');
+    const btn = $('#adm-ia-buscar-btn');
+    errorEl.textContent = '';
+
+    const descripcion = $('#adm-ia-descripcion').value.trim();
+    if (!descripcion) { errorEl.textContent = 'Describí qué tipo de empresas buscar.'; return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Buscando… (puede tardar 1-2 minutos)';
+    resultadoEl.innerHTML = '';
+    try {
+      const data = await api('/api/admin/ia-buscar', { method: 'POST', body: {
+        descripcion, cantidad: $('#adm-ia-cantidad').value,
+      } });
+      renderResultadoIA(data.items);
+      await cargarProspectos();
+    } catch (err) {
+      errorEl.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Buscar automático (con API key)';
+    }
+  });
+
+  // ---------- Abrir en Claude.ai (alternativa sin API key) ----------
+  const CAMPOS_PROMPT_IA =
+    'empresa, categoria, web, email, telefono, linkedin, decisor_nombre, decisor_cargo, canal, notas, mensaje_asunto, mensaje_contenido';
+
+  function armarPromptIA(descripcion, cantidad) {
+    const excluir = prospectos.map((p) => p.empresa);
+    return [
+      'Actuá como el equipo de prospección comercial de Digital Impulso (digitalimpulso.com), una empresa',
+      'argentina de tecnología, IA y automatización: tótems de autogestión, cobro con Mercado Pago/QR, chatbots',
+      'y atención por WhatsApp con IA, automatización de procesos internos, apps y sistemas a medida, y tableros/BI.',
+      '',
+      `Buscá en la web ${cantidad} empresas reales que encajen con esto: ${descripcion}`,
+      '',
+      `No repitas ninguna de estas (ya son prospectos cargados): ${excluir.length ? excluir.join(', ') : '(ninguna todavía)'}`,
+      '',
+      'Reglas:',
+      '- Nunca inventes un email, teléfono, nombre de decisor o cargo. Si no lo encontrás publicado en una fuente',
+      '  real, dejá ese campo vacío (mejor vacío que inventado).',
+      '- Para cada empresa, redactá un mensaje de prospección específico (4-8 líneas, español rioplatense, tono',
+      '  directo): qué hace la empresa, qué oportunidad/fricción detectaste, qué le propondría Digital Impulso.',
+      '  Nada de plantilla genérica ("Hola, somos Digital Impulso...").',
+      '- Elegí canal: "email" si hay un email público real, "linkedin" si solo hay LinkedIn, "instagram" si tiene',
+      '  más presencia ahí, "otro" si no hay ninguno claro.',
+      '',
+      `Respondé ÚNICAMENTE con un bloque de código \`\`\`json que contenga un array con este formato exacto por`,
+      `empresa (sin texto antes ni después del bloque), con estas claves: ${CAMPOS_PROMPT_IA}.`,
+    ].join('\n');
+  }
+
+  $('#adm-ia-abrir-claude').addEventListener('click', () => {
+    const errorEl = $('#adm-ia-error');
+    errorEl.textContent = '';
+    const descripcion = $('#adm-ia-descripcion').value.trim();
+    if (!descripcion) { errorEl.textContent = 'Describí qué tipo de empresas buscar.'; return; }
+    const cantidad = $('#adm-ia-cantidad').value || '3';
+    const prompt = armarPromptIA(descripcion, cantidad);
+    window.open('https://claude.ai/new?q=' + encodeURIComponent(prompt), '_blank', 'noopener');
+  });
+
+  function extraerJSON(texto) {
+    const m = texto.match(/```json\s*([\s\S]*?)```/i) || texto.match(/```\s*([\s\S]*?)```/);
+    return JSON.parse(m ? m[1] : texto);
+  }
+
+  $('#adm-ia-pegado-importar').addEventListener('click', async () => {
+    const errorEl = $('#adm-ia-pegado-error');
+    errorEl.textContent = '';
+    let candidatos;
+    try {
+      candidatos = extraerJSON($('#adm-ia-pegado').value);
+      if (!Array.isArray(candidatos)) throw new Error('no es un array');
+    } catch {
+      errorEl.textContent = 'No pude leer eso como JSON — revisá que hayas pegado el bloque completo (con los corchetes [ ]).';
+      return;
+    }
+    try {
+      const data = await api('/api/admin/ia-importar', { method: 'POST', body: { candidatos } });
+      renderResultadoIA(data.items);
+      $('#adm-ia-pegado').value = '';
+      await cargarProspectos();
+    } catch (err) {
+      errorEl.textContent = err.message;
+    }
+  });
+
+  function renderResultadoIA(items) {
+    const cont = $('#adm-ia-resultado');
+    if (!items.length) {
+      cont.innerHTML = '<p class="adm-muted" style="font-size:13px">No se encontraron empresas nuevas (o ya estaban todas cargadas).</p>';
+      return;
+    }
+    cont.innerHTML = `<p class="adm-sub" style="margin-bottom:10px">${items.length} empresa(s) agregadas a Prospectos:</p>`;
+    for (const it of items) {
+      const div = document.createElement('div');
+      div.className = 'adm-msg-item';
+      const estado = it.autoEnviado
+        ? '<span class="adm-pill adm-pill-si">Enviado automáticamente</span>'
+        : `<span class="adm-pill adm-pill-no">Borrador pendiente</span>${it.motivoNoEnvio ? ` <span class="adm-muted">— ${escapeHtml(it.motivoNoEnvio)}</span>` : ''}`;
+      div.innerHTML = `
+        <div class="adm-msg-head"><div><b>${escapeHtml(it.prospecto.empresa)}</b> <span class="adm-muted">(${escapeHtml(it.prospecto.canal)})</span></div></div>
+        <p class="adm-sub" style="margin-bottom:8px">${escapeHtml(it.prospecto.notas)}</p>
+        ${estado}
+      `;
+      cont.appendChild(div);
+    }
+  }
 
   // ---------- Utils ----------
   function escapeHtml(s) {

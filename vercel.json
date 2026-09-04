@@ -5,6 +5,9 @@
   "redirects": [
     { "source": "/casos", "destination": "/proyectos", "permanent": true }
   ],
+  "functions": {
+    "api/admin/ia-buscar.js": { "maxDuration": 60 }
+  },
   "headers": [
     {
       "source": "/assets/fonts/(.*)",

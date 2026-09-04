@@ -4,8 +4,8 @@ body { min-height: 100vh; }
 
 .adm-hidden { display: none !important; }
 
-/* ---------- Login ---------- */
-#adm-login {
+/* ---------- Login / alta del primer usuario ---------- */
+#adm-login, #adm-setup {
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -53,12 +53,55 @@ body { min-height: 100vh; }
 .adm-error { color: #FCA5A5; font-size: 13px; margin-top: 10px; min-height: 16px; }
 .adm-ok { color: #86EFAC; font-size: 13px; margin-top: 10px; min-height: 16px; }
 
-/* ---------- App ---------- */
-#adm-app { max-width: 1200px; margin: 0 auto; padding: 24px var(--pad-x) 80px; }
+/* ---------- App: layout con panel lateral ---------- */
+#adm-app { min-height: 100vh; }
 
-.adm-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
-.adm-topbar h1 { font-size: 18px; font-weight: 800; }
-.adm-topbar .adm-sub { color: var(--muted); font-size: 13px; }
+.adm-shell { display: flex; min-height: 100vh; }
+
+.adm-sidebar {
+  width: 220px; flex: 0 0 220px;
+  background: var(--bg2); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 20px 14px;
+  position: sticky; top: 0; height: 100vh;
+}
+.adm-brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; padding: 0 8px 20px; }
+.adm-brand img { border-radius: 4px; }
+
+.adm-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.adm-nav-item {
+  display: flex; align-items: center; gap: 10px;
+  background: none; border: none; text-align: left;
+  color: var(--muted); font-family: inherit; font-size: 14px; font-weight: 600;
+  padding: 10px 10px; border-radius: 8px; cursor: pointer;
+}
+.adm-nav-item:hover { background: rgba(255,255,255,.05); color: var(--txt); }
+.adm-nav-item.is-activa { background: rgba(94,234,212,.1); color: var(--c); }
+.adm-nav-ico { width: 18px; text-align: center; opacity: .8; }
+
+.adm-sidebar-foot { padding-top: 14px; border-top: 1px solid var(--border); }
+
+.adm-main { flex: 1; min-width: 0; padding: 28px clamp(20px, 3vw, 40px) 80px; }
+
+.adm-view-head { margin-bottom: 20px; }
+.adm-view-head h1 { font-size: 20px; font-weight: 800; }
+.adm-view-head .adm-sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+
+.adm-panel {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 14px;
+  padding: 22px 24px; margin-bottom: 18px; max-width: 720px;
+}
+.adm-panel h2 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.adm-panel code { background: rgba(255,255,255,.08); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+
+@media (max-width: 860px) {
+  .adm-shell { flex-direction: column; }
+  .adm-sidebar { width: 100%; flex: none; height: auto; position: static; flex-direction: row; align-items: center; padding: 12px 14px; gap: 12px; }
+  .adm-brand { padding: 0 8px 0 0; }
+  .adm-nav { flex-direction: row; flex: 1; overflow-x: auto; }
+  .adm-sidebar-foot { padding-top: 0; border-top: none; }
+  .adm-sidebar-foot .adm-btn { white-space: nowrap; }
+}
 
 .adm-toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
 .adm-toolbar input[type="search"] {
@@ -108,3 +151,16 @@ table.adm-table { width: 100%; border-collapse: collapse; font-size: 13px; min-w
 .adm-msg-head .adm-fecha { color: var(--muted); font-size: 12px; }
 
 hr.adm-sep { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+/* ---------- Drawer lateral (enviar por LinkedIn/Instagram) ---------- */
+.adm-drawer-overlay {
+  position: fixed; inset: 0; background: rgba(8,9,12,.6);
+  display: flex; justify-content: flex-end; z-index: 60;
+}
+.adm-drawer {
+  width: 100%; max-width: 420px; height: 100%;
+  background: var(--bg2); border-left: 1px solid var(--border);
+  padding: 24px; overflow-y: auto;
+}
+.adm-drawer-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.adm-drawer-head h2 { font-size: 16px; font-weight: 800; }

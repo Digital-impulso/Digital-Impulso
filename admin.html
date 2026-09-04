@@ -49,46 +49,248 @@
 
   <!-- App -->
   <div id="adm-app" class="adm-hidden">
-    <div class="adm-topbar">
-      <div>
-        <h1>Prospección C · D</h1>
-        <p class="adm-sub">Clientes, mensajes y a quién ya le escribimos.</p>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="adm-btn adm-btn-ghost" id="adm-btn-config">Configuración</button>
-        <button class="adm-btn adm-btn-ghost" id="adm-logout">Salir</button>
-      </div>
-    </div>
+    <div class="adm-shell">
 
-    <div class="adm-toolbar">
-      <input type="search" id="adm-buscar" placeholder="Buscar empresa o decisor…">
-      <select id="adm-filtro-canal">
-        <option value="">Todos los canales</option>
-        <option value="email">Email</option>
-        <option value="linkedin">LinkedIn</option>
-        <option value="otro">Otro</option>
-      </select>
-      <select id="adm-filtro-estado">
-        <option value="">Enviado y sin enviar</option>
-        <option value="pendiente">Sin ningún envío</option>
-        <option value="enviado">Con al menos un envío</option>
-      </select>
-      <div class="adm-spacer"></div>
-      <button class="adm-btn adm-btn-ghost" id="adm-btn-importar">Importar varios</button>
-      <button class="adm-btn" id="adm-btn-nuevo">+ Nuevo prospecto</button>
-    </div>
+      <aside class="adm-sidebar">
+        <div class="adm-brand">
+          <img src="/assets/images/logo-isotipo.png" alt="" width="22" height="22">
+          <span>Digital Impulso</span>
+        </div>
+        <nav class="adm-nav">
+          <button class="adm-nav-item is-activa" data-vista="prospectos">
+            <span class="adm-nav-ico">▤</span> Prospectos
+          </button>
+          <button class="adm-nav-item" data-vista="buscar-ia">
+            <span class="adm-nav-ico">✦</span> Buscar con IA
+          </button>
+          <button class="adm-nav-item" data-vista="integraciones">
+            <span class="adm-nav-ico">⇄</span> Integraciones
+          </button>
+          <button class="adm-nav-item" data-vista="usuarios">
+            <span class="adm-nav-ico">◍</span> Usuarios
+          </button>
+        </nav>
+        <div class="adm-sidebar-foot">
+          <button class="adm-btn adm-btn-ghost adm-btn-block" id="adm-logout">Salir</button>
+        </div>
+      </aside>
 
-    <div class="adm-table-wrap">
-      <table class="adm-table">
-        <thead>
-          <tr>
-            <th>Empresa</th><th>Categoría</th><th>Canal</th><th>Decisor</th>
-            <th>Contacto</th><th>Mensajes</th><th>Último envío</th>
-          </tr>
-        </thead>
-        <tbody id="adm-tbody"></tbody>
-      </table>
-      <div class="adm-empty adm-hidden" id="adm-empty">Todavía no hay prospectos cargados.</div>
+      <main class="adm-main">
+
+        <!-- Vista: Prospectos -->
+        <section class="adm-view" id="adm-view-prospectos">
+          <div class="adm-view-head">
+            <div>
+              <h1>Prospectos</h1>
+              <p class="adm-sub">Clientes C · D, mensajes y a quién ya le escribimos.</p>
+            </div>
+          </div>
+
+          <div class="adm-toolbar">
+            <input type="search" id="adm-buscar" placeholder="Buscar empresa o decisor…">
+            <select id="adm-filtro-canal">
+              <option value="">Todos los canales</option>
+              <option value="email">Email</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="instagram">Instagram</option>
+              <option value="otro">Otro</option>
+            </select>
+            <select id="adm-filtro-estado">
+              <option value="">Enviado y sin enviar</option>
+              <option value="pendiente">Sin ningún envío</option>
+              <option value="enviado">Con al menos un envío</option>
+            </select>
+            <div class="adm-spacer"></div>
+            <button class="adm-btn adm-btn-ghost" id="adm-btn-importar">Importar varios</button>
+            <button class="adm-btn" id="adm-btn-nuevo">+ Nuevo prospecto</button>
+          </div>
+
+          <div class="adm-table-wrap">
+            <table class="adm-table">
+              <thead>
+                <tr>
+                  <th>Empresa</th><th>Categoría</th><th>Canal</th><th>Decisor</th>
+                  <th>Contacto</th><th>Mensajes</th><th>Último envío</th>
+                </tr>
+              </thead>
+              <tbody id="adm-tbody"></tbody>
+            </table>
+            <div class="adm-empty adm-hidden" id="adm-empty">Todavía no hay prospectos cargados.</div>
+          </div>
+        </section>
+
+        <!-- Vista: Integraciones -->
+        <section class="adm-view adm-hidden" id="adm-view-integraciones">
+          <div class="adm-view-head">
+            <div>
+              <h1>Integraciones</h1>
+              <p class="adm-sub">De acá sale el envío automatizado de mensajes a los prospectos.</p>
+            </div>
+          </div>
+
+          <div class="adm-panel">
+            <h2>Email (SMTP)</h2>
+            <p class="adm-sub" style="margin-bottom:16px">
+              La casilla desde la que salen los mails de prospección. Si se deja vacío, se usa la misma
+              casilla configurada para las confirmaciones de <code>/agendar</code>.
+            </p>
+            <div class="adm-grid2">
+              <div class="adm-field"><label>Host SMTP</label><input id="adm-int-host" placeholder="smtpout.secureserver.net"></div>
+              <div class="adm-field"><label>Puerto</label><input id="adm-int-port" placeholder="587"></div>
+              <div class="adm-field"><label>Usuario</label><input id="adm-int-user" placeholder="info@digitalimpulso.com"></div>
+              <div class="adm-field"><label>Contraseña</label><input id="adm-int-pass" type="password" placeholder=""></div>
+              <div class="adm-field" style="grid-column:1/-1"><label>Remitente (nombre + email)</label><input id="adm-int-from" placeholder="Digital Impulso &lt;info@digitalimpulso.com&gt;"></div>
+            </div>
+            <p class="adm-muted" id="adm-int-pass-hint" style="font-size:12px;margin-top:-6px"></p>
+            <p class="adm-error" id="adm-int-smtp-error"></p>
+            <p class="adm-ok" id="adm-int-smtp-ok"></p>
+            <div class="adm-actions">
+              <button class="adm-btn" id="adm-int-guardar">Guardar</button>
+              <button class="adm-btn adm-btn-ghost" id="adm-int-probar">Probar conexión</button>
+            </div>
+          </div>
+
+          <div class="adm-panel">
+            <h2>Reglas de envío</h2>
+            <p class="adm-sub" style="margin-bottom:16px">Para no mandar en ráfaga y que el proveedor de correo no lo frene.</p>
+            <div class="adm-grid2">
+              <div class="adm-field"><label>Espera mínima entre envíos (segundos)</label><input id="adm-int-espera" placeholder="20"></div>
+              <div class="adm-field"><label>Tope de envíos por día (vacío = sin tope)</label><input id="adm-int-tope" placeholder="30"></div>
+            </div>
+            <p class="adm-error" id="adm-int-reglas-error"></p>
+            <p class="adm-ok" id="adm-int-reglas-ok"></p>
+            <div class="adm-actions">
+              <button class="adm-btn" id="adm-int-reglas-guardar">Guardar</button>
+            </div>
+          </div>
+
+          <div class="adm-panel">
+            <h2>Inteligencia artificial (Claude)</h2>
+            <p class="adm-sub" style="margin-bottom:16px">
+              Opcional: solo hace falta para el botón "Buscar automático" de Buscar con IA. La API key sale de
+              <a href="https://console.anthropic.com" target="_blank" rel="noopener" style="color:var(--c2)">console.anthropic.com</a>
+              y es un consumo aparte, facturado por uso a esa cuenta — no tiene relación con ninguna suscripción de
+              Claude.ai. Si no la configurás, siempre queda la opción de "Abrir en Claude.ai" (usa la sesión de
+              Claude.ai que ya tengan abierta, sin costo adicional de API).
+            </p>
+            <div class="adm-grid2">
+              <div class="adm-field" style="grid-column:1/-1"><label>API key</label><input id="adm-int-ia-key" type="password" placeholder="sk-ant-..."></div>
+              <div class="adm-field"><label>Modelo</label>
+                <select id="adm-int-ia-modelo">
+                  <option value="claude-opus-5">Claude Opus 5 (más capaz, más caro)</option>
+                  <option value="claude-sonnet-5">Claude Sonnet 5 (equilibrado)</option>
+                  <option value="claude-haiku-4-5">Claude Haiku 4.5 (más barato)</option>
+                </select>
+              </div>
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;margin:14px 0;font-size:13px;color:var(--muted)">
+              <input type="checkbox" id="adm-int-ia-auto" style="width:auto">
+              Enviar el email automáticamente cuando la IA encuentre un email verificado (coincide con el dominio del sitio)
+            </label>
+            <p class="adm-muted" style="font-size:12px;margin-top:-8px">
+              Recomendado dejarlo apagado al principio: sin esto, cada mensaje que arma la IA queda como borrador
+              para revisar y mandar con un clic. LinkedIn e Instagram siempre quedan como borrador, nunca se
+              auto-envían.
+            </p>
+            <p class="adm-error" id="adm-int-ia-error"></p>
+            <p class="adm-ok" id="adm-int-ia-ok"></p>
+            <div class="adm-actions">
+              <button class="adm-btn" id="adm-int-ia-guardar">Guardar</button>
+              <button class="adm-btn adm-btn-ghost" id="adm-int-ia-probar">Probar conexión</button>
+            </div>
+          </div>
+
+          <div class="adm-panel">
+            <h2>Redes sociales (LinkedIn e Instagram)</h2>
+            <p class="adm-sub">
+              Ninguna de las dos tiene una API pública que permita mandar mensajes de forma automática a
+              alguien que no escribió primero — LinkedIn no la ofrece a desarrolladores externos, e Instagram
+              solo permite responder conversaciones ya iniciadas por el otro lado, no arrancar una en frío.
+              Automatizarlo igual (simulando el login de la cuenta personal) viola los términos de esas
+              plataformas y arriesga que la cuenta quede baneada, así que no lo hacemos.
+            </p>
+            <p class="adm-sub" style="margin-top:10px">
+              Tampoco se puede mostrar el perfil de LinkedIn/Instagram dentro de esta página (ellos mismos lo
+              bloquean con cabeceras de seguridad, para que nadie los embeba en un iframe ajeno — no depende de
+              nosotros). Por eso, desde la ficha de cada prospecto con canal "LinkedIn" o "Instagram", el botón
+              "Abrir y copiar →" deja el mensaje listo para copiar y abre el perfil en una <b>ventana aparte</b>
+              ya ubicada al lado (en un segundo monitor si hay uno conectado) — lo más parecido a verlos juntos
+              sin depender de un embed que esas plataformas no permiten. Después de pegarlo y mandarlo ahí, se
+              marca <b>"Ya lo mandé"</b> y queda igual de trazable en Prospectos.
+            </p>
+          </div>
+        </section>
+
+        <!-- Vista: Buscar con IA -->
+        <section class="adm-view adm-hidden" id="adm-view-buscar-ia">
+          <div class="adm-view-head">
+            <div>
+              <h1>Buscar con IA</h1>
+              <p class="adm-sub">Claude busca empresas nuevas, arma la ficha y redacta el mensaje de cada una.</p>
+            </div>
+          </div>
+
+          <div class="adm-panel" style="max-width:100%">
+            <div class="adm-field">
+              <label>Qué tipo de empresas buscar</label>
+              <textarea id="adm-ia-descripcion" placeholder="Ej: mayoristas de indumentaria en Rosario con varias sucursales, sin apps de autogestión visibles..." style="min-height:90px"></textarea>
+            </div>
+            <div class="adm-grid2">
+              <div class="adm-field"><label>Cuántas empresas (máx. 5 por búsqueda)</label><input id="adm-ia-cantidad" value="3"></div>
+            </div>
+            <p class="adm-muted" style="font-size:12px">
+              No repite empresas que ya estén cargadas en Prospectos, ni inventa emails o decisores que no
+              encuentre publicados.
+            </p>
+            <p class="adm-error" id="adm-ia-error"></p>
+            <div class="adm-actions">
+              <button class="adm-btn adm-btn-ghost" id="adm-ia-abrir-claude">Abrir en Claude.ai (sin API key) ↗</button>
+              <button class="adm-btn" id="adm-ia-buscar-btn">Buscar automático (con API key)</button>
+            </div>
+
+            <div id="adm-ia-resultado" style="margin-top:18px"></div>
+          </div>
+
+          <div class="adm-panel" style="max-width:100%">
+            <h2>Pegar la respuesta de Claude.ai</h2>
+            <p class="adm-sub" style="margin-bottom:16px">
+              Después de mandar el prompt en la pestaña de Claude.ai, copiá el bloque de código
+              <code>```json ... ```</code> completo que respondió y pegalo acá.
+            </p>
+            <div class="adm-field">
+              <textarea id="adm-ia-pegado" style="min-height:160px;font-family:monospace;font-size:12px" placeholder='```json&#10;[{"empresa": "...", "canal": "email", "mensaje_contenido": "...", ...}]&#10;```'></textarea>
+            </div>
+            <p class="adm-error" id="adm-ia-pegado-error"></p>
+            <div class="adm-actions">
+              <button class="adm-btn" id="adm-ia-pegado-importar">Importar</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Vista: Usuarios -->
+        <section class="adm-view adm-hidden" id="adm-view-usuarios">
+          <div class="adm-view-head">
+            <div>
+              <h1>Usuarios</h1>
+              <p class="adm-sub">Quiénes pueden entrar al panel.</p>
+            </div>
+          </div>
+
+          <div class="adm-panel">
+            <div id="adm-usuarios-lista"></div>
+
+            <hr class="adm-sep">
+            <p class="adm-sub" style="margin-bottom:10px">Agregar usuario</p>
+            <div class="adm-grid2">
+              <div class="adm-field"><label>Usuario</label><input id="adm-nu-usuario"></div>
+              <div class="adm-field"><label>Contraseña (mín. 8)</label><input id="adm-nu-clave" type="password"></div>
+            </div>
+            <button class="adm-btn" id="adm-nu-crear">Crear usuario</button>
+            <p class="adm-error" id="adm-nu-error"></p>
+          </div>
+        </section>
+
+      </main>
     </div>
   </div>
 
@@ -107,11 +309,11 @@
         <div class="adm-field"><label>Web</label><input id="adm-mp-web" placeholder="empresa.com.ar"></div>
         <div class="adm-field"><label>Email</label><input id="adm-mp-email" type="email"></div>
         <div class="adm-field"><label>Teléfono</label><input id="adm-mp-telefono"></div>
-        <div class="adm-field"><label>LinkedIn</label><input id="adm-mp-linkedin" placeholder="linkedin.com/company/…"></div>
+        <div class="adm-field"><label>LinkedIn / Instagram</label><input id="adm-mp-linkedin" placeholder="linkedin.com/company/… o @usuario de Instagram"></div>
         <div class="adm-field"><label>Decisor — nombre</label><input id="adm-mp-decisor-nombre"></div>
         <div class="adm-field"><label>Decisor — cargo</label><input id="adm-mp-decisor-cargo"></div>
         <div class="adm-field"><label>Canal recomendado</label>
-          <select id="adm-mp-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="otro">Otro</option></select>
+          <select id="adm-mp-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="otro">Otro</option></select>
         </div>
       </div>
       <div class="adm-field"><label>Oportunidad / notas</label><textarea id="adm-mp-notas" placeholder="Qué necesidad detectamos, qué le proponemos…"></textarea></div>
@@ -134,7 +336,7 @@
           <p class="adm-sub" style="margin-bottom:10px">Nuevo mensaje</p>
           <div class="adm-grid2">
             <div class="adm-field"><label>Canal</label>
-              <select id="adm-nm-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="otro">Otro</option></select>
+              <select id="adm-nm-canal"><option value="email">Email</option><option value="linkedin">LinkedIn</option><option value="instagram">Instagram</option><option value="otro">Otro</option></select>
             </div>
             <div class="adm-field"><label>Asunto</label><input id="adm-nm-asunto" placeholder="(para email)"></div>
           </div>
@@ -154,7 +356,7 @@
         <button class="adm-close" data-cerrar="adm-modal-importar">×</button>
       </div>
       <p class="adm-sub" style="margin-bottom:10px">
-        Orden de columnas: <b>Empresa, Categoría, Web, Email, Teléfono, LinkedIn, Decisor (nombre), Decisor (cargo), Canal, Notas</b>.
+        Orden de columnas: <b>Empresa, Categoría, Web, Email, Teléfono, LinkedIn/Instagram, Decisor (nombre), Decisor (cargo), Canal, Notas</b>.
         Podés dejar columnas vacías; sólo Empresa es obligatoria.
       </p>
       <div class="adm-field">
@@ -169,25 +371,32 @@
     </div>
   </div>
 
-  <!-- Modal: configuración / usuarios -->
-  <div class="adm-overlay adm-hidden" id="adm-modal-config">
-    <div class="adm-modal">
-      <div class="adm-modal-head">
-        <div><h2>Configuración</h2><p class="adm-sub">Usuarios que pueden entrar al panel.</p></div>
-        <button class="adm-close" data-cerrar="adm-modal-config">×</button>
+  <!-- Panel lateral: enviar por LinkedIn/Instagram (copiar mensaje + abrir el perfil) -->
+  <div class="adm-drawer-overlay adm-hidden" id="adm-drawer-overlay">
+    <aside class="adm-drawer">
+      <div class="adm-drawer-head">
+        <div>
+          <h2 id="adm-dr-titulo">Enviar por LinkedIn</h2>
+          <p class="adm-sub" id="adm-dr-sub"></p>
+        </div>
+        <button class="adm-close" id="adm-dr-cerrar">×</button>
       </div>
 
-      <div id="adm-usuarios-lista"></div>
+      <p class="adm-sub" style="margin:14px 0 4px">1. Copiá el mensaje</p>
+      <div class="adm-field">
+        <textarea id="adm-dr-mensaje" readonly style="min-height:220px"></textarea>
+      </div>
+      <button class="adm-btn adm-btn-block" id="adm-dr-copiar">Copiar mensaje</button>
+      <p class="adm-ok" id="adm-dr-ok"></p>
+
+      <p class="adm-sub" style="margin:18px 0 4px">2. Abrí el perfil en una ventana al lado y pegalo ahí</p>
+      <button class="adm-btn adm-btn-ghost adm-btn-block" id="adm-dr-abrir">Abrir en ventana aparte ↗</button>
+      <p class="adm-muted" id="adm-dr-sin-url" style="font-size:12px;margin-top:6px"></p>
 
       <hr class="adm-sep">
-      <p class="adm-sub" style="margin-bottom:10px">Agregar usuario</p>
-      <div class="adm-grid2">
-        <div class="adm-field"><label>Usuario</label><input id="adm-nu-usuario"></div>
-        <div class="adm-field"><label>Contraseña (mín. 8)</label><input id="adm-nu-clave" type="password"></div>
-      </div>
-      <button class="adm-btn" id="adm-nu-crear">Crear usuario</button>
-      <p class="adm-error" id="adm-nu-error"></p>
-    </div>
+      <p class="adm-sub" style="margin-bottom:10px">3. Una vez enviado</p>
+      <button class="adm-btn adm-btn-block" id="adm-dr-marcar">Ya lo mandé — marcar como enviado</button>
+    </aside>
   </div>
 
   <script src="/admin.js"></script>
