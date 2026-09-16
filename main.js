@@ -160,18 +160,54 @@ window.addEventListener('scroll', () => {
   }, { passive: true });
 })();
 
-// ============ Acordeón de casos: hover en desktop, click en mobile ============
-(function casesAccordion() {
-  const acc = document.querySelector('.cases-accordion');
-  if (!acc) return;
-  const cards = Array.from(acc.querySelectorAll('.case-card'));
+// ============ Casos de éxito: carrusel spotlight (flechas + puntos) ============
+(function casesSpotlight() {
+  const track = document.querySelector('.spotlight-track');
+  const dotsWrap = document.querySelector('.spotlight-dots');
+  if (!track || !dotsWrap) return;
+  const cards = Array.from(track.querySelectorAll('.spotlight-card'));
+  const arrows = document.querySelectorAll('.spotlight-arrow');
   if (!cards.length) return;
-  const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
-  const activate = (card) => { cards.forEach(c => c.classList.remove('active')); card.classList.add('active'); };
-  activate(cards[0]);
-  cards.forEach(card => {
-    // Desktop: se abre al pasar el mouse. En mobile es una grilla de 2 columnas
-    // con todas las cards visibles, así que el click navega directo.
-    card.addEventListener('mouseenter', () => { if (!isMobile()) activate(card); });
+
+  const dots = cards.map((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'spotlight-dot';
+    b.setAttribute('aria-label', 'Ver caso ' + (i + 1) + ' de ' + cards.length);
+    b.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(b);
+    return b;
   });
+
+  const setActive = (i) => dots.forEach((d, j) => d.classList.toggle('active', j === i));
+  let current = 0;
+  setActive(0);
+
+  function goTo(i) {
+    current = Math.max(0, Math.min(cards.length - 1, i));
+    const left = cards[current].offsetLeft - track.offsetLeft;
+    track.scrollTo({ left, behavior: 'smooth' });
+  }
+
+  arrows.forEach(btn => {
+    btn.addEventListener('click', () => goTo(current + parseInt(btn.dataset.dir, 10)));
+  });
+
+  let raf = null;
+  track.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const r = c.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      current = best;
+      setActive(best);
+      raf = null;
+    });
+  }, { passive: true });
 })();
