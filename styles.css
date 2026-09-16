@@ -905,6 +905,7 @@ footer {
 .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-top: 28px; }
 .result-item { background: #20232B; border: 1px solid var(--border); border-radius: 14px; padding: 28px 24px; }
 .result-num {
+  display: block;
   font-size: clamp(1.7rem, 3vw, 2.1rem); font-weight: 900; letter-spacing: -0.03em;
   background: linear-gradient(135deg, #fff, #5EEAD4);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;

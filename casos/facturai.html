@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <title>FacturAI: OCR de facturas con IA | Digital Impulso</title>
+  <meta name="description" content="Cómo construimos FacturAI: lectura de facturas con IA multimodal, matching contra órdenes de compra, pagos a proveedores con aprobación y conexión a ERPs. Arquitectura completa.">
+  <link rel="canonical" href="https://digitalimpulso.com/casos/facturai">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="spotlight"></div>
+  <nav id="navbar">
+    <a href="/" class="nav-logo">
+      <img class="nav-logo-img" src="/assets/images/logo-isotipo.png" alt="Digital Impulso">
+      Digital Impulso
+    </a>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-menu">
+    <div class="nav-links">
+      <a href="/#servicios">Servicios</a>
+      <a href="/totems">Tótems</a>
+      <a href="/proyectos">Proyectos</a>
+      <a href="/#nosotros">Nosotros</a>
+      <a href="/#contacto">Contacto</a>
+    </div>
+    <div class="nav-right">
+      <a href="/agendar" class="btn-primary">Agendar demo →</a>
+    </div>
+    </div>
+  </nav>
+
+  <main class="case-main">
+    <nav class="breadcrumb" aria-label="Migas de pan">
+      <a href="/">Inicio</a>
+      <span class="sep">›</span>
+      <a href="/proyectos">Proyectos</a>
+      <span class="sep">›</span>
+      <span class="current">FacturAI</span>
+    </nav>
+
+    <header class="case-hero">
+      <div class="case-hero-text">
+        <div class="case-tags">
+          <span class="case-tag-chip">Multi-industria</span>
+          <span class="case-tag-chip">Sistema propio · OCR con IA</span>
+        </div>
+        <h1>FacturAI: la factura entra por foto y sale conciliada, pagada y en el ERP</h1>
+        <p class="case-hero-lead">Cargar facturas a mano, cruzarlas contra lo que realmente se pidió y perseguir a alguien para que las pague es trabajo administrativo puro, sin margen de error permitido. Construimos FacturAI para sacarle ese trabajo de encima a los equipos de compras y administración, de punta a punta.</p>
+      </div>
+      <div class="case-hero-media">
+        <svg class="case-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h1"/></svg>
+      </div>
+    </header>
+
+    <div class="case-body">
+      <section class="case-block">
+        <h2>El desafío</h2>
+        <p>Cada factura que entra a una empresa tiene que cargarse, validarse contra lo que se pidió, aprobarse y pagarse — y en la mayoría de las pymes eso corre por planillas y memoria de alguien del equipo de compras. Los errores de tipeo, las facturas que no cuadran, los pagos duplicados o los proveedores que llaman preguntando "¿cuándo cobro?" son el síntoma de un proceso que depende de que una persona no se equivoque, todos los días, con volumen creciente.</p>
+      </section>
+
+      <section class="case-block">
+        <h2>Cómo lo resolvimos</h2>
+        <p>FacturAI no es un solo módulo: es una plataforma que acompaña la factura desde que llega hasta que se paga y se contabiliza.</p>
+        <ol class="steps">
+          <li class="step"><span class="step-num">01</span><div class="step-body"><h3>Lectura con IA, no OCR clásico</h3><p>Un modelo de visión de Anthropic lee la imagen de la factura directamente y arma el dato estructurado, en vez de convertir a texto plano y adivinar después.</p></div></li>
+          <li class="step"><span class="step-num">02</span><div class="step-body"><h3>Se valida antes de guardar</h3><p>Código propio — no el modelo de IA — verifica que la aritmética cierre. Si no cierra, se le pide al modelo que revise puntualmente lo que falló, hasta 3 veces.</p></div></li>
+          <li class="step"><span class="step-num">03</span><div class="step-body"><h3>Cruce automático con órdenes de compra</h3><p>Cada factura se compara contra las órdenes de compra abiertas del proveedor: si coincide, cierra sola; si hay dudas, se le muestran al usuario las alternativas en vez de decidir en silencio.</p></div></li>
+          <li class="step"><span class="step-num">04</span><div class="step-body"><h3>Pago con aprobación y sin perseguir a nadie</h3><p>El aprobador recibe un mail diario con lo pendiente y aprueba con un clic, sin login. El proveedor se entera solo cuando el pago ya se hizo.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="case-block">
+        <h2>Arquitectura técnica</h2>
+        <p>Flask (Python) con PostgreSQL y SQLAlchemy, organizado en más de 25 módulos por dominio de negocio. El corazón del producto es un modelo de visión de Anthropic que lee la factura en una sola pasada, con validación aritmética determinística en código propio.</p>
+        <div class="case-tags" style="margin-top:20px">
+          <span class="case-tag-chip">Python · Flask</span>
+          <span class="case-tag-chip">PostgreSQL · SQLAlchemy</span>
+          <span class="case-tag-chip">Claude Haiku 4.5 (visión)</span>
+          <span class="case-tag-chip">AFIP · WSAA/WSCDC</span>
+          <span class="case-tag-chip">Mercado Pago</span>
+          <span class="case-tag-chip">Google Drive / Gmail / Calendar</span>
+          <span class="case-tag-chip">WhatsApp (Twilio + Meta)</span>
+          <span class="case-tag-chip">Resend → Brevo → SMTP</span>
+          <span class="case-tag-chip">Siigo / Tango (ERP)</span>
+          <span class="case-tag-chip">Cloudinary</span>
+        </div>
+      </section>
+
+      <section class="case-block">
+        <h2>Módulos del sistema</h2>
+        <ol class="steps">
+          <li class="step"><span class="step-num">01</span><div class="step-body"><h3>Extracción de facturas (OCR con IA)</h3><p>Lee imagen o PDF y devuelve el dato estructurado en una sola pasada del modelo. Un catálogo de productos ya conocidos de ese proveedor se le pasa al modelo como referencia, para resolver ambigüedades de lectura sin depender de un segundo paso de matching. Soporta el formato de factura completo de Argentina (IVA 21/10.5/27%, percepciones) y el simplificado de Colombia (IVA 19/5%, retenciones, NIT).</p></div></li>
+          <li class="step"><span class="step-num">02</span><div class="step-body"><h3>Validación y reintento guiado</h3><p>La aritmética se valida con código propio, no con el modelo. Si algo no cierra, se reintenta hasta 3 veces señalando puntualmente qué número no coincide, y se corta si dos vueltas seguidas dan el mismo error — no insiste en vano.</p></div></li>
+          <li class="step"><span class="step-num">03</span><div class="step-body"><h3>Resolución de identidad de productos</h3><p>El mismo producto puede llegar escrito distinto en cada factura por errores de lectura. Un sistema de coincidencia en capas (código de proveedor, alias aprendidos, similitud de texto con validación de precio) evita que eso se lea como si fueran productos distintos — y por lo tanto, evita alertas de aumento de precio falsas.</p></div></li>
+          <li class="step"><span class="step-num">04</span><div class="step-body"><h3>Órdenes de compra</h3><p>Numeración, aprobación y envío al proveedor separados, seguimiento de en qué estado y en manos de quién está cada una, y cierre automático contra las facturas que van llegando — reconociendo entregas parciales.</p></div></li>
+          <li class="step"><span class="step-num">05</span><div class="step-body"><h3>Pagos a proveedores</h3><p>Flujo de tres roles (aprobador, pagador, proveedor) con mails automáticos en cada paso y aprobación con un clic desde el mail, sin necesidad de iniciar sesión. Cada pago guarda una foto fija de las facturas que canceló, para que una edición posterior no cambie lo que ya se le comunicó al proveedor.</p></div></li>
+          <li class="step"><span class="step-num">06</span><div class="step-body"><h3>Conexión con ERPs</h3><p>Arquitectura de adaptadores para enviar comprobantes contables directo al ERP del cliente. Si la conexión falla, la factura se guarda igual en FacturAI y solo se avisa — nunca bloquea el trabajo del usuario.</p></div></li>
+          <li class="step"><span class="step-num">07</span><div class="step-body"><h3>Validación fiscal AFIP</h3><p>Cola de validación en segundo plano que confirma el CAE de cada factura contra AFIP. Si el cliente no tiene certificado digital cargado, cae automáticamente a un método de respaldo público — la validación no se frena por falta de credenciales.</p></div></li>
+          <li class="step"><span class="step-num">08</span><div class="step-body"><h3>Ingesta automática por correo y WhatsApp</h3><p>Las facturas también pueden llegar solas: por una casilla de mail monitoreada o por foto directo al bot de WhatsApp, que además responde preguntas sobre los datos de la empresa.</p></div></li>
+          <li class="step"><span class="step-num">09</span><div class="step-body"><h3>Comparador de precios y alertas</h3><p>Compara listas de precios de proveedores y sugiere ahorro, y avisa por mail y en la app cuando un precio sube más de lo esperado, aparece un producto o proveedor nuevo, o se acerca el límite del plan contratado.</p></div></li>
+          <li class="step"><span class="step-num">10</span><div class="step-body"><h3>Agenda de demos</h3><p>Página propia de agenda (no un widget de terceros) contra la disponibilidad real del equipo comercial en Google Calendar, con confirmación automática y aviso interno.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="case-block">
+        <h2>Decisiones de ingeniería que marcan la diferencia</h2>
+        <div class="why-grid">
+          <div class="why-item"><span class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>El modelo lee, el código valida</h3><p>La IA nunca decide sola si una factura está bien: la aritmética la confirma código determinístico, así el error no depende de que el modelo "haga bien la cuenta".</p></div></div>
+          <div class="why-item"><span class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>El modelo se eligió midiendo, no por moda</h3><p>Se probó escalar a un modelo más grande y, sobre una muestra real, la diferencia de precisión no justificaba el costo extra — se quedó con el más chico donde el resultado era el mismo.</p></div></div>
+          <div class="why-item"><span class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Nunca frena al usuario</h3><p>Si la conexión con AFIP o con el ERP del cliente falla, la factura se guarda igual y el sistema avisa — el usuario nunca queda bloqueado esperando a un tercero.</p></div></div>
+          <div class="why-item"><span class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Aprobar sin fricción, sin resignar seguridad</h3><p>Los links de aprobación de pagos son de un solo uso, con firma y vencimiento, sin necesidad de que el proveedor o el aprobador tengan que loguearse para actuar.</p></div></div>
+        </div>
+      </section>
+
+      <section class="case-block">
+        <h2>Resultados</h2>
+        <div class="result-grid">
+          <div class="result-item"><span class="result-num">74% → ~0%</span><span class="result-label">Facturas que no cuadraban matemáticamente y se guardaban igual, antes vs. después de validar antes de guardar</span></div>
+          <div class="result-item"><span class="result-num">10</span><span class="result-label">Módulos integrados end-to-end: OCR, compras, pagos, ERP, AFIP y más</span></div>
+          <div class="result-item"><span class="result-num">AR + CO</span><span class="result-label">Dos países, dos formatos fiscales distintos, un mismo sistema</span></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <section class="case-cta">
+    <h2>¿Querés un resultado así en tu negocio?</h2>
+    <p>Coordinemos una demo de 30 minutos, sin compromiso.</p>
+    <a href="/agendar" class="hero-btn-main">Agendar demo →</a>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="/" class="nav-logo"><img class="nav-logo-img" src="/assets/images/logo-isotipo.png" alt="Digital Impulso"> Digital Impulso</a>
+        <p class="footer-tag">Automatizamos, digitalizamos y escalamos tu negocio con tecnología, IA y automatización.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="/#servicios">Servicios</a>
+        <a href="/totems">Tótems</a>
+        <a href="/proyectos">Proyectos</a>
+        <a href="/#nosotros">Nosotros</a>
+        <a href="/agendar">Agendar demo</a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+      <div class="footer-col footer-contact">
+        <p class="footer-col-title">Contacto</p>
+        <a class="footer-contact-item" href="https://wa.me/5491171668769" target="_blank" rel="noopener"><span class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span> +54 9 11 7166-8769</a>
+        <a class="footer-contact-item" href="mailto:info@digitalimpulso.com"><span class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg></span> info@digitalimpulso.com</a>
+        <div class="footer-socials">
+          <a class="social-icon" href="https://www.linkedin.com/company/digitalimpulso/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a class="social-icon" href="https://www.instagram.com/digitalimpulso.ar" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm7.846-10.405a1.441 1.441 0 01-2.88 0 1.44 1.44 0 012.88 0z"/></svg></a>
+        </div>
+        <div class="footer-contact-text">
+          <a href="tel:+5491171668769">+54 9 11 7166-8769</a>
+          <a href="mailto:info@digitalimpulso.com">info@digitalimpulso.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Digital Impulso. Todos los derechos reservados. · <a href="/privacidad" style="color:inherit">Política de privacidad</a> · <a href="/terminos" style="color:inherit">Términos y condiciones</a></div>
+  </footer>
+
+  <a href="https://wa.me/5491171668769" class="wa-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+  <script src="/main.js"></script>
+</body>
+</html>
