@@ -73,7 +73,7 @@
           <li class="step"><span class="step-num">01</span><div class="step-body"><h3>Recetas (BOM) conectadas al stock real</h3><p>Cada producto tiene su lista de insumos necesarios, y el sistema sabe en todo momento si hay suficiente stock para fabricarlo antes de que alguien lo descubra a mitad de la orden.</p></div></li>
           <li class="step"><span class="step-num">02</span><div class="step-body"><h3>Trazabilidad de punta a punta</h3><p>Desde que un insumo entra por un proveedor hasta que el producto terminado sale a un cliente, todo queda registrado por lote, con quién lo movió y cuándo.</p></div></li>
           <li class="step"><span class="step-num">03</span><div class="step-body"><h3>Doble validación en cada recepción</h3><p>Quien registra que llegó mercadería no es quien confirma que efectivamente está — dos personas, dos momentos, un solo dato confiable.</p></div></li>
-          <li class="step"><span class="step-num">04</span><div class="step-body"><h3>Acceso a medida de cada rol</h3><p>Permisos configurables por función, no un genérico "admin o usuario" — cada empresa arma quién ve costos, quién aprueba y quién solo opera.</p></div></li>
+          <li class="step"><span class="step-num">04</span><div class="step-body"><h3>Tres roles, permisos granulares</h3><p>Administrador, Supervisor y Operador, con permisos configurables por función: cada empresa define quién ve costos, quién aprueba y quién solo opera.</p></div></li>
         </ol>
       </section>
 
@@ -92,7 +92,7 @@
       <section class="case-block">
         <h2>Módulos del sistema</h2>
         <ol class="steps">
-          <li class="step"><span class="step-num">01</span><div class="step-body"><h3>Insumos multi-proveedor y multi-moneda</h3><p>Cada insumo puede tener varios proveedores con precios distintos, en pesos o dólares, con el tipo de cambio congelado al momento de cada ingreso — así el costo histórico no se distorsiona cuando cambia la cotización.</p></div></li>
+          <li class="step"><span class="step-num">01</span><div class="step-body"><h3>Insumos: ubicación, stock crítico y multi-proveedor</h3><p>Cada materia prima tiene su ubicación en depósito y su alerta de stock crítico. Además, puede tener varios proveedores con precios distintos, en pesos o dólares, con el tipo de cambio congelado al momento de cada ingreso — así el costo histórico no se distorsiona cuando cambia la cotización.</p></div></li>
           <li class="step"><span class="step-num">02</span><div class="step-body"><h3>Productos y recetas (BOM)</h3><p>Lista de materiales por producto, con trazabilidad por lote: fecha de fabricación, control de calidad (aprobado/rechazado) y operario responsable.</p></div></li>
           <li class="step"><span class="step-num">03</span><div class="step-body"><h3>Fabricación</h3><p>Órdenes con prioridad y estado, cálculo de costo estimado, y detección automática de qué insumo falta antes de arrancar a producir.</p></div></li>
           <li class="step"><span class="step-num">04</span><div class="step-body"><h3>Ingresos y egresos</h3><p>Recepción de insumos y despacho de productos a cliente, con remito, datos de transporte y una categoría propia para devoluciones de garantía.</p></div></li>
@@ -100,8 +100,9 @@
           <li class="step"><span class="step-num">06</span><div class="step-body"><h3>Reparación / postventa</h3><p>Productos que vuelven a fábrica por falla: diagnóstico, insumos usados en la reparación y tiempo real vs. estimado, ligado al egreso original.</p></div></li>
           <li class="step"><span class="step-num">07</span><div class="step-body"><h3>Movimientos de stock</h3><p>El libro de auditoría del inventario: cada entrada, salida, ajuste o fabricación queda registrada con stock anterior y nuevo, motivo y usuario responsable.</p></div></li>
           <li class="step"><span class="step-num">08</span><div class="step-body"><h3>Ubicaciones de almacén</h3><p>Posiciones con capacidad, soporte para zonas refrigeradas, y bloqueo temporal de una posición por mantenimiento sin tener que borrarla.</p></div></li>
-          <li class="step"><span class="step-num">09</span><div class="step-body"><h3>Usuarios, roles y permisos</h3><p>Permisos granulares por función (quién ve costos, quién aprueba, quién administra usuarios), no un simple admin/usuario.</p></div></li>
+          <li class="step"><span class="step-num">09</span><div class="step-body"><h3>Usuarios, roles y permisos</h3><p>Roles de Administrador, Supervisor y Operador, con permisos granulares por función (quién ve costos, quién aprueba, quién administra usuarios).</p></div></li>
           <li class="step"><span class="step-num">10</span><div class="step-body"><h3>Alertas automáticas</h3><p>Aviso por email cuando una orden de fabricación se crea sin stock suficiente, o cuando un insumo cruza su umbral mínimo.</p></div></li>
+          <li class="step"><span class="step-num">11</span><div class="step-body"><h3>ABM de datos maestros</h3><p>Clientes, proveedores, ubicaciones y unidades de medida, administrados desde el mismo sistema.</p></div></li>
         </ol>
       </section>
 
@@ -118,7 +119,7 @@
       <section class="case-block">
         <h2>Resultados</h2>
         <div class="result-grid">
-          <div class="result-item"><span class="result-num">10</span><span class="result-label">Módulos de negocio integrados en un mismo sistema</span></div>
+          <div class="result-item"><span class="result-num">11</span><span class="result-label">Módulos de negocio integrados en un mismo sistema</span></div>
           <div class="result-item"><span class="result-num">100%</span><span class="result-label">Trazabilidad de stock, insumo a producto terminado</span></div>
           <div class="result-item"><span class="result-num">2</span><span class="result-label">Personas distintas en cada recepción de mercadería</span></div>
         </div>

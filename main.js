@@ -118,6 +118,35 @@ window.addEventListener('scroll', () => {
   vids.forEach(v => io.observe(v));
 })();
 
+// ============ Enlaces con ancla (/totems#via-cargo): reajusta cuando terminan de cargar las imágenes ============
+window.addEventListener('load', () => {
+  if (!location.hash) return;
+  const el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+  if (!el) return;
+  // Instantáneo: el scroll suave se corta cuando las imágenes de arriba terminan de cargar
+  const jump = () => el.scrollIntoView({ behavior: 'instant' });
+  jump();
+  setTimeout(jump, 400);
+});
+
+// ============ Tarjetas de proyectos: capturas que se alternan solas ============
+(function rotatingMedia() {
+  const boxes = document.querySelectorAll('.proy-rotate');
+  if (!boxes.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  boxes.forEach((box, n) => {
+    const imgs = box.querySelectorAll('img');
+    if (imgs.length < 2) return;
+    let i = 0;
+    // Desfasadas entre sí para que no cambien todas a la vez
+    setTimeout(() => setInterval(() => {
+      if (document.hidden) return;
+      imgs[i].classList.remove('is-active');
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add('is-active');
+    }, 4000), n * 700);
+  });
+})();
+
 // ============ Carrusel de reels (/totems/videos): puntos indicadores en mobile ============
 (function reelsCarousel() {
   const track = document.querySelector('.tv-list');
@@ -154,6 +183,58 @@ window.addEventListener('scroll', () => {
         const d = Math.abs(r.left + r.width / 2 - center);
         if (d < bestDist) { bestDist = d; best = i; }
       });
+      setActive(best);
+      raf = null;
+    });
+  }, { passive: true });
+})();
+
+// ============ Casos de éxito: carrusel spotlight (flechas + puntos) ============
+(function casesSpotlight() {
+  const track = document.querySelector('.spotlight-track');
+  const dotsWrap = document.querySelector('.spotlight-dots');
+  if (!track || !dotsWrap) return;
+  const cards = Array.from(track.querySelectorAll('.spotlight-card'));
+  const arrows = document.querySelectorAll('.spotlight-arrow');
+  if (!cards.length) return;
+
+  const dots = cards.map((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'spotlight-dot';
+    b.setAttribute('aria-label', 'Ver caso ' + (i + 1) + ' de ' + cards.length);
+    b.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  const setActive = (i) => dots.forEach((d, j) => d.classList.toggle('active', j === i));
+  let current = 0;
+  setActive(0);
+
+  function goTo(i) {
+    current = Math.max(0, Math.min(cards.length - 1, i));
+    const left = cards[current].offsetLeft - track.offsetLeft;
+    track.scrollTo({ left, behavior: 'smooth' });
+  }
+
+  arrows.forEach(btn => {
+    btn.addEventListener('click', () => goTo(current + parseInt(btn.dataset.dir, 10)));
+  });
+
+  let raf = null;
+  track.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const r = c.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      current = best;
       setActive(best);
       raf = null;
     });

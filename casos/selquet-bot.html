@@ -7,7 +7,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <title>Bot de WhatsApp con IA para SELQUET | Digital Impulso</title>
+  <title>Bots y agentes de WhatsApp con IA: SELQUET y más | Digital Impulso</title>
   <meta name="description" content="Cómo construimos el bot de WhatsApp de SELQUET: motor conversacional propio sobre Claude, reservas, eventos, pedidos con pago real y reporte diario automático. Arquitectura completa.">
   <link rel="canonical" href="https://digitalimpulso.com/casos/selquet-bot">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,17 +43,17 @@
       <span class="sep">›</span>
       <a href="/proyectos">Proyectos</a>
       <span class="sep">›</span>
-      <span class="current">Selquet Bot</span>
+      <span class="current">Bots y agentes de WhatsApp</span>
     </nav>
 
     <header class="case-hero">
       <div class="case-hero-text">
         <div class="case-tags">
           <span class="case-tag-chip">Gastronomía</span>
-          <span class="case-tag-chip">Sistema propio · WhatsApp + IA</span>
+          <span class="case-tag-chip">Bots y agentes de WhatsApp con IA</span>
         </div>
         <h1>El mozo que nunca duerme: un bot de WhatsApp que reserva, vende y cobra solo</h1>
-        <p class="case-hero-lead">SELQUET necesitaba atender reservas, pedidos y eventos por WhatsApp a toda hora sin perder la calidez de un restaurante real. Construimos un sistema propio de punta a punta: no un menú de botones, sino un motor conversacional que entiende, recuerda y actúa.</p>
+        <p class="case-hero-lead">SELQUET necesitaba atender reservas, pedidos y eventos por WhatsApp a toda hora sin perder la calidez de un restaurante real. Construimos un sistema propio de punta a punta, en producción las 24 horas: no un menú de botones, sino un motor conversacional que entiende, recuerda y actúa.</p>
       </div>
       <div class="case-hero-media">
         <svg class="case-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -97,7 +97,7 @@
         <ol class="steps">
           <li class="step"><span class="step-num">01</span><div class="step-body"><h3>Motor de chat con Claude</h3><p>Loop de function-calling con 7 herramientas (reservar, pedir, guardar dato de evento, registrar opinión, entre otras). Las consultas de información —horarios, menú, precios— no pasan por herramientas: se inyectan directo en el contexto del modelo, siempre leídas en vivo desde la base, nunca hardcodeadas.</p></div></li>
           <li class="step"><span class="step-num">02</span><div class="step-body"><h3>Reservas de mesa</h3><p>Motor de disponibilidad propio por franja horaria y capacidad configurada. Los grupos que superan la capacidad de una mesa se derivan automáticamente al flujo de eventos.</p></div></li>
-          <li class="step"><span class="step-num">03</span><div class="step-body"><h3>Eventos corporativos y privados</h3><p>Formulario conversacional con estado persistente: cada dato capturado se guarda aparte de la charla, así el bot nunca vuelve a preguntar algo que el cliente ya dijo.</p></div></li>
+          <li class="step"><span class="step-num">03</span><div class="step-body"><h3>Eventos corporativos, privados y sociales</h3><p>Formulario conversacional con estado persistente: cada dato capturado se guarda aparte de la charla, así el bot nunca vuelve a preguntar algo que el cliente ya dijo.</p></div></li>
           <li class="step"><span class="step-num">04</span><div class="step-body"><h3>Pedidos para llevar + portal /pedir</h3><p>Reconocimiento de productos por nombre (tolera errores de tipeo), pedido mínimo y anticipación de retiro configurables, portal web propio con pago por Mercado Pago o "al retirar".</p></div></li>
           <li class="step"><span class="step-num">05</span><div class="step-body"><h3>Carta y comanda en PDF</h3><p>El sistema toma el PDF de diseño real de la carta y reemplaza solo los números de precio que reconoce con confianza contra el menú vivo — nunca toca el diseño ni imprime un precio si no está seguro. La comanda se genera igual, con la marca del local, y se manda por WhatsApp al aprobar el pedido.</p></div></li>
           <li class="step"><span class="step-num">06</span><div class="step-body"><h3>Reporte diario automático</h3><p>Todos los días, un resumen de pedidos, reservas, solicitudes de eventos y opiniones llega solo a los responsables del local, por WhatsApp y por mail.</p></div></li>
@@ -114,6 +114,21 @@
           <div class="why-item"><span class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Nunca improvisa</h3><p>El bot no tiene el menú ni los horarios "memorizados": los lee en tiempo real desde lo que el panel tiene cargado en ese momento.</p></div></div>
           <div class="why-item"><span class="why-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><h3>Un solo proceso, a propósito</h3><p>El servidor corre con un único worker, deliberadamente: así el reporte diario automático nunca se dispara duplicado.</p></div></div>
         </div>
+      </section>
+
+      <section class="case-block">
+        <h2>Bots de WhatsApp para otros negocios</h2>
+        <p>Además del motor con IA de SELQUET, implementamos bots de WhatsApp a medida de cada rubro —con menú, preguntas frecuentes y derivación a una persona cuando hace falta— integrados a la gestión del negocio.</p>
+        <div class="subcases">
+        <div class="subcase"><span class="subcase-tag">Bicicletería</span><h3>Once a Fondo</h3><p>Automatización de preguntas frecuentes sobre productos, horarios y reparaciones, gestión post-venta y generación de tickets de servicio.</p><span class="subcase-result">↗ +20% en ventas</span></div>
+        <div class="subcase"><span class="subcase-tag">Confitería</span><h3>Las Violetas</h3><p>Gestión de reservas, promoción de eventos y consultas de menú, conservando su imagen de elegancia y calidad.</p><span class="subcase-result">↗ +35% en reservas</span></div>
+        </div>
+      </section>
+
+      <section class="case-block">
+        <h2>En palabras de los clientes</h2>
+        <blockquote class="case-quote"><p>“El bot de WhatsApp nos permitió atender mejor a nuestros clientes, agilizando el proceso de compra y garantizando una experiencia mucho más personalizada.”</p><cite>Equipo de Once a Fondo</cite></blockquote>
+      <blockquote class="case-quote"><p>“Con el bot, nuestras reservas se gestionan automáticamente, lo que nos ha permitido ofrecer una experiencia más ágil y profesional.”</p><cite>Equipo de Confitería Las Violetas</cite></blockquote>
       </section>
 
       <section class="case-block">
