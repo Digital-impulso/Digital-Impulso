@@ -212,6 +212,16 @@ window.addEventListener('load', () => {
   let current = 0;
   setActive(0);
 
+  function updateArrows() {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    arrows.forEach(btn => {
+      const dir = parseInt(btn.dataset.dir, 10);
+      const disabled = dir < 0 ? track.scrollLeft <= 2 : track.scrollLeft >= maxScroll - 2;
+      btn.classList.toggle('is-disabled', disabled);
+    });
+  }
+  updateArrows();
+
   function goTo(i) {
     current = Math.max(0, Math.min(cards.length - 1, i));
     const left = cards[current].offsetLeft - track.offsetLeft;
@@ -236,6 +246,7 @@ window.addEventListener('load', () => {
       });
       current = best;
       setActive(best);
+      updateArrows();
       raf = null;
     });
   }, { passive: true });
