@@ -1162,9 +1162,9 @@ footer {
 .case-card .case-body .case-tag { flex: 0 0 auto; }
 
 /* Tarjetas con varias capturas que se van alternando (fundido) */
-.case-media.proy-rotate { background: #111318; }
-.case-media.proy-rotate img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.9s ease; }
-.case-media.proy-rotate img.is-active { opacity: 1; }
+.proy-rotate { position: relative; background: #111318; }
+.proy-rotate > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.9s ease; }
+.proy-rotate > img.is-active { opacity: 1; }
 .proy-block[id] { scroll-margin-top: 90px; }
 
 /* Hero de página de caso con varias capturas alternando (mismo patrón que .case-media.proy-rotate) */
