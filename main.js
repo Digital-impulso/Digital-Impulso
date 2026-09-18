@@ -129,6 +129,31 @@ window.addEventListener('load', () => {
   setTimeout(jump, 400);
 });
 
+// ============ Servicios: lista a la izquierda controla el panel de imagen a la derecha ============
+(function servicesSplit() {
+  const list = document.querySelector('.svc-list');
+  const panel = document.querySelector('.svc-panel');
+  if (!list || !panel) return;
+  const items = Array.from(list.querySelectorAll('.svc-list-item'));
+  const panels = Array.from(panel.querySelectorAll('.svc-panel-item'));
+
+  function setActive(key) {
+    items.forEach(it => {
+      const active = it.dataset.svc === key;
+      it.classList.toggle('is-active', active);
+      it.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    panels.forEach(p => p.classList.toggle('is-active', p.dataset.svc === key));
+  }
+
+  items.forEach(it => {
+    const key = it.dataset.svc;
+    it.addEventListener('mouseenter', () => setActive(key));
+    it.addEventListener('focus', () => setActive(key));
+    it.addEventListener('click', () => setActive(key));
+  });
+})();
+
 // ============ Tarjetas de proyectos: capturas que se alternan solas ============
 (function rotatingMedia() {
   const boxes = document.querySelectorAll('.proy-rotate');
