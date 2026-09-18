@@ -645,6 +645,7 @@ nav#navbar.scrolled { background: rgba(20,22,27,0.82); border-bottom-color: rgba
   position: relative;
 }
 
+/* 4 tramos separados, cada uno se completa recién cuando termina el anterior (efecto relevo) */
 .process-step {
   position: relative;
   padding-top: 28px;
@@ -657,10 +658,10 @@ nav#navbar.scrolled { background: rgba(20,22,27,0.82); border-bottom-color: rgba
   top: -1px; left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, #5EEAD4, transparent);
+  background: linear-gradient(90deg, #5EEAD4, #34D3BE);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.9s ease;
+  transition: transform 0.65s ease;
 }
 
 .process-step.visible::after { transform: scaleX(1); }
@@ -671,29 +672,52 @@ nav#navbar.scrolled { background: rgba(20,22,27,0.82); border-bottom-color: rgba
   top: -4px; left: 0;
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: #5EEAD4;
-  box-shadow: 0 0 12px #5EEAD4;
+  background: rgba(255,255,255,0.18);
+  box-shadow: none;
+  transition: background 0.35s ease, box-shadow 0.35s ease;
 }
 
-.process-step.visible::before { animation: procDotPulse 2.2s ease-in-out 0.6s infinite; }
+.process-step.visible::before {
+  background: #5EEAD4;
+  box-shadow: 0 0 12px #5EEAD4;
+  animation: procDotPulse 2.2s ease-in-out infinite;
+}
 
 @keyframes procDotPulse {
   0%, 100% { box-shadow: 0 0 12px #5EEAD4; opacity: 1; }
   50% { box-shadow: 0 0 20px 4px #5EEAD4; opacity: 0.7; }
 }
 
-.process-timeline .process-step:nth-child(1) { transition-delay: 0s; }
-.process-timeline .process-step:nth-child(2) { transition-delay: 0.12s; }
-.process-timeline .process-step:nth-child(3) { transition-delay: 0.24s; }
-.process-timeline .process-step:nth-child(4) { transition-delay: 0.36s; }
+/* Cada tramo empieza a dibujarse justo cuando termina el anterior: 0.65s por paso */
+.process-timeline .process-step:nth-child(1)::after { transition-delay: 0s; }
+.process-timeline .process-step:nth-child(2)::after { transition-delay: 0.65s; }
+.process-timeline .process-step:nth-child(3)::after { transition-delay: 1.3s; }
+.process-timeline .process-step:nth-child(4)::after { transition-delay: 1.95s; }
+
+/* El punto y el número se encienden cuando su propio tramo termina de dibujarse */
+.process-timeline .process-step:nth-child(1)::before,
+.process-timeline .process-step:nth-child(1) .process-num { transition-delay: 0.65s; }
+.process-timeline .process-step:nth-child(2)::before,
+.process-timeline .process-step:nth-child(2) .process-num { transition-delay: 1.3s; }
+.process-timeline .process-step:nth-child(3)::before,
+.process-timeline .process-step:nth-child(3) .process-num { transition-delay: 1.95s; }
+.process-timeline .process-step:nth-child(4)::before,
+.process-timeline .process-step:nth-child(4) .process-num { transition-delay: 2.6s; }
+.process-timeline .process-step:nth-child(1).visible::before { animation-delay: 0.65s; }
+.process-timeline .process-step:nth-child(2).visible::before { animation-delay: 1.3s; }
+.process-timeline .process-step:nth-child(3).visible::before { animation-delay: 1.95s; }
+.process-timeline .process-step:nth-child(4).visible::before { animation-delay: 2.6s; }
 
 .process-num {
   font-size: 0.8rem;
   font-weight: 800;
-  color: #5EEAD4;
+  color: rgba(255,255,255,0.35);
   letter-spacing: 0.1em;
   margin-bottom: 12px;
+  transition: color 0.35s ease;
 }
+
+.process-step.visible .process-num { color: #5EEAD4; }
 
 .process-step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.02em; }
 .process-step p { color: #9AA1B0; font-size: 0.85rem; line-height: 1.65; }
