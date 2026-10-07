@@ -31,8 +31,12 @@ const server = serve({
       }
     }
 
-    // Ruta raíz -> index.html
-    if (pathname === "/" || pathname === "") pathname = "/index.html";
+    // Ruta raíz: la resuelven los rewrites de vercel.json según el host (ver el
+    // comentario ahí). Acá se replica para que el server local coincida con prod.
+    if (pathname === "/" || pathname === "") {
+      const host = (req.headers.get("host") || "").toLowerCase().split(":")[0];
+      pathname = host === "expo.digitalimpulso.com" ? "/expo/index.html" : "/home.html";
+    }
 
     // Evitar path traversal: descartamos cualquier ".."
     if (pathname.includes("..")) {

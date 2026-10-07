@@ -12,6 +12,33 @@
       "source": "/casos/chatbot",
       "destination": "/casos/selquet-bot",
       "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/expo",
+      "has": [
+        {
+          "type": "host",
+          "value": "expo.digitalimpulso.com"
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "destination": "/home",
+      "missing": [
+        {
+          "type": "host",
+          "value": "expo.digitalimpulso.com"
+        }
+      ]
     }
   ],
   "functions": {
