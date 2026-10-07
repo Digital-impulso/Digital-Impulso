@@ -105,18 +105,64 @@ window.addEventListener('scroll', () => {
     v.dataset.loaded = '1';
     const src = v.getAttribute('data-src');
     if (src) v.src = src;
-    // Sólo reproduce en loop si el usuario no pidió reducir movimiento
-    if (!reduce) { v.autoplay = true; v.play().catch(() => {}); }
   };
 
   if (!('IntersectionObserver' in window)) { vids.forEach(load); return; }
-  const io = new IntersectionObserver((entries, obs) => {
+
+  // Carga al acercarse y reproduce sólo lo que está a la vista: con una galería
+  // de muchos videos, esto acota cuántos descargan y decodifican a la vez.
+  const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) { load(e.target); obs.unobserve(e.target); }
+      const v = e.target;
+      if (e.isIntersecting) {
+        load(v);
+        if (!reduce) v.play().catch(() => {});
+      } else if (!v.paused) {
+        v.pause();
+      }
     });
-  }, { rootMargin: '200px 0px' });
+  }, { rootMargin: '200px 0px', threshold: 0.2 });
+
   vids.forEach(v => io.observe(v));
 })();
+
+// ============ Índice lateral (/totems): marca la sección que se está leyendo ============
+(function sideIndex() {
+  const nav = document.querySelector('.side-index');
+  if (!nav) return;
+
+  const items = Array.from(nav.querySelectorAll('a[href^="#"]'))
+    .map(a => ({ a, el: document.getElementById(decodeURIComponent(a.hash.slice(1))) }))
+    .filter(it => it.el);
+  if (!items.length) return;
+
+  let current = null;
+  const setActive = (el) => {
+    if (el === current) return;
+    current = el;
+    items.forEach(it => it.a.classList.toggle('is-active', it.el === el));
+  };
+
+  // Activa la última sección cuyo arranque ya pasó el primer tercio de la pantalla
+  const update = () => {
+    const line = window.innerHeight * 0.3;
+    let best = items[0];
+    for (const it of items) {
+      if (it.el.getBoundingClientRect().top <= line) best = it;
+    }
+    setActive(best.el);
+  };
+
+  let raf = null;
+  const onScroll = () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => { update(); raf = null; });
+  };
+  update();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+})();
+
 
 // ============ Enlaces con ancla (/totems#via-cargo): reajusta cuando terminan de cargar las imágenes ============
 window.addEventListener('load', () => {
@@ -172,47 +218,6 @@ window.addEventListener('load', () => {
   });
 })();
 
-// ============ Carrusel de reels (/totems/videos): puntos indicadores en mobile ============
-(function reelsCarousel() {
-  const track = document.querySelector('.tv-list');
-  const dotsWrap = document.querySelector('.tv-dots');
-  if (!track || !dotsWrap) return;
-  const cards = Array.from(track.querySelectorAll('.tv-card'));
-  if (cards.length < 2) return;
-
-  const dots = cards.map((card, i) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'tv-dot';
-    b.setAttribute('aria-label', 'Ver video ' + (i + 1) + ' de ' + cards.length);
-    b.addEventListener('click', () => {
-      const left = card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
-      track.scrollTo({ left, behavior: 'smooth' });
-    });
-    dotsWrap.appendChild(b);
-    return b;
-  });
-
-  const setActive = (i) => dots.forEach((d, j) => d.classList.toggle('active', j === i));
-  setActive(0);
-
-  let raf = null;
-  track.addEventListener('scroll', () => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      const trackRect = track.getBoundingClientRect();
-      const center = trackRect.left + trackRect.width / 2;
-      let best = 0, bestDist = Infinity;
-      cards.forEach((c, i) => {
-        const r = c.getBoundingClientRect();
-        const d = Math.abs(r.left + r.width / 2 - center);
-        if (d < bestDist) { bestDist = d; best = i; }
-      });
-      setActive(best);
-      raf = null;
-    });
-  }, { passive: true });
-})();
 
 // ============ Casos de éxito: carrusel spotlight (flechas + puntos) ============
 (function casesSpotlight() {

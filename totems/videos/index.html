@@ -9,22 +9,22 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <!-- SEO -->
-  <title>Los tótems en acción | Digital Impulso</title>
-  <meta name="description" content="Mirá los tótems de Digital Impulso atendiendo clientes reales: Abuelo Julio, Club Atlético Platense y Vía Cargo, en video.">
+  <title>Tótems en funcionamiento · Videos | Digital Impulso</title>
+  <meta name="description" content="Videos de los tótems de Digital Impulso instalados y atendiendo: Abuelo Julio en La Rural, Club Atlético Platense y Vía Cargo.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://digitalimpulso.com/totems/videos">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Los tótems en acción | Digital Impulso">
-  <meta property="og:description" content="Tres tótems atendiendo clientes reales: Abuelo Julio, Platense y Vía Cargo, en video.">
+  <meta property="og:title" content="Tótems en funcionamiento · Videos | Digital Impulso">
+  <meta property="og:description" content="Operaciones reales grabadas donde el tótem está instalado: Abuelo Julio, Platense y Vía Cargo.">
   <meta property="og:image" content="https://digitalimpulso.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://digitalimpulso.com/totems/videos">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Los tótems en acción | Digital Impulso">
-  <meta name="twitter:description" content="Tres tótems atendiendo clientes reales, en video.">
+  <meta name="twitter:title" content="Tótems en funcionamiento · Videos | Digital Impulso">
+  <meta name="twitter:description" content="Operaciones reales grabadas donde el tótem está instalado.">
   <meta name="twitter:image" content="https://digitalimpulso.com/og-image.jpg">
 
   <link rel="preload" href="/assets/fonts/geist-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -62,52 +62,115 @@
       <span class="current">Videos</span>
     </nav>
 
+    <!-- ============ ÍNDICE LATERAL ============ -->
+    <nav class="side-index" aria-label="Tótems de esta página">
+      <p class="side-index-title">Tótems</p>
+      <ul>
+        <li><a href="#abuelo-julio">Abuelo Julio</a></li>
+        <li><a href="#platense">Club Atlético Platense</a></li>
+        <li><a href="#via-cargo">Vía Cargo</a></li>
+      </ul>
+    </nav>
+
     <!-- ============ ENCABEZADO ============ -->
     <header class="proy-head">
-      <p class="section-eyebrow">Los tótems en acción</p>
-      <h1>Kioscos atendiendo <span class="text-gradient">clientes reales.</span></h1>
-      <p class="proy-lead">Sin renders ni maquetas: estos son nuestros tótems funcionando en la calle. Tocá cada video para verlo con sonido y en pantalla completa.</p>
+      <p class="section-eyebrow">Los tótems en funcionamiento</p>
+      <h1>Grabados en el local <span class="text-gradient">y en la feria.</span></h1>
+      <p class="proy-lead">Cada video es una operación real de principio a fin, grabada donde el tótem está instalado. Tocá cualquiera para verlo con sonido y en pantalla completa.</p>
     </header>
 
-    <!-- ============ REELS ============ -->
-    <section class="proy-block">
-      <div class="tv-list">
+    <!--
+      ============================================================
+      CÓMO AGREGAR UN VIDEO
+      ------------------------------------------------------------
+      1. Dejá el .mp4 y su poster .webp en /assets/videos/
+         Convención de nombre: <totem>-<tema>.mp4 / <totem>-<tema>-poster.webp
+         Ver /assets/videos/README.md para el comando de compresión.
+      2. Copiá un bloque <figure class="tv-item"> dentro del
+         <div class="tv-grid"> del tótem que corresponda y cambiá
+         data-src, poster, aria-label y el <figcaption>.
+      3. Si el video es horizontal, usá <figure class="tv-item tv-item--wide">.
+      4. Si sumás un tótem nuevo: agregá su <section id="..."> y su
+         entrada en el <nav class="side-index"> de arriba.
+      ============================================================
+    -->
 
-        <article class="tv-card fade-in">
-          <div class="tv-screen">
-            <video class="lazy-video" poster="/assets/videos/abuelojulio-reel-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/abuelojulio-reel.mp4" aria-label="Reel del tótem de Abuelo Julio en La Rural"></video>
-          </div>
-          <div class="tv-body">
-            <p class="case-tag">Gastronomía y ferias · La Rural</p>
-            <h2>Abuelo Julio</h2>
-            <p>Elegí el corte sobre la vaca interactiva, jugá la trivia y retirá con un QR.</p>
-          </div>
-        </article>
-
-        <article class="tv-card fade-in">
-          <div class="tv-screen">
-            <video class="lazy-video" poster="/assets/videos/platense-reel-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/platense-reel.mp4" aria-label="Reel del tótem del Club Atlético Platense"></video>
-          </div>
-          <div class="tv-body">
-            <p class="case-tag">Club deportivo · Sede del club</p>
-            <h2>Club Atlético Platense</h2>
-            <p>Entradas, socios, cuotas y buffet: cinco trámites en una pantalla.</p>
-          </div>
-        </article>
-
-        <article class="tv-card fade-in">
-          <div class="tv-screen">
-            <video class="lazy-video" poster="/assets/videos/viacargo-reel-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/viacargo-reel.mp4" aria-label="Reel del tótem de autogestión de Vía Cargo"></video>
-          </div>
-          <div class="tv-body">
-            <p class="case-tag">Logística · +600 agencias</p>
-            <h2>Vía Cargo</h2>
-            <p>Envíos en autogestión, con carga por QR desde el celular.</p>
-          </div>
-        </article>
-
+    <!-- ============ ABUELO JULIO ============ -->
+    <section class="proy-block" id="abuelo-julio">
+      <div class="tv-group-head">
+        <p class="section-eyebrow">Gastronomía y ferias · La Rural</p>
+        <h2>Abuelo Julio</h2>
+        <p>El visitante elige el corte sobre el mapa de la res, juega la trivia y retira su pedido con un QR.</p>
       </div>
-      <div class="tv-dots" aria-label="Elegir video"></div>
+      <div class="tv-grid">
+        <figure class="tv-item fade-in">
+          <div class="tv-screen">
+            <video class="lazy-video" poster="/assets/videos/abuelojulio-reel-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/abuelojulio-reel.mp4" aria-label="El tótem de Abuelo Julio en el stand de La Rural"></video>
+          </div>
+          <figcaption>El tótem en el stand de La Rural</figcaption>
+        </figure>
+        <figure class="tv-item fade-in">
+          <div class="tv-screen">
+            <video class="lazy-video" poster="/assets/videos/abuelojulio-pedidos-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/abuelojulio-pedidos.mp4" aria-label="Armado del pedido sobre el mapa de cortes"></video>
+          </div>
+          <figcaption>Armado del pedido sobre el mapa de cortes</figcaption>
+        </figure>
+        <figure class="tv-item fade-in">
+          <div class="tv-screen">
+            <video class="lazy-video" poster="/assets/videos/abuelojulio-ruleta-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/abuelojulio-ruleta.mp4" aria-label="Trivia Braford y ruleta de premios"></video>
+          </div>
+          <figcaption>Trivia Braford y ruleta de premios</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ PLATENSE ============ -->
+    <section class="proy-block" id="platense">
+      <div class="tv-group-head">
+        <p class="section-eyebrow">Club deportivo · Sede del club</p>
+        <h2>Club Atlético Platense</h2>
+        <p>Entradas, alta de socios, cuotas, buffet y beneficios: cinco trámites resueltos en la misma pantalla.</p>
+      </div>
+      <div class="tv-grid">
+        <figure class="tv-item fade-in">
+          <div class="tv-screen">
+            <video class="lazy-video" poster="/assets/videos/platense-reel-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/platense-reel.mp4" aria-label="El tótem del Club Atlético Platense en la sede"></video>
+          </div>
+          <figcaption>El tótem en la sede del club</figcaption>
+        </figure>
+        <figure class="tv-item fade-in">
+          <div class="tv-screen">
+            <video class="lazy-video" poster="/assets/videos/platense-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/platense.mp4" aria-label="Recorrido por los trámites del kiosco de Platense"></video>
+          </div>
+          <figcaption>Recorrido por los cinco trámites</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ VÍA CARGO ============ -->
+    <section class="proy-block" id="via-cargo">
+      <div class="tv-group-head">
+        <p class="section-eyebrow">Logística · +600 agencias</p>
+        <h2>Vía Cargo</h2>
+        <p>Retiro, despacho y cotización en autogestión, con la carga de datos desde el celular por QR.</p>
+      </div>
+      <div class="tv-grid">
+        <figure class="tv-item fade-in">
+          <div class="tv-screen">
+            <video class="lazy-video" poster="/assets/videos/viacargo-reel-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/viacargo-reel.mp4" aria-label="El tótem de Vía Cargo en una agencia"></video>
+          </div>
+          <figcaption>El tótem en la agencia</figcaption>
+        </figure>
+        <figure class="tv-item fade-in">
+          <div class="tv-screen">
+            <video class="lazy-video" poster="/assets/videos/viacargo-poster.webp" width="576" height="1024" muted loop playsinline controls preload="none" data-src="/assets/videos/viacargo.mp4" aria-label="Autogestión de un envío en el tótem de Vía Cargo"></video>
+          </div>
+          <figcaption>Autogestión de un envío, paso a paso</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="proy-block">
       <div class="cases-cta">
         <a href="/totems" class="hero-btn-ghost">Conocé cómo funcionan →</a>
       </div>

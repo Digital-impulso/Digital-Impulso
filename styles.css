@@ -1214,16 +1214,73 @@ footer {
 
 .tp-include { grid-template-columns: 1fr 1fr; max-width: 760px; }
 
-/* Galería de reels (/totems/videos): filas alternadas en desktop, carrusel en mobile */
-.tv-list { display: flex; flex-direction: column; gap: clamp(56px, 8vw, 100px); }
-.tv-card {
-  display: grid;
-  grid-template-columns: minmax(0, 380px) 1fr;
-  gap: clamp(36px, 6vw, 80px);
-  align-items: center;
+/* ============ Índice lateral (/totems) ============ */
+/* Fijo al costado del contenido centrado de 1100px: queda 24px a la izquierda de
+   la caja de texto. Por debajo de 1510px no hay margen suficiente y se oculta. */
+.side-index {
+  display: none;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(50% - 550px - 192px);
+  width: 168px;
+  z-index: 40;
 }
-.tv-card:nth-child(even) { grid-template-columns: 1fr minmax(0, 380px); }
-.tv-card:nth-child(even) .tv-screen { order: 2; }
+@media (min-width: 1510px) { .side-index { display: block; } }
+
+.side-index-title {
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #6E7682;
+  margin: 0 0 14px 17px;
+}
+.side-index ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.11);
+}
+.side-index a {
+  display: block;
+  padding: 9px 0 9px 17px;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.side-index a:hover { color: rgba(255, 255, 255, 0.72); }
+.side-index a.is-active {
+  color: #FFFFFF;
+  font-weight: 600;
+  border-left-color: var(--c);
+}
+
+/* ============ Galería de videos (/totems/videos) ============ */
+/* Un grupo por tótem; cada grupo admite todos los videos que haga falta. */
+.tv-group-head { margin-bottom: 26px; }
+.tv-group-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 800; letter-spacing: -0.03em; margin: 6px 0 12px; }
+.tv-group-head p { color: #9AA1B0; font-size: 0.95rem; line-height: 1.7; max-width: 62ch; }
+
+.tv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: clamp(16px, 2.4vw, 26px);
+}
+.tv-item { margin: 0; min-width: 0; }
+.tv-item--wide { grid-column: span 2; }
+.tv-item--wide .tv-screen { aspect-ratio: 16 / 9; }
+.tv-item figcaption {
+  color: #9AA1B0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
 .tv-screen {
   width: 100%;
   border-radius: 18px; overflow: hidden; background: #000;
@@ -1232,9 +1289,6 @@ footer {
   box-shadow: 0 30px 70px -30px rgba(94,234,212,0.4);
 }
 .tv-screen video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.tv-body h2 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 700; letter-spacing: -0.01em; margin: 12px 0 12px; }
-.tv-body p { color: #9AA1B0; font-size: 1rem; line-height: 1.7; max-width: 46ch; }
-.tv-dots { display: none; }
 
 @media (max-width: 768px) {
   .totem-feature--flip { grid-template-columns: 1fr; }
@@ -1245,35 +1299,19 @@ footer {
   .tp-benefits { grid-template-columns: 1fr; }
   .tp-include { grid-template-columns: 1fr; }
 
-  /* Carrusel: se pasa video + texto de a una card, deslizando */
-  .tv-list {
-    flex-direction: row;
-    gap: 18px;
+  /* Videos: el grupo del tótem se desliza en horizontal */
+  .tv-grid {
+    display: flex;
+    gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 6px;
   }
-  .tv-list::-webkit-scrollbar { display: none; }
-  .tv-card,
-  .tv-card:nth-child(even) {
-    display: flex; flex-direction: column;
-    flex: 0 0 100%; min-width: 0;
-    scroll-snap-align: center;
-  }
-  .tv-card:nth-child(even) .tv-screen { order: 0; }
-  .tv-screen { max-width: 300px; margin: 0 auto; }
-  .tv-body { text-align: center; padding: 16px 10px 0; }
-  .tv-body p { margin: 0 auto; }
-  .tv-dots { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
-  .tv-dot {
-    width: 9px; height: 9px; border-radius: 50%;
-    background: rgba(255,255,255,0.18);
-    border: none; padding: 0; cursor: pointer;
-    transition: background 0.25s ease, transform 0.25s ease;
-  }
-  .tv-dot.active { background: var(--c); transform: scale(1.25); }
+  .tv-grid::-webkit-scrollbar { display: none; }
+  .tv-item { flex: 0 0 min(72%, 260px); scroll-snap-align: center; }
+  .tv-item--wide { flex-basis: min(92%, 420px); }
 }
 
 /* Chips de métricas/capacidades (sin la flecha de resultado de .case-result) */
