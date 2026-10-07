@@ -14,18 +14,6 @@
       "permanent": true
     }
   ],
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/expo",
-      "has": [
-        {
-          "type": "host",
-          "value": "expo.digitalimpulso.com"
-        }
-      ]
-    }
-  ],
   "functions": {
     "api/admin/ia-buscar.js": {
       "maxDuration": 60
