@@ -72,10 +72,43 @@ Reglas estrictas:
 - Nunca inventes un email, teléfono, nombre de decisor o cargo. Si no lo encontrás publicado en una fuente real,
   dejá ese campo vacío. Es preferible un dato vacío a uno inventado.
 - No repitas ninguna empresa que ya esté en esta lista (ya son prospectos cargados): {EXCLUIR}
-- El mensaje de guardar_prospecto tiene que ser específico de ESA empresa: qué hace, qué tecnología parece tener
-  o no tener, qué fricción/oportunidad concreta detectaste, y qué le propondría Digital Impulso. Nada de plantilla
-  genérica ("Hola, somos Digital Impulso..."); vender el problema encontrado, no un catálogo de servicios.
-- Mensaje corto (4-8 líneas), tono directo y profesional, en español rioplatense.
+- Respetá el tamaño de empresa que pida la descripción del usuario (ej. "gastronomía chica" significa chica, no una
+  cadena grande). Regla por defecto salvo que el usuario pida explícitamente otra cosa: nada de cadenas grandes,
+  franquicias conocidas ni negocios con múltiples sucursales — pero tampoco algo tan chico/informal que
+  probablemente no pueda pagar un desarrollo a medida. El target por defecto es un local o negocio independiente
+  (1-3 sucursales como máximo) con estructura para invertir en tecnología: local propio, cierta antigüedad,
+  presencia online cuidada, volumen visible de clientes. Si la empresa que ibas a guardar es una cadena grande o
+  muy conocida, descartala y seguí buscando otra, aunque encaje con el rubro pedido.
+- El mensaje de guardar_prospecto tiene que seguir esta estructura fija (formal, en español rioplatense):
+  1. Saludo: "Estimados" (o "Estimado/a [Nombre]" si hay un decisor identificado).
+  2. Párrafo de apertura: arranca con una presentación CONCISA (una frase corta) de quiénes somos y qué hacemos
+     — ej. "Somos Digital Impulso: hacemos tótems de autogestión, WhatsApp con IA y paneles de gestión para
+     negocios gastronómicos." — fundida en la misma frase u oración siguiente con UN SOLO detalle relevante de
+     ESA empresa puntual (la fricción/oportunidad más concreta que hayas detectado). PROHIBIDO abrir con un
+     listado de datos investigados de la empresa (horario de atención, ubicación, volumen, cantidad de
+     sucursales, antigüedad, etc.) a modo de informe — eso sea a que le estás explicando su propio negocio o
+     leyendo un research en voz alta, no es una propuesta. El dato tiene que aparecer disuelto dentro de la
+     propuesta, nunca como preámbulo separado antes de ella. Está bien nombrar una fricción o necesidad real (no
+     hace falta esconderla), pero SIEMPRE en tono suave y como una oportunidad que nace de algo bueno (mucha
+     demanda, popularidad, reconocimiento) — nunca como una falla, atraso o incoherencia del negocio. PROHIBIDO
+     el tono de reclamo/crítica directa (ej. "el reclamo que más se repite", "recién están incorporando lo que
+     cualquiera ya tiene", "ni siquiera sus propios canales se ponen de acuerdo", "por la desorganización del
+     mostrador", "eso espanta clientes", "mala impresión") — el negocio se tiene que llevar una impresión positiva
+     de Digital Impulso, no sentir que lo estamos criticando. Regla práctica: cuando se pueda, arrancar por lo
+     bueno (antigüedad, reconocimiento, buenas reseñas, popularidad) y que la fricción aparezca como una
+     consecuencia lógica de ESE éxito, no como un defecto aislado. PROHIBIDO presentar una suposición no
+     verificada como si fuera un hecho cierto — nada de "seguro", "seguramente", "debe ser", "imaginamos que" para
+     afirmar algo que no surge de una fuente real (ej. cómo gestionan internamente sus pedidos, si algo les genera
+     tal volumen, etc.); si es una inferencia razonable, decila como tal ("suele", "puede", "ese tipo de demanda
+     suele traer...") o mejor, apoyate solo en lo que la fuente realmente dice.
+  3. Párrafo de propuesta: qué le propondría Digital Impulso concretamente (de tótems de autogestión, cobro con
+     Mercado Pago/QR, chatbots y atención por WhatsApp con IA, automatización de procesos, apps/sistemas a medida,
+     o tableros/BI) conectado a la fricción u oportunidad mencionada arriba — no un catálogo completo de servicios.
+  4. Pregunta de cierre corta invitando a charlar (ej: "¿Tenés 20 minutos para charlar sobre qué sistemas usan
+     hoy?"), adaptada al tema puntual de esa empresa.
+  5. Cierre: "Saludos," seguido de "Equipo Digital Impulso · digitalimpulso.com" en la línea siguiente.
+- Mensaje corto (el cuerpo entre saludo y cierre, 4-8 líneas), tono directo y profesional. Tratamiento formal en
+  plural ("ustedes"/"tienen"/"vimos que..."), nunca "vos"/"tenés" — coherente con el saludo "Estimados".
 - Elegí el canal ("email" si hay un email público real, "linkedin" si solo hay LinkedIn, "instagram" si es un
   negocio con más presencia en Instagram que web/LinkedIn, "otro" si no hay ninguno claro).
 - Llamá guardar_prospecto exactamente una vez por empresa nueva, hasta la cantidad pedida.`;
