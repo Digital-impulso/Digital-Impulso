@@ -3,23 +3,51 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/casos", "destination": "/proyectos", "permanent": true },
-    { "source": "/casos/chatbot", "destination": "/casos/selquet-bot", "permanent": true }
+    {
+      "source": "/casos",
+      "destination": "/proyectos",
+      "permanent": true
+    },
+    {
+      "source": "/casos/chatbot",
+      "destination": "/casos/selquet-bot",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/expo",
+      "has": [
+        {
+          "type": "host",
+          "value": "expo.digitalimpulso.com"
+        }
+      ]
+    }
   ],
   "functions": {
-    "api/admin/ia-buscar.js": { "maxDuration": 60 }
+    "api/admin/ia-buscar.js": {
+      "maxDuration": 60
+    }
   },
   "headers": [
     {
       "source": "/assets/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=604800, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, must-revalidate"
+        }
       ]
     }
   ]
