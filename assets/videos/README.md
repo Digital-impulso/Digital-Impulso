@@ -48,4 +48,4 @@ para siempre en el historial de git— y moverlos a almacenamiento de objetos
 (Vercel Blob, Cloudflare R2, Bunny). La migración no toca el código: sólo hay que
 cambiar el `data-src` de cada `<video>` por la URL absoluta del CDN.
 
-Estado actual: ~25 MB en 7 videos.
+Estado actual: ~38 MB en 12 videos.
